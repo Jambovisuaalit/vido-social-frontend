@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="VIDO Social">
-  <rect width="64" height="64" rx="16" fill="#061b3a"/>
-  <path d="M14 15h10l8 26 8-26h10L38 50H26L14 15Z" fill="#a6d62e"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="VIDO Social"><rect width="1024" height="1024" rx="190" fill="#0F172A"/><polygon points="293.6,220 442.1,220 730.4,780 581.9,780" fill="#FF0000"/><polygon points="459.6,220 669.2,220 560,460.8" fill="#FFFFFF"/></svg>
