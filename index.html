@@ -6,7 +6,7 @@
   <title>VIDO Social — Verkkosivut ja some rakennusalan yrityksille</title>
   <meta name="description" content="VIDO Social rakentaa rakennus- ja talotekniikkayrityksille myyvät verkkosivut, jatkuvan somenäkyvyyden ja paikalliset mainoskampanjat kiinteällä hinnalla.">
   <meta name="robots" content="index,follow,max-image-preview:large">
-  <meta name="theme-color" content="#061b3a">
+  <meta name="theme-color" content="#0F172A">
   <link rel="canonical" href="https://vido-social-frontend.vercel.app/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="/site.webmanifest">
@@ -21,33 +21,29 @@
   <meta name="twitter:title" content="VIDO Social — Näytä yhtä hyvältä kuin teet työsi">
   <meta name="twitter:description" content="Verkkosivut, some ja paikallinen mainonta rakennus- ja talotekniikkayrityksille.">
   <meta name="twitter:image" content="https://vido-social-frontend.vercel.app/og-image.svg">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "VIDO Social",
-    "url": "https://vido-social-frontend.vercel.app/",
-    "email": "ville@vidosocial.com",
-    "description": "Rakennus- ja talotekniikkayritysten verkkosivut, sosiaalinen media ja paikallinen mainonta.",
-    "areaServed": "FI",
-    "priceRange": "500–1500 €",
-    "sameAs": []
-  }
-  </script>
+  <script type="application/ld+json">{
+    "@context":"https://schema.org",
+    "@type":"ProfessionalService",
+    "name":"VIDO Social",
+    "url":"https://vido-social-frontend.vercel.app/",
+    "email":"ville@vidosocial.com",
+    "description":"Rakennus- ja talotekniikkayritysten verkkosivut, sosiaalinen media ja paikallinen mainonta.",
+    "areaServed":"FI",
+    "priceRange":"500–1500 €"
+  }</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Siirry sisältöön</a>
 
   <header class="site-header" data-header>
     <div class="container nav-shell">
-      <a class="brand" href="#top" aria-label="VIDO Social etusivu">
-        <span class="brand-mark" aria-hidden="true">V</span>
-        <span>VIDO <strong>Social</strong></span>
+      <a class="brand-logo" href="#top" aria-label="VIDO Social etusivu">
+        <img src="/brand/vido-social-inverted-horizontal.svg" alt="VIDO Social">
       </a>
       <nav class="desktop-nav" aria-label="Päänavigaatio">
         <a href="#palvelut">Palvelut</a>
-        <a href="#tyot">Työnäytteet</a>
-        <a href="#prosessi">Näin aloitamme</a>
+        <a href="#tyot">Toteutustapa</a>
+        <a href="#prosessi">Aloitus</a>
         <a href="#yhteys">Yhteys</a>
       </nav>
       <a class="button button-small button-light" href="#yhteys">Pyydä aloitus</a>
@@ -56,7 +52,8 @@
 
   <main id="main">
     <section class="hero" id="top">
-      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-grid-lines" aria-hidden="true"></div>
+      <div class="hero-red-glow" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="hero-copy reveal">
           <p class="eyebrow"><span></span> Rakennus- ja talotekniikka-alan digitaalinen kumppani</p>
@@ -73,22 +70,17 @@
           </div>
         </div>
 
-        <div class="hero-visual reveal" aria-label="Esimerkki VIDO Socialin tuottamasta verkkosivusta ja sosiaalisen median julkaisusta">
-          <div class="browser-card">
-            <div class="browser-bar"><i></i><i></i><i></i><span>asiakasyritys.fi</span></div>
-            <div class="browser-content">
-              <p class="mock-kicker">LUOTETTAVA PAIKALLINEN TEKIJÄ</p>
-              <h2>Työ tehdään kerralla kunnolla.</h2>
-              <p>Selkeä palvelulupaus, oikeat työnäytteet ja yhteydenotto yhdellä painalluksella.</p>
-              <div class="mock-actions"><b>Pyydä tarjous</b><span>Katso palvelut</span></div>
-              <div class="mock-photo"><span>TYÖMAAKUVA</span></div>
-            </div>
+        <div class="hero-brand-stage reveal" aria-label="VIDO Socialin brändi ja palvelut">
+          <div class="brand-orbit orbit-one"></div>
+          <div class="brand-orbit orbit-two"></div>
+          <img class="hero-icon" src="/brand/vido-social-avatar.svg" alt="VIDO Social -tunnus">
+          <div class="hero-brand-card">
+            <p>BUILDING BRANDS.</p>
+            <strong>CREATING IMPACT.</strong>
+            <span>Verkkosivut · Some · Paikallinen mainonta</span>
           </div>
-          <div class="social-card">
-            <div class="social-head"><span class="avatar">V</span><div><strong>Asiakasyritys</strong><small>Helsinki</small></div><b>•••</b></div>
-            <div class="social-image"><span>ENNEN</span><span>JÄLKEEN</span></div>
-            <div class="social-copy"><strong>Valmis työ puhuu puolestaan.</strong><br><small>Selkeä julkaisu oikeasta projektista.</small></div>
-          </div>
+          <div class="hero-mini-card mini-card-one"><b>01</b><span>Selkeä tuotteistus</span></div>
+          <div class="hero-mini-card mini-card-two"><b>02</b><span>Ihmisen laadunvarmistus</span></div>
         </div>
       </div>
     </section>
@@ -171,15 +163,15 @@
     <section class="section dark-section" id="tyot">
       <div class="container">
         <div class="section-heading narrow reveal">
-          <p class="eyebrow"><span></span> Konkreettinen lopputulos</p>
-          <h2>Ei geneeristä markkinointia. Vaan yrityksesi näköinen kokonaisuus.</h2>
+          <p class="eyebrow"><span></span> Brändätty toteutustapa</p>
+          <h2>Moderni, rohkea ja selkeä — jokaisessa kosketuspisteessä.</h2>
         </div>
         <div class="work-grid">
           <article class="work-card large reveal">
             <div class="work-label"><span>VIDO TYÖMAA</span><strong>Myyntisivu mobiilissa ja työpöydällä</strong></div>
             <div class="device-stage">
-              <div class="desktop-device"><div class="device-nav"></div><h3>Sähkötyöt nopeasti ja luotettavasti.</h3><p>Palvelualue, luottamussignaalit ja selkeä yhteydenotto.</p><button>Pyydä tarjous</button><div class="device-panels"><i></i><i></i><i></i></div></div>
-              <div class="phone-device"><div class="phone-notch"></div><small>PAIKALLINEN SÄHKÖMIES</small><h3>Apua silloin kun sitä tarvitaan.</h3><button>Soita nyt</button><div class="phone-image"></div></div>
+              <div class="desktop-device"><div class="device-nav"></div><small>PAIKALLINEN PALVELUYRITYS</small><h3>Työ tehdään kerralla kunnolla.</h3><p>Selkeä palvelulupaus, oikeat työnäytteet ja yhteydenotto yhdellä painalluksella.</p><button>Pyydä tarjous</button><div class="device-panels"><i></i><i></i><i></i></div></div>
+              <div class="phone-device"><div class="phone-notch"></div><small>PAIKALLINEN TEKIJÄ</small><h3>Apua silloin kun sitä tarvitaan.</h3><button>Soita nyt</button><div class="phone-image"></div></div>
             </div>
           </article>
           <article class="work-card reveal">
@@ -227,6 +219,7 @@
     <section class="contact-section" id="yhteys">
       <div class="container contact-grid">
         <div class="contact-copy reveal">
+          <img class="contact-logo" src="/brand/vido-social-inverted-horizontal.svg" alt="VIDO Social">
           <p class="eyebrow"><span></span> Aloitetaan</p>
           <h2>Tehdään yrityksesi näkyvyydestä yhtä vakuuttava kuin työnjäljestä.</h2>
           <p>Valitse palvelu tai kuvaile nykyinen tilanne. Saat vastauksen ja selkeän seuraavan askeleen.</p>
@@ -241,14 +234,7 @@
             <label>Sähköposti<input type="email" name="email" autocomplete="email" required maxlength="120"></label>
             <label>Puhelin <small>(valinnainen)</small><input type="tel" name="phone" autocomplete="tel" maxlength="40"></label>
           </div>
-          <label>Kiinnostava palvelu
-            <select name="package" id="package-select">
-              <option value="En osaa vielä sanoa">En osaa vielä sanoa</option>
-              <option value="VIDO Social">VIDO Social — 500 €/kk + ALV</option>
-              <option value="VIDO Työmaa">VIDO Työmaa — 1 500 € + ALV</option>
-              <option value="VIDO Kasvu">VIDO Kasvu — 900 €/kk + ALV + media</option>
-            </select>
-          </label>
+          <label>Kiinnostava palvelu<select name="package" id="package-select"><option value="En osaa vielä sanoa">En osaa vielä sanoa</option><option value="VIDO Social">VIDO Social — 500 €/kk + ALV</option><option value="VIDO Työmaa">VIDO Työmaa — 1 500 € + ALV</option><option value="VIDO Kasvu">VIDO Kasvu — 900 €/kk + ALV + media</option></select></label>
           <label>Mitä haluatte parantaa?<textarea name="message" rows="5" required maxlength="2000" placeholder="Kerro lyhyesti nykyisestä sivustosta, somesta tai asiakashankinnasta."></textarea></label>
           <label class="honeypot" aria-hidden="true">Älä täytä tätä<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
           <label class="consent"><input type="checkbox" name="consent" required><span>Hyväksyn, että tietojani käsitellään yhteydenottoon vastaamiseksi. <a href="/tietosuoja">Tietosuojaseloste</a>.</span></label>
@@ -261,11 +247,11 @@
 
   <footer class="site-footer">
     <div class="container footer-grid">
-      <div><a class="brand footer-brand" href="#top"><span class="brand-mark">V</span><span>VIDO <strong>Social</strong></span></a><p>Rakennusalan digitaalinen näkyvyyskumppani.</p></div>
+      <div><a class="footer-logo" href="#top"><img src="/brand/vido-social-inverted-horizontal.svg" alt="VIDO Social"></a><p>Rakennusalan digitaalinen näkyvyyskumppani.</p><small>BUILDING BRANDS. CREATING IMPACT.</small></div>
       <div><strong>Palvelut</strong><a href="#palvelut">VIDO Social</a><a href="#palvelut">VIDO Työmaa</a><a href="#palvelut">VIDO Kasvu</a></div>
       <div><strong>Yritys</strong><a href="mailto:ville@vidosocial.com">ville@vidosocial.com</a><a href="/tietosuoja">Tietosuoja</a><span>Y-tunnus 3581471-7</span></div>
     </div>
-    <div class="container footer-bottom"><span>© <span id="year"></span> VIDO Social</span><span>Suunniteltu paikallisille palveluyrityksille.</span></div>
+    <div class="container footer-bottom"><span>© <span id="year"></span> VIDO Social</span><span>Moderni · Rohkea · Minimalistinen · Ammattimainen</span></div>
   </footer>
 
   <script src="/script.js" defer></script>
