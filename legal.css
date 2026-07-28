@@ -1,32 +1,33 @@
 .legal-page {
   min-height: 100vh;
   padding: 150px 0 90px;
-  background: #f5f7fa;
+  background: var(--light);
 }
 .legal-content {
   max-width: 840px;
   padding: 48px;
-  border: 1px solid #dfe3ea;
-  border-radius: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
   background: #fff;
-  box-shadow: 0 30px 80px rgba(6,27,58,.08);
+  box-shadow: 0 30px 80px rgba(15,23,42,.08);
 }
 .legal-content h1 {
   margin: 20px 0 24px;
+  color: var(--navy);
+  font-family: Poppins, Inter, sans-serif;
   font-size: clamp(48px, 7vw, 76px);
   line-height: 1;
   letter-spacing: -.055em;
 }
 .legal-content h2 {
   margin: 38px 0 10px;
+  color: var(--charcoal);
+  font-family: Poppins, Inter, sans-serif;
   font-size: 22px;
   letter-spacing: -.03em;
 }
-.legal-content p {
-  color: #667085;
-  line-height: 1.75;
-}
-.legal-content a { color: #0284c7; text-decoration: underline; }
+.legal-content p { color: var(--muted); line-height: 1.75; }
+.legal-content a { color: var(--red); text-decoration: underline; }
 
 .error-page {
   min-height: 100vh;
@@ -35,17 +36,18 @@
   padding: 30px;
   color: #fff;
   background:
-    radial-gradient(circle at 20% 10%, rgba(2,132,199,.32), transparent 30rem),
-    linear-gradient(145deg, #04142d, #0b2447);
+    radial-gradient(circle at 20% 10%, rgba(255,0,0,.25), transparent 30rem),
+    linear-gradient(145deg, #070b13, var(--navy));
 }
 .error-page main { width: min(100%, 680px); text-align: center; }
-.error-page .brand { justify-content: center; margin-bottom: 60px; }
-.error-code { margin: 0; color: #a6d62e; font-size: 14px; font-weight: 900; letter-spacing: .2em; }
-.error-page h1 { margin: 15px 0; font-size: clamp(52px, 10vw, 92px); line-height: .95; letter-spacing: -.06em; }
-.error-page main > p:not(.error-code) { margin: 0 0 30px; color: #b8c5d8; font-size: 18px; }
+.error-logo { display: block; width: 300px; margin: 0 auto 60px; }
+.error-code { margin: 0; color: var(--red); font-size: 14px; font-weight: 900; letter-spacing: .2em; }
+.error-page h1 { margin: 15px 0; font-family: Poppins, Inter, sans-serif; font-size: clamp(52px, 10vw, 92px); line-height: .95; letter-spacing: -.06em; }
+.error-page main > p:not(.error-code) { margin: 0 0 30px; color: #bec3cc; font-size: 18px; }
 
 @media (max-width: 680px) {
   .legal-page { padding-top: 115px; }
   .legal-content { padding: 28px 22px; border-radius: 20px; }
   .legal-content h1 { font-size: 48px; }
+  .error-logo { width: 230px; }
 }
