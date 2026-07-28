@@ -22,15 +22,19 @@ export default async function handler(request, response) {
   }
 
   try {
-    const [html, css, script] = await Promise.all([
+    const [html, css, polishCss, script] = await Promise.all([
       fetchText('index.html'),
       fetchText('styles.css'),
+      fetchText('typography-spacing-v1.css'),
       fetchText('script.js')
     ]);
 
+    const styles = `${css}\n${polishCss}`.replace(/<\/style/gi, '<\\/style');
+    const inlineScript = script.replace(/<\/script/gi, '<\\/script');
+
     const document = html
-      .replace('<link rel="stylesheet" href="/styles.css">', `<style>${css.replace(/<\/style/gi, '<\\/style')}</style>`)
-      .replace('<script src="/script.js" defer></script>', `<script>${script.replace(/<\/script/gi, '<\\/script')}</script>`);
+      .replace('<link rel="stylesheet" href="/styles.css">', `<style>${styles}</style>`)
+      .replace('<script src="/script.js" defer></script>', `<script>${inlineScript}</script>`);
 
     return htmlResponse(response, 200, request.method === 'HEAD' ? '' : document);
   } catch (error) {
