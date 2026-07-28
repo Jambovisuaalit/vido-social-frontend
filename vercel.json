@@ -3,8 +3,6 @@
   "trailingSlash": false,
   "functions": {"api/contact.js": {"maxDuration": 10}},
   "rewrites": [
-    {"source": "/styles.css", "destination": "https://raw.githubusercontent.com/Jambovisuaalit/vido-social-frontend/main/styles.css"},
-    {"source": "/script.js", "destination": "https://raw.githubusercontent.com/Jambovisuaalit/vido-social-frontend/main/script.js"},
     {"source": "/assets/landing/:path*", "destination": "https://raw.githubusercontent.com/Jambovisuaalit/vido-social-frontend/main/assets/landing/:path*"}
   ],
   "headers": [
