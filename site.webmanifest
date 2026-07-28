@@ -1,0 +1,16 @@
+{
+  "name": "VIDO Social",
+  "short_name": "VIDO",
+  "description": "Verkkosivut, some ja paikallinen mainonta rakennusalan yrityksille.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#061b3a",
+  "theme_color": "#061b3a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
