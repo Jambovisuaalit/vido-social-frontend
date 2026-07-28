@@ -2,6 +2,8 @@
 
 Tuotantovalmis staattinen frontend VIDO Socialin palvelupaketeille.
 
+Nykyinen julkaisu: **V7** — Dark Performance -viimeistely, virallinen logo, paikallinen Inter-fontti ja staattinen renderöinti.
+
 ## Production
 
 - https://vido-social-frontend.vercel.app
@@ -18,6 +20,7 @@ Tuotantovalmis staattinen frontend VIDO Socialin palvelupaketeille.
 
 - `index.html` — myyntisivu
 - `styles.css` — responsiivinen design system
+- `v7.css` — V7-viimeistelykerros
 - `script.js` — käyttöliittymä ja lomakkeen lähetys
 - `api/contact.js` — validoitu Vercel Function
 - `tietosuoja.html` — tietosuojaseloste
@@ -51,7 +54,8 @@ vercel --prod
 - canonical, Open Graph, Twitter Card ja JSON-LD
 - robots.txt ja sitemap.xml
 - tietosuojaseloste ja suostumus
-- honeypot, palvelinpuolen validointi ja kevyt rate limit
+- honeypot, palvelinpuolen validointi, origin-tarkistus ja kevyt rate limit
+- UTM-lähdeseuranta yhteydenottopyyntöihin
 - CSP, HSTS, X-Frame-Options ja muut turvallisuusheaderit
 
 © 2026 VIDO Social — Y-tunnus 3581471-7

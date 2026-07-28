@@ -1,20 +1,24 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fi">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>VIDO Social — Verkkosivut, some ja paikallinen kasvu palveluyrityksille</title>
-  <meta name="description" content="VIDO Social rakentaa palveluyrityksille myyvät verkkosivut, jatkuvan somenäkyvyyden ja paikallisen Meta-mainonnan selkeällä toimitusmallilla.">
+  <title>VIDO Social — Näkyvyyttä, joka muuttuu liideiksi</title>
+  <meta name="description" content="VIDO Social yhdistää verkkosivut, jatkuvan sisällön ja paikallisen Meta-mainonnan mitattavaksi liidipoluksi rakennus-, LVI-, sähkö- ja huoltoyrityksille.">
   <meta name="robots" content="index,follow,max-image-preview:large">
-  <meta name="theme-color" content="#05070b">
+  <meta name="theme-color" content="#050914">
   <link rel="canonical" href="https://vido-social-frontend.vercel.app/">
+  <link rel="icon" href="/favicon-v2.svg" type="image/svg+xml">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preload" href="/assets/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/v7.css">
   <meta property="og:locale" content="fi_FI">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vido-social-frontend.vercel.app/">
-  <meta property="og:title" content="VIDO Social — Hyvä työ ansaitsee paremman näkyvyyden">
-  <meta property="og:description" content="Verkkosivut, some ja paikallinen kasvu rakennus-, remontti- ja palvelualan yrityksille.">
-  <meta property="og:image" content="https://vido-social-frontend.vercel.app/assets/landing/demo-social-posts.svg">
+  <meta property="og:title" content="VIDO Social — Näkyvyyttä, joka muuttuu liideiksi">
+  <meta property="og:description" content="Verkkosivut, jatkuva sisältö ja paikallinen mainonta palveluyrityksille.">
+  <meta property="og:image" content="https://vido-social-frontend.vercel.app/og-image-v2.svg">
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"VIDO Social","url":"https://vido-social-frontend.vercel.app/","email":"ville@vidosocial.com","areaServed":"FI","priceRange":"500–1500 €","description":"Palveluyritysten verkkosivut, sosiaalinen media ja paikallinen Meta-mainonta."}</script>
 </head>
@@ -24,17 +28,15 @@
   <header class="site-header" data-header>
     <div class="shell nav-shell">
       <a class="brand" href="#top" aria-label="VIDO Social etusivu">
-        <svg class="brand-mark" viewBox="0 0 56 56" aria-hidden="true"><path fill="#ff2a2a" d="M7 8h14l25 40H32z"/><path fill="#fff" d="M24 8h25L37 28z"/></svg>
-        <span class="brand-name"><b>VIDO</b><i></i><em>Social</em></span>
+        <img class="brand-logo" src="/brand/vido-social-inverted-horizontal.svg" alt="VIDO Social" width="2000" height="560">
       </a>
       <nav class="nav-links" aria-label="Päänavigaatio">
         <a href="#palvelut">Palvelut</a>
-        <a href="#mallit">Mallijulkaisut</a>
-        <a href="#prosessi">Prosessi</a>
-        <a href="#raportointi">Raportointi</a>
+        <a href="#mallit">Työnäytteet</a>
+        <a href="#prosessi">Toimitusmalli</a>
         <a href="#hinnat">Hinnat</a>
       </nav>
-      <a class="button button-small button-light" href="#yhteys">Pyydä aloitus</a>
+      <a class="button button-small button-primary" href="#yhteys">Pyydä liidiarvio</a>
     </div>
   </header>
 
@@ -43,37 +45,65 @@
       <div class="glow glow-one"></div><div class="glow glow-two"></div>
       <div class="shell hero-grid">
         <div class="hero-copy reveal">
-          <p class="eyebrow">Verkkosivut · some · paikallinen Meta-mainonta</p>
-          <h1>Hyvä työ ansaitsee <span>paremman näkyvyyden.</span></h1>
-          <p class="hero-lead">VIDO Social tekee rakennus-, remontti- ja palvelualan yrityksestä verkossa yhtä uskottavan kuin työnjälki on käytännössä.</p>
+          <p class="eyebrow">Paikallisten palveluyritysten kasvukumppani</p>
+          <h1>Näkyvyyttä, joka muuttuu <span>liideiksi.</span></h1>
+          <p class="hero-lead">Yhdistämme verkkosivut, jatkuvan sisällön ja paikallisen mainonnan yhdeksi selkeäksi poluksi — löydettävyydestä tarjouspyyntöön.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#yhteys">Pyydä aloitus <span aria-hidden="true">→</span></a>
-            <a class="button button-ghost" href="#mallit">Katso mallijulkaisut</a>
+            <a class="button button-primary" href="#yhteys">Pyydä maksuton liidiarvio <span aria-hidden="true">→</span></a>
+            <a class="button button-ghost" href="#palvelut">Katso palvelut</a>
           </div>
-          <div class="hero-notes" aria-label="Palvelun periaatteet">
-            <span>Kiinteät hinnat</span><span>Ihmisen laadunvarmistus</span><span>Kevyt materiaaliprosessi</span>
-          </div>
+          <ul class="hero-notes" aria-label="Palvelun periaatteet">
+            <li>Kiinteät paketit</li><li>Hyväksyt kaiken ennen julkaisua</li><li>Kevyt materiaaliprosessi</li>
+          </ul>
+          <ul class="sector-list" aria-label="Palvelemamme toimialat">
+            <li>Rakennus</li><li>LVI</li><li>Sähkö</li><li>Huolto</li>
+          </ul>
         </div>
 
-        <div class="hero-visual reveal" aria-label="VIDO Socialin demovisuaaleja">
-          <div class="hero-frame">
-            <div class="frame-top"><span><i></i><i></i><i></i></span><b>VIDO Social — demo</b></div>
-            <img src="/assets/landing/demo-social-posts.svg" alt="VIDO Socialin kuvitteellisia mallijulkaisuja paikallisille palveluyrityksille" width="1440" height="1080" fetchpriority="high">
-            <div class="frame-badge">Mallijulkaisu · ei asiakascase</div>
+        <div class="hero-visual reveal">
+          <div class="hero-system">
+            <div class="system-top">
+              <span>VIDO Growth System</span>
+              <em>Palvelumalli</em>
+            </div>
+            <div class="system-body">
+              <div class="system-intro">
+                <small>Yksi kumppani</small>
+                <strong>Kolme vaihetta kohti yhteydenottoa.</strong>
+              </div>
+              <ol class="system-flow">
+                <li>
+                  <span>01</span>
+                  <div><small>Löydettävyys</small><strong>Myyntisivu</strong><p>Palvelut ja toimialue ymmärretään heti.</p></div>
+                  <b>Työmaa</b>
+                </li>
+                <li>
+                  <span>02</span>
+                  <div><small>Luottamus</small><strong>Jatkuva sisältö</strong><p>Työnjälki ja osaaminen näkyvät säännöllisesti.</p></div>
+                  <b>Social</b>
+                </li>
+                <li>
+                  <span>03</span>
+                  <div><small>Aktivointi</small><strong>Paikallinen mainonta</strong><p>Oikea yleisö ohjataan selkeään CTA:han.</p></div>
+                  <b>Kasvu</b>
+                </li>
+              </ol>
+              <div class="system-result">
+                <span>Seurattava päätavoite</span>
+                <strong>Laadukkaat yhteydenotot</strong>
+              </div>
+            </div>
           </div>
-          <div class="floating-card floating-card-a"><small>01</small><strong>Social</strong><span>12 julkaisua / kk</span></div>
-          <div class="floating-card floating-card-b"><small>02</small><strong>Työmaa</strong><span>1–3 sivun myyntisivu</span></div>
-          <div class="floating-card floating-card-c"><small>03</small><strong>Kasvu</strong><span>Sisältö + Meta-mainonta</span></div>
         </div>
       </div>
     </section>
 
     <section class="trust-strip" aria-label="VIDO Socialin toimintaperiaatteet">
       <div class="shell trust-grid">
-        <div><span>01</span><b>Selkeä tuotteistus</b><small>Tiedät mitä saat ja mitä se maksaa.</small></div>
-        <div><span>02</span><b>Kevyt aloitus</b><small>Materiaalit kulkevat WhatsAppilla.</small></div>
-        <div><span>03</span><b>Ihmisen QA</b><small>Faktat ja laatu tarkistetaan ennen julkaisua.</small></div>
-        <div><span>04</span><b>Hyväksyntä ennen julkaisua</b><small>Asiakas säilyttää kontrollin.</small></div>
+        <div><span>01</span><b>Hinta näkyy etukäteen</b><small>Paketti, sisältö ja toimitusaika ovat selkeitä.</small></div>
+        <div><span>02</span><b>Kevyt aloitus</b><small>Perustiedot, logo ja kuvat riittävät alkuun.</small></div>
+        <div><span>03</span><b>Ihmisen laadunvarmistus</b><small>Faktat, yhteystiedot ja lupaukset tarkistetaan.</small></div>
+        <div><span>04</span><b>Kontrolli säilyy asiakkaalla</b><small>Mitään ei julkaista ilman hyväksyntää.</small></div>
       </div>
     </section>
 
@@ -122,14 +152,14 @@
       <div class="shell process-grid">
         <div class="process-copy reveal">
           <p class="eyebrow dark">Kevyt toimitusmalli</p>
-          <h2>Miten sisältö valmistuu.</h2>
-          <p>Asiakkaan tehtäväksi jää toimittaa oikeat perustiedot ja materiaalit. VIDO hoitaa suunnittelun, tuotannon, viimeistelyn ja julkaisun.</p>
+          <h2>Näin projekti etenee.</h2>
+          <p>Asiakas toimittaa oikeat lähtötiedot. VIDO hoitaa suunnittelun, tuotannon, laadunvarmistuksen ja julkaisun sovitun paketin mukaan.</p>
           <ol class="steps-list">
-            <li><span>01</span><div><b>Materiaalit WhatsAppilla</b><small>Kuvat, videot, ideat ja ajankohtaiset tiedot.</small></div></li>
-            <li><span>02</span><div><b>Suunnittelu ja sisältökalenteri</b><small>Aiheet ja julkaisurytmi viikoiksi eteenpäin.</small></div></li>
-            <li><span>03</span><div><b>Muokkaus ja brändäys</b><small>Visuaalit ja tekstit yrityksen ilmeen mukaisesti.</small></div></li>
-            <li><span>04</span><div><b>Hyväksyntä</b><small>Asiakas tarkistaa faktat ja hyväksyy sisällöt.</small></div></li>
-            <li><span>05</span><div><b>Julkaisu</b><small>Sisältö julkaistaan sovittuihin kanaviin.</small></div></li>
+            <li><span>01</span><div><b>Lähtötiedot ja materiaalit</b><small>Palvelut, toimialue, yhteystiedot, logo ja kuvat.</small></div></li>
+            <li><span>02</span><div><b>Ensimmäinen luonnos</b><small>VIDO rakentaa ehdotuksen sovitun tavoitteen ympärille.</small></div></li>
+            <li><span>03</span><div><b>Tarkistus ja viimeistely</b><small>Faktat, visuaalit ja CTA:t käydään läpi.</small></div></li>
+            <li><span>04</span><div><b>Asiakkaan hyväksyntä</b><small>Mitään ei julkaista ilman kirjallista hyväksyntää.</small></div></li>
+            <li><span>05</span><div><b>Julkaisu ja jatko</b><small>Sivu, sisällöt tai kampanja julkaistaan ja seuraava askel sovitaan.</small></div></li>
           </ol>
         </div>
         <figure class="media-frame reveal">
@@ -209,6 +239,7 @@
           <details><summary>Saako sisältöön vaikuttaa ennen julkaisua?</summary><p>Kyllä. VIDO tarkistaa laadun ja faktat, ja asiakas hyväksyy julkaistavan sisällön ennen julkaisua.</p></details>
           <details><summary>Ovatko sivun grafiikat oikeita asiakascaseja?</summary><p>Eivät. Sivun mallijulkaisut, dashboard ja verkkosivumockup on merkitty demoiksi ja niitä käytetään vain palvelun havainnollistamiseen.</p></details>
           <details><summary>Miten VIDO Kasvun mediabudjetti maksetaan?</summary><p>Mediabudjetti maksetaan suoraan mainosalustalle. VIDO Kasvun kuukausihinta kattaa sisällön, kampanjahallinnan, seurannan ja raportoinnin.</p></details>
+          <details><summary>Onko palvelussa pitkä sopimus?</summary><p>VIDO Social on kuukausittain irtisanottava. VIDO Työmaa on kiinteähintainen projekti. VIDO Kasvun ehdot ja mediabudjetti sovitaan kirjallisesti ennen käynnistystä.</p></details>
         </div>
       </div>
     </section>
@@ -216,19 +247,20 @@
     <section class="contact-section grid-bg" id="yhteys">
       <div class="shell contact-grid">
         <div class="contact-copy reveal">
-          <div class="brand brand-static"><svg class="brand-mark" viewBox="0 0 56 56" aria-hidden="true"><path fill="#ff2a2a" d="M7 8h14l25 40H32z"/><path fill="#fff" d="M24 8h25L37 28z"/></svg><span class="brand-name"><b>VIDO</b><i></i><em>Social</em></span></div>
-          <p class="eyebrow">Aloitetaan</p><h2>Tehdään näkyvyydestäsi yhtä vakuuttava kuin työnjäljestäsi.</h2>
-          <p>Kerro nykytilanteesta ja kiinnostavasta palvelusta. Saat selkeän ehdotuksen seuraavista askelista.</p>
+          <div class="brand brand-static"><img class="brand-logo" src="/brand/vido-social-inverted-horizontal.svg" alt="VIDO Social" width="2000" height="560"></div>
+          <p class="eyebrow">Maksuton liidiarvio</p><h2>Selvitetään, mikä estää yhteydenottoja juuri nyt.</h2>
+          <p>Kerro nykytilanteesta ja tärkeimmästä tavoitteesta. Saat rajatun ehdotuksen seuraavasta järkevästä askeleesta — ilman pitkää myyntipalaveria.</p>
           <a class="contact-email" href="mailto:ville@vidosocial.com">ville@vidosocial.com</a>
         </div>
         <form class="contact-form reveal" id="contact-form" novalidate>
-          <div class="form-row"><label>Nimi<input name="name" autocomplete="name" required maxlength="80"></label><label>Yritys<input name="company" autocomplete="organization" required maxlength="100"></label></div>
+          <div class="form-row"><label>Nimi<input type="text" name="name" autocomplete="name" required maxlength="80"></label><label>Yritys<input type="text" name="company" autocomplete="organization" required maxlength="100"></label></div>
           <div class="form-row"><label>Sähköposti<input type="email" name="email" autocomplete="email" required maxlength="120"></label><label>Puhelin <small>(valinnainen)</small><input type="tel" name="phone" autocomplete="tel" maxlength="40"></label></div>
           <label>Kiinnostava palvelu<select name="package" id="package-select"><option value="En osaa vielä sanoa">En osaa vielä sanoa</option><option value="VIDO Social">VIDO Social — 500 €/kk + ALV</option><option value="VIDO Työmaa">VIDO Työmaa — 1 500 € + ALV</option><option value="VIDO Kasvu">VIDO Kasvu — 900 €/kk + ALV + media</option></select></label>
           <label>Mitä haluatte parantaa?<textarea name="message" rows="5" required maxlength="2000" placeholder="Kerro lyhyesti nykyisestä sivustosta, somesta tai asiakashankinnasta."></textarea></label>
-          <label class="honeypot" aria-hidden="true">Verkkosivu<input name="website" tabindex="-1" autocomplete="off"></label>
+          <label class="honeypot" aria-hidden="true">Verkkosivu<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+          <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="page_url">
           <label class="consent"><input type="checkbox" name="consent" required><span>Hyväksyn, että tietojani käsitellään yhteydenottoon vastaamiseksi. <a href="/tietosuoja">Tietosuojaseloste</a>.</span></label>
-          <button class="button button-primary button-block" type="submit">Pyydä ehdotus ja seuraavat askeleet <span>→</span></button>
+          <button class="button button-primary button-block" type="submit">Pyydä maksuton liidiarvio <span>→</span></button>
           <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -237,13 +269,13 @@
 
   <footer class="site-footer">
     <div class="shell footer-grid">
-      <div><a class="brand" href="#top"><svg class="brand-mark" viewBox="0 0 56 56" aria-hidden="true"><path fill="#ff2a2a" d="M7 8h14l25 40H32z"/><path fill="#fff" d="M24 8h25L37 28z"/></svg><span class="brand-name"><b>VIDO</b><i></i><em>Social</em></span></a><p>Rakennus- ja palvelualan digitaalinen näkyvyyskumppani.</p></div>
+      <div><a class="brand" href="#top"><img class="brand-logo" src="/brand/vido-social-inverted-horizontal.svg" alt="VIDO Social" width="2000" height="560"></a><p>Rakennus- ja palvelualan digitaalinen näkyvyyskumppani.</p></div>
       <div><b>Palvelut</b><a href="#hinnat">VIDO Social</a><a href="#hinnat">VIDO Työmaa</a><a href="#hinnat">VIDO Kasvu</a></div>
       <div><b>Yritys</b><a href="mailto:ville@vidosocial.com">ville@vidosocial.com</a><a href="/tietosuoja">Tietosuoja</a><span>Y-tunnus 3581471-7</span></div>
     </div>
     <div class="shell footer-bottom"><span>© <span id="year"></span> VIDO Social</span><span>Kaikki sivun malligrafiikat ovat kuvitteellisia demoja.</span></div>
   </footer>
-  <a class="mobile-cta" href="#yhteys">Pyydä aloitus</a>
+  <a class="mobile-cta" href="#yhteys">Pyydä maksuton liidiarvio</a>
   <script src="/script.js" defer></script>
 </body>
 </html>

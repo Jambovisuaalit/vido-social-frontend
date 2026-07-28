@@ -2,7 +2,8 @@ const header = document.querySelector('[data-header]');
 const onScroll = () => header?.classList.toggle('scrolled', window.scrollY > 20);
 onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
 
-document.getElementById('year').textContent = new Date().getFullYear();
+const year = document.getElementById('year');
+if (year) year.textContent = new Date().getFullYear();
 
 document.querySelectorAll('[data-package]').forEach((link) => {
   link.addEventListener('click', () => {
@@ -26,6 +27,17 @@ document.querySelectorAll('.reveal').forEach((el) => {
 
 const form = document.getElementById('contact-form');
 const status = document.getElementById('form-status');
+
+if (form) {
+  const params = new URLSearchParams(window.location.search);
+  ['utm_source', 'utm_medium', 'utm_campaign'].forEach((name) => {
+    const field = form.elements.namedItem(name);
+    if (field) field.value = params.get(name) || '';
+  });
+  const pageUrl = form.elements.namedItem('page_url');
+  if (pageUrl) pageUrl.value = window.location.href;
+}
+
 form?.addEventListener('submit', async (event) => {
   event.preventDefault();
   if (!form.checkValidity()) {
@@ -34,9 +46,12 @@ form?.addEventListener('submit', async (event) => {
   }
   const button = form.querySelector('button[type="submit"]');
   const data = Object.fromEntries(new FormData(form).entries());
+  const idleLabel = button.innerHTML;
   button.disabled = true;
+  button.setAttribute('aria-busy', 'true');
   button.textContent = 'Lähetetään…';
   status.textContent = '';
+  delete status.dataset.state;
   try {
     const response = await fetch('/api/contact', {
       method: 'POST',
@@ -46,11 +61,14 @@ form?.addEventListener('submit', async (event) => {
     const result = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(result.error || 'Viestin lähetys epäonnistui.');
     form.reset();
+    status.dataset.state = 'success';
     status.textContent = 'Kiitos. Yhteydenottopyyntö on lähetetty.';
   } catch (error) {
+    status.dataset.state = 'error';
     status.textContent = `${error.message} Voit lähettää viestin myös osoitteeseen ville@vidosocial.com.`;
   } finally {
     button.disabled = false;
-    button.innerHTML = 'Pyydä ehdotus ja seuraavat askeleet <span>→</span>';
+    button.removeAttribute('aria-busy');
+    button.innerHTML = idleLabel;
   }
 });
