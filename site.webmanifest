@@ -4,13 +4,14 @@
   "description": "Verkkosivut, some ja paikallinen mainonta rakennusalan yrityksille.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#061b3a",
-  "theme_color": "#061b3a",
+  "background_color": "#0F172A",
+  "theme_color": "#0F172A",
   "icons": [
     {
       "src": "/favicon.svg",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     }
   ]
 }
