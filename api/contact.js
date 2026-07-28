@@ -24,6 +24,16 @@ function isRateLimited(ip) {
   return history.length > MAX_REQUESTS;
 }
 
+function parseBody(request) {
+  if (request.body && typeof request.body === 'object') return request.body;
+  if (typeof request.body !== 'string') return {};
+  try {
+    return JSON.parse(request.body || '{}');
+  } catch {
+    return null;
+  }
+}
+
 export default async function handler(request, response) {
   if (request.method !== 'POST') {
     response.setHeader('Allow', 'POST');
@@ -33,7 +43,8 @@ export default async function handler(request, response) {
   const ip = String(request.headers['x-forwarded-for'] || request.socket?.remoteAddress || 'unknown').split(',')[0].trim();
   if (isRateLimited(ip)) return json(response, 429, { error: 'Liian monta yritystä. Yritä myöhemmin uudelleen.' });
 
-  const body = typeof request.body === 'string' ? JSON.parse(request.body || '{}') : (request.body || {});
+  const body = parseBody(request);
+  if (!body) return json(response, 400, { error: 'Virheellinen pyyntö.' });
   if (body.website) return json(response, 200, { ok: true });
 
   const data = {
