@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="VIDO Social — Näytä yhtä hyvältä kuin teet työsi">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#04142d"/>
+      <stop offset="1" stop-color="#0b2447"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.2" cy="0.1" r="0.75">
+      <stop offset="0" stop-color="#0284c7" stop-opacity="0.65"/>
+      <stop offset="1" stop-color="#0284c7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g transform="translate(82 76)">
+    <rect width="64" height="64" rx="16" fill="#a6d62e"/>
+    <path d="M15 14h10l7 27 7-27h10L38 51H26L15 14Z" fill="#061b3a"/>
+    <text x="82" y="45" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#ffffff">VIDO <tspan fill="#a6d62e">Social</tspan></text>
+  </g>
+  <text x="82" y="245" font-family="Arial, sans-serif" font-size="76" font-weight="700" letter-spacing="-3" fill="#ffffff">Näytä yhtä hyvältä</text>
+  <text x="82" y="330" font-family="Arial, sans-serif" font-size="76" font-weight="700" letter-spacing="-3" fill="#a6d62e">kuin teet työsi.</text>
+  <text x="82" y="415" font-family="Arial, sans-serif" font-size="28" fill="#c1cde0">Verkkosivut, some ja paikallinen mainonta</text>
+  <text x="82" y="455" font-family="Arial, sans-serif" font-size="28" fill="#c1cde0">rakennus- ja talotekniikkayrityksille.</text>
+  <rect x="82" y="520" width="300" height="58" rx="29" fill="#a6d62e"/>
+  <text x="122" y="558" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#061b3a">vidosocial.com</text>
+</svg>
