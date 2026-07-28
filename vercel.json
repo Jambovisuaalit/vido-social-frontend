@@ -3,6 +3,8 @@
   "trailingSlash": false,
   "functions": {"api/contact.js": {"maxDuration": 10}},
   "rewrites": [
+    {"source": "/styles.css", "destination": "https://raw.githubusercontent.com/Jambovisuaalit/vido-social-frontend/main/styles.css"},
+    {"source": "/script.js", "destination": "https://raw.githubusercontent.com/Jambovisuaalit/vido-social-frontend/main/script.js"},
     {"source": "/assets/landing/:path*", "destination": "https://raw.githubusercontent.com/Jambovisuaalit/vido-social-frontend/main/assets/landing/:path*"}
   ],
   "headers": [
@@ -19,8 +21,7 @@
     },
     {"source": "/", "headers": [{"key": "Cache-Control", "value": "public, max-age=0, must-revalidate"}]},
     {"source": "/(tietosuoja|404)", "headers": [{"key": "Cache-Control", "value": "public, max-age=0, must-revalidate"}]},
-    {"source": "/assets/landing/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=3600, must-revalidate"}]},
-    {"source": "/(styles.css|script.js)", "headers": [{"key": "Cache-Control", "value": "public, max-age=3600, must-revalidate"}]},
+    {"source": "/(styles.css|script.js|assets/landing/(.*))", "headers": [{"key": "Cache-Control", "value": "public, max-age=3600, must-revalidate"}]},
     {"source": "/api/(.*)", "headers": [{"key": "Cache-Control", "value": "no-store"}]}
   ]
 }
