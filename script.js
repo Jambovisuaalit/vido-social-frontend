@@ -1,3 +1,8 @@
+const mobileStyles = document.createElement('link');
+mobileStyles.rel = 'stylesheet';
+mobileStyles.href = '/mobile-v2.css';
+document.head.appendChild(mobileStyles);
+
 const header = document.querySelector('[data-header]');
 const onScroll = () => header?.classList.toggle('scrolled', window.scrollY > 20);
 onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
