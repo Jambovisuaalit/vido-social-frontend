@@ -472,42 +472,102 @@ export const servicePages: ServicePage[] = [
 ];
 
 export type CaseStudy = {
+  caseNumber: string;
   slug: string;
   title: string;
   metaTitle: string;
   description: string;
   category: string;
   location: string;
+  propertyType: string;
   summary: string;
+  facts: { label: string; value: string }[];
+  startingPoint: string;
+  challenge: string;
+  solution: string;
+  phases: { title: string; text: string }[];
   scope: string[];
   outcome: string;
+  customerValue: { title: string; text: string }[];
   quote: string;
   quoteName: string;
   images: { src: string; alt: string }[];
+  serviceLink: { href: string; label: string };
+  featured: boolean;
 };
 
 export const caseStudies: CaseStudy[] = [
   {
+    caseNumber: "01",
     slug: "rantasaunan-kunnostus",
-    title: "Lähes satavuotiaan rantasaunan kunnostus",
-    metaTitle: "Rantasaunan kunnostus | Referenssi",
+    title: "Lähes 100-vuotiaan rantasaunan vaativa kunnostus",
+    metaTitle: "Rantasaunan kunnostus | Vaativa hirsikohde",
     description:
-      "Vanhan hirsirantasaunan vesikaton, lattian ja terassin kunnostus. Tutustu Nyholm Brothersin toteuttamaan projektiin.",
+      "Lähes 100-vuotiaan hirsirantasaunan vesikaton, löylyhuoneen lattian ja ruuvipaaluterassin kunnostus.",
     category: "Korjausrakentaminen",
     location: "Rantakohde",
+    propertyType: "Lähes 100-vuotias hirsirantasauna",
     summary:
-      "Lähes satavuotias hirsirantasauna sai uuden vesikaton, saunahuoneen lattian ja suuren terassin. Vanha rakennus vaati joustavaa ongelmanratkaisua työn aikana.",
+      "Vanhan hirsisaunan vesikatto ja löylyhuoneen lattia uusittiin, ja rakennuksen yhteyteen toteutettiin suuri ruuvipaaluilla seisova terassi.",
+    facts: [
+      { label: "Kohde", value: "Hirsinen rantasauna" },
+      {
+        label: "Työn ydin",
+        value: "Vesikatto, löylyhuoneen lattia ja terassi",
+      },
+      { label: "Perustus", value: "Ruuvipaalut" },
+      { label: "Palvelu", value: "Korjausrakentaminen" },
+    ],
+    startingPoint:
+      "Kohteena oli haastavassa paikassa sijaitseva lähes 100-vuotias hirsinen rantasauna. Useita rakennuksen käytön kannalta keskeisiä osia oli uudistettava saman hankkeen aikana.",
+    challenge:
+      "Vanha hirsirakenne ja rantaympäristö vaativat ratkaisuja, jotka parantavat rakennuksen toimivuutta sen alkuperäistä luonnetta kadottamatta. Työn aikana kokonaisuuteen tuli myös uusia toiveita.",
+    solution:
+      "Vesikatto, löylyhuoneen lattia ja ruuvipaaluille perustettu terassi vietiin läpi yhtenä kokonaisuutena. Pukuhuoneen penkit ja piipun tasoitus lisättiin toteutukseen työn aikana.",
+    phases: [
+      {
+        title: "Kokonaisuuden rajaus",
+        text: "Vanhan rakennuksen kriittiset korjaustarpeet ja uuden terassin toteutus koottiin yhdeksi projektiksi.",
+      },
+      {
+        title: "Saunan rakenteet",
+        text: "Vesikatto ja löylyhuoneen lattia uusittiin osana vanhan hirsisaunan kunnostusta.",
+      },
+      {
+        title: "Ruuvipaaluterassi",
+        text: "Rantasaunan yhteyteen rakennettiin suuri terassi ruuvipaalujen varaan.",
+      },
+      {
+        title: "Lisätyöt ja viimeistely",
+        text: "Pukuhuoneen penkit ja piipun tasoitus sovitettiin mukaan projektin edetessä.",
+      },
+    ],
     scope: [
       "Vesikaton uusiminen",
-      "Saunahuoneen lattian uusiminen",
+      "Löylyhuoneen lattian uusiminen",
       "Suuren terassin rakentaminen ruuvipaaluille",
-      "Lisätyönä penkkien ja piipun viimeistelyä",
+      "Pukuhuoneen penkit lisätyönä",
+      "Piipun tasoitus lisätyönä",
     ],
     outcome:
-      "Kohteen toimivuus parani, mutta vanhan hirsisaunan luonne säilyi. Työ eteni asiakkaan kanssa aktiivisesti viestien myös silloin, kun suunnitelmia täsmennettiin.",
+      "Asiakkaan mukaan myös kesken projektin syntyneet lisätoiveet saatiin toteutettua. Hän nosti palautteessaan erityisesti esiin sujuvan, ammattimaisen viestinnän ja kyvyn hoitaa vaativa kokonaisuus.",
+    customerValue: [
+      {
+        title: "Vaativa kohde hallintaan",
+        text: "Vanha rakennus ja rantaympäristö käsiteltiin yhtenä korjausrakentamisen kokonaisuutena.",
+      },
+      {
+        title: "Joustava toteutus",
+        text: "Uudet toiveet pystyttiin liittämään käynnissä olevaan projektiin.",
+      },
+      {
+        title: "Selkeä yhteistyö",
+        text: "Asiakas pysyi mukana projektin edetessä ja laajuuden täsmentyessä.",
+      },
+    ],
     quote:
-      "Erityiskiitos hyvästä viestinnästä ja joustavuudesta matkan varrella.",
-    quoteName: "Juhani, asiakas",
+      "Modernin asiakaslähtöistä palvelua ja kommunikaatio sujuvaa ja ammattimaista. Helppo suositella tätä porukkaa vaativiinkin projekteihin!",
+    quoteName: "Juhani Snellman, asiakas",
     images: [
       {
         src: imageUrls.saunaExterior,
@@ -522,27 +582,79 @@ export const caseStudies: CaseStudy[] = [
         alt: "Rantasaunan terassin rakennustyö",
       },
     ],
+    serviceLink: {
+      href: "/korjausrakentaminen-espoo",
+      label: "Tutustu korjausrakentamiseen",
+    },
+    featured: true,
   },
   {
+    caseNumber: "02",
     slug: "terassin-rakentaminen-espoo",
     title: "Vanhan terassin purku ja uuden rakentaminen",
     metaTitle: "Terassin rakentaminen Espoo | Referenssi",
     description:
-      "Vanhan terassin purku ja uuden terassin toteutus Espoossa. Katso Nyholm Brothersin referenssi.",
+      "Vanhan terassin purku ja uuden terassin toteutus Espoossa. Tutustu projektin lähtötilanteeseen, työvaiheisiin ja asiakaskokemukseen.",
     category: "Terassit",
     location: "Espoo",
+    propertyType: "Vanhan terassin uusiminen",
     summary:
-      "Vanhentunut terassi purettiin ja tilalle rakennettiin uusi kokonaisuus. Työn rajaus ja eteneminen sovittiin asiakkaan kanssa ennen aloitusta.",
+      "Vanha terassi purettiin ja tilalle rakennettiin uusi kokonaisuus. Asiakkaan mukaan projekti eteni sovitusti ja työn laatu oli erinomaista.",
+    facts: [
+      { label: "Kohde", value: "Vanha terassi" },
+      { label: "Työn ydin", value: "Purku ja uuden rakentaminen" },
+      { label: "Sijainti", value: "Espoo" },
+      { label: "Palvelu", value: "Terassirakentaminen" },
+    ],
+    startingPoint:
+      "Asiakkaan lähtötilanteessa oli vanha terassi, joka päätettiin purkaa ja rakentaa uudelleen. Tavoitteena oli selkeästi rajattu kokonaisuus ja viimeistelty uusi ulkotila.",
+    challenge:
+      "Purku ja uudelleenrakentaminen piti sovittaa yhdeksi hallituksi työksi niin, että asiakas tiesi, mitä tehdään ja millainen lopputulos on valmistumassa.",
+    solution:
+      "Vanha rakenne purettiin, uusi terassi rakennettiin ja kokonaisuus viimeisteltiin sovitun työn mukaisesti. Asiakaspalaute vahvistaa sekä toteutuksen sujuvuuden että työn laadun.",
+    phases: [
+      {
+        title: "Työn rajaus",
+        text: "Vanhan terassin purku ja uuden rakentaminen sovittiin yhdeksi ymmärrettäväksi kokonaisuudeksi.",
+      },
+      {
+        title: "Vanhan purku",
+        text: "Vanha terassikokonaisuus purettiin uuden tieltä.",
+      },
+      {
+        title: "Uusi terassi",
+        text: "Tilalle rakennettiin uusi rakenne ja oleskeluun sopiva terassipinta.",
+      },
+      {
+        title: "Viimeistely ja luovutus",
+        text: "Työ vietiin loppuun sovitun mukaisesti ja valmis kokonaisuus luovutettiin asiakkaalle.",
+      },
+    ],
     scope: [
       "Vanhan terassin purku",
-      "Uuden terassin runko",
-      "Terassilaudoitus ja viimeistely",
-      "Työmaan siistiminen",
+      "Uuden terassin rakentaminen",
+      "Rakenteen ja terassipinnan viimeistely",
+      "Valmiin kokonaisuuden luovutus",
     ],
     outcome:
       "Uusi terassi valmistui sovitusti ja palvelee pihan oleskelutilana. Asiakas nosti palautteessaan esiin sekä työn laadun että sovituissa asioissa pysymisen.",
-    quote: "Kaikki sujui sovitusti ja työn laatu oli erinomaista.",
-    quoteName: "Jukka-Pekka, asiakas",
+    customerValue: [
+      {
+        title: "Sovittu piti",
+        text: "Asiakas koki projektin edenneen sovitun mukaisesti.",
+      },
+      {
+        title: "Laadukas lopputulos",
+        text: "Valmiin työn laatu sai asiakkaalta erinomaisen arvion.",
+      },
+      {
+        title: "Helppo yhteistyö",
+        text: "Palvelukokemus oli asiakkaan mukaan luonteva ja suosittelun arvoinen.",
+      },
+    ],
+    quote:
+      "Kaikki sujui sovitun mukaisesti ja työn laatu on erinomaista. Kaiken lisäksi mukavia kavereita. Suosittelen lämpimästi.",
+    quoteName: "Jukka-Pekka Pulkkinen, asiakas",
     images: [
       {
         src: imageUrls.terrace,
@@ -553,28 +665,79 @@ export const caseStudies: CaseStudy[] = [
         alt: "Terassin laudoitus ja rakennuksen liitos",
       },
     ],
+    serviceLink: {
+      href: "/terassin-rakentaminen-espoo",
+      label: "Tutustu terassirakentamiseen",
+    },
+    featured: true,
   },
   {
+    caseNumber: "03",
     slug: "keittioremontti-espoo",
     title: "Keittiöremontti sujuvalla projektinjohdolla",
     metaTitle: "Keittiöremontti Espoo | Referenssi",
     description:
-      "Keittiöremontti, jossa asiakas arvosti ammattitaitoa, joustavuutta ja aktiivista viestintää.",
+      "Keittiöremontti Espoossa, jossa asiakas arvosti ammattitaitoa, joustavuutta ja aktiivista viestintää.",
     category: "Huoneistoremontit",
     location: "Espoo",
+    propertyType: "Keittiöremontti",
     summary:
-      "Keittiön uudistus toteutettiin asiakkaan toiveiden mukaan. Projektissa korostuivat joustavuus, ratkaisukeskeisyys ja aktiivinen yhteydenpito.",
+      "Keittiöremontti vietiin läpi aktiivisesti viestien. Asiakas tiesi, miten työ eteni, ja kuvasi koko projektia miellyttäväksi ja stressittömäksi.",
+    facts: [
+      { label: "Kohde", value: "Keittiö" },
+      { label: "Työn ydin", value: "Keittiöremontin toteutus" },
+      { label: "Sijainti", value: "Espoo" },
+      { label: "Painotus", value: "Viestintä ja joustavuus" },
+    ],
+    startingPoint:
+      "Asiakas halusi toteuttaa keittiöremontin ammattilaisten kanssa siten, että työn eteneminen olisi ennakoitavaa ja yhteistyö helppoa alusta loppuun.",
+    challenge:
+      "Keittiöremontissa useat peräkkäiset työvaiheet ja käytännön muutokset voivat kuormittaa asiakasta, ellei etenemisestä ja seuraavista päätöksistä viestitä aktiivisesti.",
+    solution:
+      "Patric ja Kasper toteuttivat projektin joustavasti ja pitivät asiakkaan ajan tasalla työvaiheiden etenemisestä. Asiakas nosti esiin sekä ammattitaidon että ystävällisen toimintatavan.",
+    phases: [
+      {
+        title: "Aloitus ja yhteinen suunta",
+        text: "Tavoite ja remontin eteneminen käytiin läpi ennen varsinaista toteutusta.",
+      },
+      {
+        title: "Työvaiheiden toteutus",
+        text: "Keittiöremontin eri vaiheet vietiin eteenpäin ammattilaisten koordinoimana.",
+      },
+      {
+        title: "Aktiivinen viestintä",
+        text: "Asiakkaalle kerrottiin työn etenemisestä koko projektin ajan.",
+      },
+      {
+        title: "Valmis kokonaisuus",
+        text: "Projektin lopputulos ja toimintatapa tekivät remontista asiakkaalle stressittömän kokemuksen.",
+      },
+    ],
     scope: [
-      "Vanhan keittiön purkutyöt",
-      "Pintojen valmistelu",
-      "Uuden kokonaisuuden asennustyöt",
+      "Keittiöremontin kokonaisuuden toteutus",
       "Työvaiheiden koordinointi",
+      "Etenemisestä tiedottaminen",
+      "Muutoksiin joustava reagointi",
     ],
     outcome:
       "Asiakas koki remontin etenemisen stressittömäksi, koska työn etenemisestä viestittiin ja muutoksiin reagoitiin joustavasti.",
+    customerValue: [
+      {
+        title: "Ammattitaitoinen toteutus",
+        text: "Asiakas arvioi tekijät erittäin ammattitaitoisiksi.",
+      },
+      {
+        title: "Joustava yhteistyö",
+        text: "Käytännön tilanteisiin pystyttiin reagoimaan ilman turhaa kitkaa.",
+      },
+      {
+        title: "Vähemmän stressiä",
+        text: "Aktiivinen viestintä teki projektista asiakkaalle ennakoitavan.",
+      },
+    ],
     quote:
-      "Koko remontti alusta loppuun sujui hyvin. Ammattitaitoisia, ystävällisiä ja joustavia tekijöitä.",
-    quoteName: "Ann, asiakas",
+      "Keittiöremontti sujui alusta loppuun erinomaisesti! Patric ja Kasper ovat erittäin ammattitaitoisia, ystävällisiä ja joustavia.",
+    quoteName: "Ann Turtle, asiakas",
     images: [
       {
         src: imageUrls.kitchen,
@@ -585,8 +748,92 @@ export const caseStudies: CaseStudy[] = [
         alt: "Keittiöremontin asennusvaihe",
       },
     ],
+    serviceLink: {
+      href: "/huoneistoremontti-espoo",
+      label: "Tutustu huoneistoremontteihin Espoossa",
+    },
+    featured: true,
+  },
+  {
+    caseNumber: "04",
+    slug: "huoneistoremontti-helsinki-kallio",
+    title: "Huonokuntoisen kaksion remontti Kalliossa",
+    metaTitle: "Huoneistoremontti Kallio Helsinki | Referenssi",
+    description:
+      "Huonokuntoisen kaksion remontti Helsingin Kalliossa. Tutustu projektin lähtötilanteeseen, ratkaisuihin ja asiakaskokemukseen.",
+    category: "Huoneistoremontit",
+    location: "Kallio, Helsinki",
+    propertyType: "Huonokuntoinen kaksio",
+    summary:
+      "Vaativa kaksion remontti vietiin alkukartoituksesta asunnon luovutukseen. Asiakkaalle avattiin vaihtoehdot ja kustannukset projektin eri vaiheissa.",
+    facts: [
+      { label: "Kohde", value: "Kaksio" },
+      { label: "Lähtötilanne", value: "Huonokuntoinen asunto" },
+      { label: "Sijainti", value: "Kallio, Helsinki" },
+      { label: "Palvelu", value: "Huoneistoremontti" },
+    ],
+    startingPoint:
+      "Kohteena oli melko huonossa kunnossa oleva kaksio Helsingin Kalliossa. Lähtötilanne edellytti kokonaisuuden huolellista kartoitusta ennen toteutuspäätöksiä.",
+    challenge:
+      "Vaativassa kohteessa eri vaihtoehtojen vaikutukset ja kustannukset piti tehdä asiakkaalle ymmärrettäviksi remontin edetessä. Ratkaisuja tarvittiin myös työn aikana.",
+    solution:
+      "Projektia vietiin eteenpäin alkukartoituksesta luovutukseen avoimella viestinnällä. Asiakkaalle käytiin läpi vaihtoehtoja ja kuluja, ja veljekset löysivät työn aikana useita kohteeseen sopivia ratkaisuja.",
+    phases: [
+      {
+        title: "Alkukartoitus",
+        text: "Asunnon lähtötilanne ja remontin vaatima kokonaisuus käytiin läpi ennen toteutusta.",
+      },
+      {
+        title: "Vaihtoehdot ja kustannukset",
+        text: "Asiakkaalle avattiin remontin eri vaiheissa vaihtoehdot ja niiden kustannusvaikutukset.",
+      },
+      {
+        title: "Ratkaisut työn aikana",
+        text: "Vaativaan kohteeseen löydettiin remontin edetessä useita toimivia ratkaisuja.",
+      },
+      {
+        title: "Asunnon luovutus",
+        text: "Kokonaisuus vietiin valmiiksi ja luovutettiin asiakkaalle hallitun projektin päätteeksi.",
+      },
+    ],
+    scope: [
+      "Kaksion huoneistoremontti",
+      "Vaihtoehtojen läpikäynti asiakkaan kanssa",
+      "Kustannusvaikutuksista viestiminen",
+      "Ongelmanratkaisu toteutuksen aikana",
+      "Kohteen luovutus",
+    ],
+    outcome:
+      "Asiakas kuvasi remonttia hienosti toteutetuksi ja nosti erityisesti esiin vaihtoehdoista ja kustannuksista viestimisen sekä vaativaan kohteeseen löydetyt ratkaisut.",
+    customerValue: [
+      {
+        title: "Kustannukset näkyviksi",
+        text: "Asiakas sai tietoa vaihtoehdoista ja kuluista päätösten tueksi.",
+      },
+      {
+        title: "Ratkaisukyky työmaalla",
+        text: "Vaativassa asunnossa eteen tulleisiin tilanteisiin löydettiin toimivia ratkaisuja.",
+      },
+      {
+        title: "Yksi ehyt projekti",
+        text: "Viestintä jatkui alkukartoituksesta valmiin asunnon luovutukseen.",
+      },
+    ],
+    quote:
+      "Hienosti toteutettu remontti melko huonossa kunnossa olevassa kaksiossa Kalliossa. Omistaja osasi hyvin viestiä eri vaihtoehdoista ja kuluista remontin eri vaiheissa.",
+    quoteName: "Paavo Rytsä, asiakas",
+    images: [],
+    serviceLink: {
+      href: "/huoneistoremontti-helsinki",
+      label: "Tutustu huoneistoremontteihin Helsingissä",
+    },
+    featured: false,
   },
 ];
+
+export const featuredCaseStudies = caseStudies.filter(
+  (study) => study.featured,
+);
 
 export const testimonials = [
   {
@@ -614,3 +861,6 @@ export const getServicePage = (slug: string) =>
 
 export const getCaseStudy = (slug: string) =>
   caseStudies.find((study) => study.slug === slug);
+
+export const getRelatedCaseStudies = (slug: string) =>
+  caseStudies.filter((study) => study.slug !== slug).slice(0, 2);
