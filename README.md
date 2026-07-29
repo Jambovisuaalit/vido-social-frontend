@@ -19,7 +19,7 @@ SESSION_SECRET=eri-pitka-satunnainen-arvo
 UPSTASH_REDIS_REST_URL=https://...
 UPSTASH_REDIS_REST_TOKEN=...
 RESEND_API_KEY=re_...
-CONTACT_FROM_EMAIL=JKP Group <verkkosivu@jkpgroup.fi>
+CONTACT_FROM_EMAIL="JKP Group <verkkosivu@jkpgroup.fi>"
 CONTACT_TO_EMAIL=jari.koskela@jkpgroup.fi
 ```
 
@@ -32,3 +32,7 @@ Ilman Redis-muuttujia julkinen sivusto käyttää aina `content/defaults.ts`-sis
 3. Verifioi lähettäjädomain Resendissä.
 4. Aseta ympäristömuuttujat Verceliin.
 5. Testaa lomake, admin, mobiilinäkymä ja hakukoneiden metatiedot.
+
+## Laatuportti
+
+Jokainen pull request ajetaan GitHub Actionsissa tuotantobuildilla ennen yhdistämistä.
