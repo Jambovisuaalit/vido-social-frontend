@@ -1,61 +1,34 @@
-# VIDO Social Frontend
+# JKP Group Oy — verkkosivusto
 
-Tuotantovalmis staattinen frontend VIDO Socialin palvelupaketeille.
+PRD:n mukainen Next.js-toteutus JKP Group Oy:lle.
 
-Nykyinen julkaisu: **V7** — Dark Performance -viimeistely, virallinen logo, paikallinen Inter-fontti ja staattinen renderöinti.
+## Sivut
 
-## Production
+- `/` — etusivu ja yhteydenotto
+- `/talotekniikka` — rakennuttaminen, valvonta, LVI-suunnittelu ja kustannushallinta
+- `/vuokraus` — kohdelistauksen valmis rakenne
+- `/referenssit` — referenssien valmis rakenne
+- `/admin` — salasanasuojattu tekstien hallinta
 
-- https://vido-social-frontend.vercel.app
-- Vercel project: `vido-social-frontend`
-- GitHub: `Jambovisuaalit/vido-social-frontend`
-
-## Palvelupaketit
-
-- **VIDO Social:** 500 €/kk + ALV
-- **VIDO Työmaa:** 1 500 € + ALV
-- **VIDO Kasvu:** 900 €/kk + ALV + mediabudjetti
-
-## Rakenne
-
-- `index.html` — myyntisivu
-- `styles.css` — responsiivinen design system
-- `v7.css` — V7-viimeistelykerros
-- `script.js` — käyttöliittymä ja lomakkeen lähetys
-- `api/contact.js` — validoitu Vercel Function
-- `tietosuoja.html` — tietosuojaseloste
-- `404.html` — mukautettu virhesivu
-- `vercel.json` — headerit, CSP, välimuisti ja function-asetukset
-
-## Yhteydenottolomakkeen ympäristömuuttujat
-
-Lisää Vercelin projektiasetuksiin:
-
-```text
-RESEND_API_KEY=...
-CONTACT_FROM_EMAIL=VIDO Social <yhteys@vahvistettu-domain.fi>
-CONTACT_TO_EMAIL=ville@vidosocial.com
-```
-
-Ilman näitä muuttujia lomake avaa käyttäjän sähköpostiohjelman varayhteydenottoa varten.
-
-## Julkaisu
-
-Vercel CLI:
+## Ympäristömuuttujat
 
 ```bash
-vercel
-vercel --prod
+NEXT_PUBLIC_SITE_URL=https://jkpgroup.fi
+ADMIN_PASSWORD=vahva-salasana
+SESSION_SECRET=eri-pitka-satunnainen-arvo
+UPSTASH_REDIS_REST_URL=https://...
+UPSTASH_REDIS_REST_TOKEN=...
+RESEND_API_KEY=re_...
+CONTACT_FROM_EMAIL=JKP Group <verkkosivu@jkpgroup.fi>
+CONTACT_TO_EMAIL=jari.koskela@jkpgroup.fi
 ```
 
-## Laatu ja turvallisuus
+Ilman Redis-muuttujia julkinen sivusto käyttää aina `content/defaults.ts`-sisältöä. Admin-tallennus estetään selkeällä virheellä. Ilman Resend-konfiguraatiota lomake ohjaa käyttäjän käyttämään suoraa sähköpostia.
 
-- responsiivinen mobiili- ja työpöytäasettelu
-- canonical, Open Graph, Twitter Card ja JSON-LD
-- robots.txt ja sitemap.xml
-- tietosuojaseloste ja suostumus
-- honeypot, palvelinpuolen validointi, origin-tarkistus ja kevyt rate limit
-- UTM-lähdeseuranta yhteydenottopyyntöihin
-- CSP, HSTS, X-Frame-Options ja muut turvallisuusheaderit
+## Julkaisua ennen
 
-© 2026 VIDO Social — Y-tunnus 3581471-7
+1. Vahvista kaikki yritys- ja palvelutekstit Jari Koskelalta.
+2. Lisää oikeat vuokrauskohteet, referenssit ja kuvat.
+3. Verifioi lähettäjädomain Resendissä.
+4. Aseta ympäristömuuttujat Verceliin.
+5. Testaa lomake, admin, mobiilinäkymä ja hakukoneiden metatiedot.
