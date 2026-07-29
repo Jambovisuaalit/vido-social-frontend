@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fi">
   <head>
     <meta charset="utf-8" />
@@ -139,7 +139,10 @@
       <p>
         Voimme käsitellä nimeä, yrityksen nimeä, sähköpostiosoitetta,
         puhelinnumeroa, kiinnostavaa palvelua, viestissä annettuja tietoja sekä
-        yhteydenoton lähdetietoja (UTM-parametrit ja sivun osoite).
+        yhteydenoton lähdetietoja (UTM-parametrit ja sivun osoite). Roskapostin
+        estämiseksi käsittelemme lisäksi selaimen käyttäjäagenttia ja
+        IP-osoitteesta muodostettua yksisuuntaista tiivistettä. Raakaa
+        IP-osoitetta ei tallenneta liidirekisteriin.
       </p>
       <h2>3. Käsittelyn tarkoitus ja oikeusperuste</h2>
       <p>
@@ -152,13 +155,15 @@
       <p>
         Yhteydenottotietoja säilytetään vain niin kauan kuin asian käsittely tai
         mahdollinen asiakassuhde edellyttää. Tarpeettomat tiedot poistetaan
-        kohtuullisessa ajassa.
+        kohtuullisessa ajassa. Lähetysrajoitukseen käytetty IP-tiiviste poistuu
+        automaattisesti viimeistään 24 tunnin kuluttua.
       </p>
       <h2>5. Vastaanottajat ja palveluntarjoajat</h2>
       <p>
         Tietoja voivat käsitellä VIDO Socialin käyttämät tekniset
-        palveluntarjoajat, kuten verkkosivuston hosting- ja sähköpostipalvelu.
-        Tietoja ei myydä.
+        palveluntarjoajat: Vercel verkkosivuston hostingiin, Supabase
+        yhteydenottotietojen turvalliseen tallennukseen ja Resend
+        sähköposti-ilmoituksiin. Tietoja ei myydä.
       </p>
       <h2>6. Tietojen siirrot</h2>
       <p>
