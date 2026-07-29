@@ -1,0 +1,124 @@
+/* VIDO Social — mobile layout correction v2 */
+@media (max-width: 599px){
+  html{scroll-padding-top:16px}
+  body{overflow-x:hidden;font-size:16px;line-height:1.58}
+  .shell{width:min(calc(100% - 32px),var(--max))}
+  .section{padding:64px 0}
+
+  /* Header belongs to the hero on mobile instead of covering every section. */
+  .site-header{position:absolute;top:12px;left:0;right:0;z-index:20}
+  .nav-shell{min-height:54px;padding:7px 12px;border-radius:16px;box-shadow:0 12px 32px rgba(0,0,0,.24)}
+  .nav-shell>.button,.nav-links{display:none!important}
+  .brand{gap:8px}
+  .brand-mark{width:25px;height:25px}
+  .brand-name{gap:7px}
+  .brand-name b{font-size:18px}
+  .brand-name i{display:block!important;width:2px;height:18px}
+  .brand-name em{display:inline!important;font-size:11px}
+
+  /* Hero hierarchy and touch targets. */
+  .hero{padding:96px 0 58px}
+  .hero-grid{gap:28px}
+  .hero-copy{max-width:none}
+  .hero .eyebrow{max-width:30ch;margin-bottom:18px;font-size:10px;line-height:1.45;letter-spacing:.13em}
+  h1{font-size:clamp(42px,12vw,50px);line-height:.98;letter-spacing:-.055em}
+  h2{font-size:clamp(34px,10vw,42px);line-height:1.02;letter-spacing:-.045em}
+  h3{font-size:24px}
+  .hero h1{margin-bottom:20px}
+  .hero-lead{font-size:17px;line-height:1.55}
+  .hero-actions{gap:11px;margin-top:25px}
+  .hero-actions .button{min-height:54px;padding-inline:18px;font-size:16px}
+  .hero-notes{display:grid;grid-template-columns:1fr;gap:12px;margin-top:22px;font-size:14px;line-height:1.35}
+  .hero-notes li{display:flex;align-items:center}
+  .sector-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:18px}
+  .sector-list li{text-align:center;padding:8px 10px;font-size:12px}
+
+  /* Product/system panel. */
+  .growth-panel{border-radius:20px;box-shadow:0 24px 60px rgba(0,0,0,.34)}
+  .panel-intro{padding:20px 17px 10px}
+  .panel-intro strong{font-size:23px}
+  .growth-flow{padding:8px 12px 14px}
+  .growth-flow li{grid-template-columns:32px minmax(0,1fr);gap:10px;padding:13px}
+  .growth-flow em{grid-column:2;justify-self:start;margin-top:4px}
+  .growth-flow p{font-size:12px}
+  .panel-result{margin:0 12px 14px}
+
+  /* Proof strip becomes compact 2 x 2 instead of a long vertical list. */
+  .trust-grid{grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid var(--line);border-radius:18px;overflow:hidden}
+  .trust-grid>div{min-height:132px;padding:18px 14px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .trust-grid>div:nth-child(2n){border-right:0}
+  .trust-grid>div:nth-last-child(-n+2){border-bottom:0}
+  .trust-grid b{font-size:15px;line-height:1.25}
+  .trust-grid small{font-size:12px;line-height:1.42}
+
+  .split-heading,.section-head{gap:14px;margin-bottom:30px}
+  .split-heading p:last-child,.section-head>p{font-size:16px;line-height:1.58}
+
+  /* Cards and pricing. */
+  .solution-grid,.pricing-grid{gap:14px}
+  .solution-card,.price-card{padding:22px;border-radius:18px}
+  .solution-card h3{margin:30px 0 10px}
+  .solution-card p{font-size:15px;line-height:1.55}
+  .solution-card li,.price-card li{font-size:14px;line-height:1.45}
+  .solution-num{right:16px;top:15px;font-size:52px}
+  .recommended,.popular{margin:-22px 0 16px}
+  .price-card h3{margin-top:28px}
+  .price strong{font-size:36px}
+  .price-card .button{min-height:50px;font-size:15px}
+
+  /* Social feed: one readable card, with only a controlled preview of the next. */
+  .posts-section{padding-top:70px}
+  .post-grid{grid-auto-columns:min(82vw,318px);gap:12px;margin-right:-16px;padding-right:16px;padding-bottom:10px;scroll-padding-inline:0}
+  .social-post{border-radius:17px}
+  .post-head{min-height:52px;padding:9px 11px}
+  .post-head b{font-size:12px}
+  .post-head small{font-size:10px}
+  .post-photo strong{left:15px;right:15px;bottom:16px;font-size:21px}
+  .social-post>p{min-height:68px;padding:6px 12px 13px;font-size:12px}
+
+  /* Process and media cards. */
+  .two-column,.two-column-reverse,.contact-grid,.faq-grid{gap:28px}
+  .steps-list{margin-top:22px}
+  .steps-list li{grid-template-columns:36px minmax(0,1fr);gap:10px;padding:15px 0}
+  .steps-list b{font-size:16px}
+  .steps-list small{font-size:13px;line-height:1.45}
+  .media-frame{border-radius:18px;box-shadow:0 18px 48px rgba(0,0,0,.20)}
+  .media-top{min-height:48px;padding:0 14px;font-size:13px}
+  .media-frame figcaption{padding:12px 14px;font-size:12px;line-height:1.45}
+  .report-section .media-frame,.website-section .media-frame{margin-top:2px}
+
+  /* FAQ and contact. */
+  summary{padding:18px 34px 18px 0;font-size:16px;line-height:1.35}
+  details p{padding:0 24px 18px 0;font-size:15px;line-height:1.55}
+  .contact-section{padding:68px 0}
+  .brand-static{margin-bottom:24px}
+  .contact-copy h2{font-size:40px;line-height:1.02}
+  .contact-copy>p{font-size:16px;line-height:1.58}
+  .contact-form{padding:18px;border-radius:18px}
+  .contact-form label{font-size:14px}
+  .contact-form input,.contact-form select{min-height:48px}
+  .consent{font-size:13px!important;line-height:1.45}
+
+  /* Footer is compact and never hidden behind a fixed CTA. */
+  .site-footer{padding:44px 0 28px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px 18px}
+  .footer-grid>div:first-child{grid-column:1/-1}
+  .footer-grid p{font-size:14px;line-height:1.5}
+  .footer-grid a,.footer-grid span{font-size:14px;line-height:1.5}
+  .footer-bottom{gap:8px;margin-top:24px;padding-top:18px;font-size:12px;line-height:1.45}
+
+  /* The fixed bottom CTA was obscuring posts, forms and footer. */
+  .mobile-cta{display:none!important}
+}
+
+@media (max-width: 374px){
+  .shell{width:min(calc(100% - 24px),var(--max))}
+  h1{font-size:40px}
+  h2{font-size:33px}
+  .brand-name em{display:none!important}
+  .brand-name i{display:none!important}
+  .trust-grid{grid-template-columns:1fr}
+  .trust-grid>div{min-height:auto;border-right:0!important;border-bottom:1px solid var(--line)!important}
+  .trust-grid>div:last-child{border-bottom:0!important}
+  .post-grid{grid-auto-columns:86vw;margin-right:-12px;padding-right:12px}
+}
