@@ -14,6 +14,7 @@ import {
   PhoneIcon,
 } from "@/components/ui";
 import {
+  caseStudies,
   getServicePage,
   servicePages,
   siteConfig,
@@ -57,6 +58,10 @@ export default async function ServicePageRoute({
   const page = getServicePage(slug);
 
   if (!page) notFound();
+
+  const relatedCase = caseStudies.find(
+    (study) => study.serviceLink.href === `/${page.slug}`,
+  );
 
   const serviceSchema = {
     "@context": "https://schema.org",
@@ -233,12 +238,23 @@ export default async function ServicePageRoute({
               “
             </span>
             <blockquote>
-              Kommunikaatio eri vaihtoehdoista ja kustannuksista oli
-              erinomaista. Myös ongelmanratkaisu toimi hienosti.
+              {relatedCase?.quote ??
+                "Kommunikaatio eri vaihtoehdoista ja kustannuksista oli erinomaista. Myös ongelmanratkaisu toimi hienosti."}
             </blockquote>
-            <p>Paavo · huoneistoremontti</p>
-            <Link className="text-link" href="/referenssit">
-              Tutustu töihimme
+            <p>
+              {relatedCase?.quoteName ?? "Paavo, asiakas"} ·{" "}
+              {relatedCase?.category.toLocaleLowerCase("fi") ??
+                "huoneistoremontti"}
+            </p>
+            <Link
+              className="text-link"
+              href={
+                relatedCase
+                  ? `/referenssit/${relatedCase.slug}`
+                  : "/referenssit"
+              }
+            >
+              {relatedCase ? "Lue koko projekti" : "Tutustu töihimme"}
               <ArrowIcon />
             </Link>
           </div>
