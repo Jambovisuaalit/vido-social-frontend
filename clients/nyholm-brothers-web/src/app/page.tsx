@@ -12,7 +12,7 @@ import {
   PhoneIcon,
 } from "@/components/ui";
 import {
-  caseStudies,
+  featuredCaseStudies,
   imageUrls,
   serviceLinks,
   siteConfig,
@@ -316,7 +316,7 @@ export default function Home() {
           </div>
 
           <div className="case-grid">
-            {caseStudies.map((study, index) => (
+            {featuredCaseStudies.map((study, index) => (
               <Link
                 className={`case-card ${index === 0 ? "case-card-large" : ""}`}
                 href={`/referenssit/${study.slug}`}
