@@ -24,6 +24,7 @@ export function ContactForm({ subject = "Yhteydenotto verkkosivulta" }: { subjec
       const payload = (await response.json()) as { message?: string };
       if (!response.ok) throw new Error(payload.message || "Viestin lähetys epäonnistui.");
       form.reset();
+      startedAt.current = Date.now();
       setStatus("success");
       setMessage("Kiitos. Viesti on vastaanotettu.");
     } catch (error) {
@@ -44,6 +45,10 @@ export function ContactForm({ subject = "Yhteydenotto verkkosivulta" }: { subjec
       </div>
       <label>Viesti<textarea name="message" required minLength={10} maxLength={3000} rows={6} /></label>
       <label className="honeypot" aria-hidden="true">Verkkosivu<input name="website" tabIndex={-1} autoComplete="off" /></label>
+      <label>
+        <input name="privacyConsent" type="checkbox" value="Hyväksytty" required />
+        Hyväksyn tietojeni käsittelyn yhteydenottoon vastaamista varten.
+      </label>
       <button className="button button-submit" type="submit" disabled={status === "loading"}>
         {status === "loading" ? "Lähetetään…" : "Lähetä viesti"}
       </button>
