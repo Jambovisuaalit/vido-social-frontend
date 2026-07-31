@@ -8,6 +8,13 @@ export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const content = await getSiteContent();
+  const heroStyle = content.hero.imageUrl
+    ? {
+        backgroundImage: `linear-gradient(145deg, rgba(9, 28, 23, 0.22), rgba(9, 28, 23, 0.84)), url("${content.hero.imageUrl}")`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+      }
+    : undefined;
 
   return (
     <>
@@ -30,7 +37,7 @@ export default async function HomePage() {
                 <div><strong>1</strong><span>Suora vastuuhenkilö</span></div>
               </div>
             </div>
-            <div className="hero-visual" aria-label="JKP Groupin palvelukokonaisuus">
+            <div className="hero-visual" aria-label="JKP Groupin palvelukokonaisuus" style={heroStyle}>
               <div className="visual-kicker">JKP / PROJECT CONTROL</div>
               <div className="visual-ring"><span>Hanke</span><strong>Hallinnassa</strong></div>
               <div className="visual-grid">
