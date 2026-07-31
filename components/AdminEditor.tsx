@@ -49,6 +49,24 @@ export function AdminEditor() {
     setStatus(response.ok ? "Tallennettu. Muutokset näkyvät heti sivustolla." : payload.message || "Tallennus epäonnistui.");
   }
 
+  async function uploadHeroImage(file: File | null) {
+    if (!file || !content) return;
+    setStatus("Ladataan kuvaa…");
+
+    const formData = new FormData();
+    formData.set("file", file);
+    const response = await fetch("/api/admin/media", { method: "POST", body: formData });
+    const payload = (await response.json()) as { message?: string; url?: string };
+
+    if (!response.ok || !payload.url) {
+      setStatus(payload.message || "Kuvan lataus epäonnistui.");
+      return;
+    }
+
+    setContent({ ...content, hero: { ...content.hero, imageUrl: payload.url } });
+    setStatus("Kuva ladattu. Tallenna muutokset ottaaksesi kuvan käyttöön.");
+  }
+
   if (!authenticated || !content) {
     return (
       <form className="admin-login" onSubmit={login}>
@@ -80,6 +98,9 @@ export function AdminEditor() {
         <label>Yläotsikko<input value={content.hero.eyebrow} onChange={(e) => setContent({ ...content, hero: { ...content.hero, eyebrow: e.target.value } })} /></label>
         <label>Pääotsikko<textarea rows={2} value={content.hero.title} onChange={(e) => setContent({ ...content, hero: { ...content.hero, title: e.target.value } })} /></label>
         <label>Ingressi<textarea rows={4} value={content.hero.lead} onChange={(e) => setContent({ ...content, hero: { ...content.hero, lead: e.target.value } })} /></label>
+        <label>Hero-kuvan URL<input type="url" value={content.hero.imageUrl} onChange={(e) => setContent({ ...content, hero: { ...content.hero, imageUrl: e.target.value } })} /></label>
+        <label>Uusi hero-kuva<input type="file" accept="image/jpeg,image/png,image/webp" onChange={(e) => void uploadHeroImage(e.target.files?.[0] || null)} /></label>
+        <p>JPEG, PNG tai WebP. Enimmäiskoko 6 Mt. Kuva tallennetaan JKP:n Supabase Storageen.</p>
       </section>
 
       <section className="admin-card">
