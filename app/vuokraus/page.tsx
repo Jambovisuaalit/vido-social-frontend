@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { BusinessPremisesForm, ApartmentApplicationForm } from "@/components/RentalForms";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { getSiteContent } from "@/lib/content";
+import { getPublishedRentals } from "@/lib/rentals";
 
 export const metadata: Metadata = {
   title: "Liike-, toimitila- ja asuntovuokraus Jyväskylä",
@@ -11,8 +13,15 @@ export const metadata: Metadata = {
 };
 export const dynamic = "force-dynamic";
 
+const typeLabels = {
+  holiday: "Loma-asunto tai kiinteistö",
+  commercial: "Liike- tai toimitila",
+  residential: "Vuokra-asunto",
+} as const;
+
 export default async function VuokrausPage() {
-  const content = await getSiteContent();
+  const [content, properties] = await Promise.all([getSiteContent(), getPublishedRentals()]);
+
   return (
     <>
       <Header email={content.company.email} />
@@ -34,13 +43,44 @@ export default async function VuokrausPage() {
 
         <section className="section">
           <div className="shell section-heading">
-            <div><p className="eyebrow dark">Vuokrattavat kohteet</p><h2>Kohdelistaus on valmis täytettäväksi.</h2></div>
-            <p>Julkaisemme vain JKP Groupin vahvistamat kohde-, hinta- ja saatavuustiedot. Kortit täytetään asiakkaan materiaalitoimituksen jälkeen.</p>
+            <div><p className="eyebrow dark">Vuokrattavat kohteet</p><h2>Ajantasaiset kohteet yhdestä näkymästä.</h2></div>
+            <p>Loma-asunnot ja kiinteistöt pysyvät näkyvissä jatkuvasti. Liike-, toimitila- ja asuntokohteet näkyvät vain vapaina.</p>
           </div>
-          <div className="shell property-grid">
-            <article className="property-card"><div className="property-placeholder"><span>KOHDE 01</span></div><div><small>Tiedot odottavat vahvistusta</small><h3>Lomahuoneisto tai kiinteistö</h3><p>Sijainti, kuvat, vuokra, vapautuminen ja lisätiedot lisätään tähän.</p></div></article>
-            <article className="property-card"><div className="property-placeholder second"><span>KOHDE 02</span></div><div><small>Tiedot odottavat vahvistusta</small><h3>Liike- tai toimitila</h3><p>Pinta-ala, käyttötarkoitus, saavutettavuus, vuokra ja ehdot lisätään tähän.</p></div></article>
-          </div>
+
+          {properties.length > 0 ? (
+            <div className="shell property-grid">
+              {properties.map((property) => (
+                <Link className="property-card" href={`/vuokraus/${property.slug}`} key={property.id}>
+                  {property.mainImage ? (
+                    <div
+                      className="property-placeholder"
+                      style={{ backgroundImage: `url("${property.mainImage}")`, backgroundPosition: "center", backgroundSize: "cover" }}
+                    >
+                      <span>{typeLabels[property.type]}</span>
+                    </div>
+                  ) : (
+                    <div className="property-placeholder"><span>{typeLabels[property.type]}</span></div>
+                  )}
+                  <div>
+                    <small>{property.city || typeLabels[property.type]}</small>
+                    <h3>{property.title}</h3>
+                    <p>{property.summary || property.description}</p>
+                    <div className="button-row">
+                      {property.price ? <strong>{property.price}</strong> : null}
+                      <span>Tutustu kohteeseen →</span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="shell">
+              <article className="property-card">
+                <div className="property-placeholder"><span>EI JULKAISTUJA KOHTEITA</span></div>
+                <div><small>Kohdetiedot päivittyvät</small><h3>Kysy tämänhetkisestä tarjonnasta</h3><p>Vahvistettuja vapaita kohteita ei ole juuri nyt julkaistu. Lähetä tilakysely tai ota suoraan yhteyttä.</p></div>
+              </article>
+            </div>
+          )}
         </section>
 
         <section className="contact-section" id="toimitilakysely">
