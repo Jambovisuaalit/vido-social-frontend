@@ -2,93 +2,108 @@
 
 Tarkistettu: 31.7.2026
 
+## Päätetty arkkitehtuuri
+
+- Oma yksityinen GitHub-repository: `Jambovisuaalit/jkp-group-website`
+- Supabase on ensisijainen sisältö-, media- ja lomaketallennus
+- Upstash Redis poistuu tuotantoarkkitehtuurista
+- JKP Groupille luodaan oma Supabase-projekti `eu-north-1`-alueelle
+- `jkpgroup.fi` liitetään vasta onnistuneen Next.js-buildin ja asiakkaan hyväksynnän jälkeen
+
 ## Turvaraja
 
-Haara `client/jkp-group-production` on JKP Groupin erillinen toimitusraita. **Sitä ei saa yhdistää VIDO Socialin `main`-haaraan.** Lopullinen ratkaisu on siirtää tiedostopuu omaan yksityiseen `jkp-group-website`-repositoryyn.
+Haara `client/jkp-group-production` on JKP Groupin erillinen väliaikainen toimitusraita. **Sitä ei saa yhdistää VIDO Socialin `main`-haaraan.** Lopullinen tiedostopuu siirretään omaan yksityiseen repositoryyn.
 
-## GitHub
+## Toteutettu lähdekoodissa
 
-- Lähdehaara: `client/jkp-group-production`
-- Draft-PR: #4 — `DO NOT MERGE TO VIDO MAIN`
-- Tarkistettu head-commit: `1b45cb1a2bc06b5a2475f012a113d5658c4891ad`
-- Haaralla on Next.js App Router + TypeScript -lähdekoodi.
-- GitHub Actions -ajoa tai hyväksyttyä CI-buildia ei löytynyt tarkistetulle commitille.
+- palvelinpuolinen Supabase admin client
+- Supabase ensisijaisena `jkp_site_content`-sisältötallennuksena
+- Supabasesta luettavat ja näkyvyyssäännöillä suodatettavat vuokrakohteet
+- dynaamiset `/vuokraus/[slug]`-kohdesivut
+- kaikkien lomakkeiden tallennus `jkp_form_submissions`-tauluun ennen sähköposti-ilmoitusta
+- Resend best-effort-ilmoituksena; tallennettu lomake ei katoa sähköpostihäiriössä
+- autentikoitu admin-kuvanlataus `jkp-media`-bucketiin
+- hero-kuvan URL ja upload admin-näkymässä
+- yhteydenottolomakkeen puuttunut tietosuostumus korjattu
+- `.env.example`
+- yhtenäinen Supabase-migraatio
 
-## Vercel
+## Supabase-resurssit
 
-Vercelissä on kaksi JKP-preview-projektia:
-
-- `jkp-group-client-preview`
-- `jkp-group-production-preview`
-
-Molemmilla on `READY`-tilassa oleva deploy. Uusimman `jkp-group-production-preview`-deployn build-loki kuitenkin näyttää vain yhden deployment-tiedoston, `framework: null` ja 26 ms buildin. Tämä todentaa staattisen previewn, **ei Next.js-sovelluksen tuotantobuildia**.
-
-Tuotantovalmiutta ei saa merkitä hyväksytyksi ennen kuin oma JKP-repository on kytketty omaan Vercel-projektiin ja `npm install && npm run build` on onnistunut Vercelin build-lokissa.
-
-## Supabase
-
-Supabase-projekti `dbfvptbhxqgsanwnwgxy` on aktiivinen, mutta projektin nimi on edelleen `Paint28` ja samassa tietokannassa on myös muiden asiakasprojektien tauluja. JKP:n tuotantoeristys ei siten ole valmis.
-
-Varmennetut JKP-resurssit:
+Migraatio: `supabase/migrations/202607310001_jkp_primary_backend.sql`
 
 - `jkp_site_content`
 - `jkp_rental_properties`
 - `jkp_references`
 - `jkp_form_submissions`
-- `jkp-media` Storage bucket
+- `jkp-media`
 
-Kaikissa neljässä JKP-taulussa RLS on käytössä ja `anon`- sekä `authenticated`-rooleille on eksplisiittinen deny-policy. `jkp-media`-bucket on tällä hetkellä **public**, ei private. Bucket sallii JPEG-, PNG- ja WebP-kuvat, enintään 6 Mt.
+Neljä JKP-taulua käyttävät RLS:ää ja estävät suoran `anon`- ja `authenticated`-pääsyn. Sovellus käyttää ainoastaan palvelinpuolista service role -avainta.
 
-Nykyinen GitHub-haara käyttää sisällön tallennukseen Upstash Redisiä. Supabase-skeema on olemassa erillisenä infrastruktuurina, mutta sitä ei ole kytketty tämän haaran `lib/content.ts`-toteutukseen. Dokumentaatiossa ei saa väittää Supabase-adminin olevan käytössä ennen integraatiota ja build-testiä.
-
-## Toteutettu lähdekoodissa
-
-- Next.js App Router + TypeScript
-- etusivu, talotekniikka, vuokraus, referenssit ja admin
-- kaksi erillistä vuokrauslomaketta
-- Resend-pohjainen sähköpostikäsittely
-- Upstash Redis -sisältötallennus ja oletussisällön fallback
-- SEO-metadata, robots ja sitemap
-- responsiivinen käyttöliittymä
+`jkp-media` on tarkoituksella julkinen vain verkkosivuilla näytettäville kuville. Upload tehdään autentikoidun admin-API:n kautta. Arkaluonteisia asiakirjoja ei saa tallentaa tähän bucketiin.
 
 ## Jarin vuokraussäännöt
 
-- Loma-asunnot ja kiinteistöt pysyvät näkyvissä.
-- Liike- ja toimitilat näkyvät vain vapaina.
-- Vuokra-asunnot näkyvät vain vapaina.
+- Loma-asunnot ja kiinteistöt näkyvät, kun `published=true`.
+- Liike- ja toimitilat näkyvät vain, kun `published=true` ja `status=available`.
+- Vuokra-asunnot näkyvät vain, kun `published=true` ja `status=available`.
 - Varauskalenteria ei toteuteta.
-- Jokaisella kohteella on kuvallinen lisätietosivu.
+- Jokaisella julkaistulla kohteella on kuvallinen lisätietosivu.
 
-## Nykyisen haaran Vercel-muuttujat
+## GitHub-tila
+
+- Väliaikainen lähdehaara: `client/jkp-group-production`
+- Draft-PR: #4 — `DO NOT MERGE TO VIDO MAIN`
+- Yksityistä `jkp-group-website`-repositorya ei voitu luoda käytettävissä olevalla GitHub-connectorilla, koska connectorissa ei ole repositoryn luontitoimintoa.
+- GitHub Actions -build pitää varmentaa uudessa repositoryssa.
+
+## Supabase-projektin luontiyritys
+
+Uuden `JKP Group Website` -projektin luonti `vidosocial`-organisaatioon yritettiin `eu-north-1`-alueelle. Ilmoitettu kustannus oli 0 €/kk.
+
+Luonti estyi, koska organisaation aktiivisten ilmaisten projektien enimmäismäärä on käytössä. Nykyistä jaettua `Paint28`-projektia ei käytetä JKP:n tuotantoympäristönä.
+
+Ratkaisu vaatii yhden seuraavista:
+
+1. tarpeettoman Supabase-projektin pausettaminen tai poistaminen
+2. organisaation Supabase-tason päivittäminen
+3. JKP-projektin luominen toiseen organisaatioon
+
+## Ympäristömuuttujat
 
 - `NEXT_PUBLIC_SITE_URL`
 - `ADMIN_PASSWORD`
 - `SESSION_SECRET`
-- `UPSTASH_REDIS_REST_URL`
-- `UPSTASH_REDIS_REST_TOKEN`
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `SUPABASE_STORAGE_BUCKET=jkp-media`
 - `RESEND_API_KEY`
 - `CONTACT_FROM_EMAIL`
 - `CONTACT_TO_EMAIL=jari.koskela@jkpgroup.fi`
 
-Supabase-integraatioon siirryttäessä tarvitaan lisäksi palvelinpuoliset Supabase-muuttujat. Salaisuuksia ei saa tallentaa GitHubiin.
+`SUPABASE_SERVICE_ROLE_KEY` on vain palvelinpuolella. Sitä ei saa tallentaa GitHubiin, Driveen tai `NEXT_PUBLIC_`-muuttujaan.
+
+## Vercel
+
+Nykyiset previewt ovat staattisia deployja eivätkä todenna Next.js-tuotantobuildia. Lopullinen repository kytketään omaan JKP Vercel -projektiin ja hyväksytään vasta, kun:
+
+- `npm install` onnistuu
+- `npm run build` onnistuu
+- admin-tallennus toimii
+- kuvanlataus toimii
+- kohdelistaus ja kohdesivut toimivat
+- kaikki kolme lomaketyyppiä tallentuvat Supabaseen
+- Resend-ilmoitus toimii
 
 ## Avoimet julkaisuportit
 
-1. Luo oma yksityinen GitHub-repository.
-2. Siirrä JKP-sovelluspuu sen `main`-haaraan.
-3. Luo tai kytke oma Vercel-projekti GitHub-repositoryyn.
-4. Päätä käytetäänkö tuotannossa Upstashia vai Supabasea — ei kahta rinnakkaista totuutta.
-5. Jos Supabase valitaan, siirrä JKP omaan Supabase-projektiin tai dokumentoi ja hyväksytä jaetun projektin riski.
-6. Muuta `jkp-media` private-bucketiksi, jos kuvia ei ole tarkoitus jakaa julkisina URL-osoitteina, tai dokumentoi tietoisesti public-ratkaisu.
-7. Aseta ympäristömuuttujat Preview- ja Production-ympäristöihin.
-8. Aja onnistunut Next.js-tuotantobuild ja tallenna build-loki.
-9. Testaa admin, kuvanhallinta, molemmat lomakkeet ja sähköpostitoimitus.
+1. Luo yksityinen `Jambovisuaalit/jkp-group-website`-repository GitHubin käyttöliittymässä tai sellaisella integraatiolla, joka tukee repositoryn luontia.
+2. Siirrä `client/jkp-group-production` uuden repositoryn `main`-haaraksi.
+3. Vapauta Supabase-projektipaikka, päivitä tilaus tai valitse toinen organisaatio.
+4. Luo oma JKP Supabase -projekti ja suorita migraatio.
+5. Kytke uusi GitHub-repository Verceliin.
+6. Lisää ympäristömuuttujat Preview- ja Production-ympäristöihin.
+7. Aja ja tallenna onnistunut Next.js-build-loki.
+8. Testaa admin, kuvanhallinta, kohteet, lomakkeet ja Resend.
+9. Lisää asiakkaan oikeat kuvat, vuokrakohteet ja referenssit.
 10. Kytke `jkpgroup.fi` vasta Jarin hyväksynnän jälkeen.
-
-## Asiakasriippuvuudet
-
-- vahvistetut tekstit ja yhteystiedot
-- logo ja omat kuvat
-- vuokrakohteet ja niiden saatavuustiedot
-- referenssit ja julkaisuluvat
-- Jarin koottu palaute ensimmäisestä vedoksesta
