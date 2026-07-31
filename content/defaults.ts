@@ -14,6 +14,7 @@ export type SiteContent = {
     eyebrow: string;
     title: string;
     lead: string;
+    imageUrl: string;
   };
   about: {
     title: string;
@@ -47,6 +48,7 @@ export const defaultContent: SiteContent = {
     title: "Hankkeet hallintaan. Tilat tehokkaaseen käyttöön.",
     lead:
       "JKP Group yhdistää kokeneen taloteknisen rakennuttamisen, valvonnan ja LVI-suunnittelun sekä joustavat liike- ja toimitilaratkaisut.",
+    imageUrl: "",
   },
   about: {
     title: "Yksi kokenut vastuuhenkilö projektin alusta loppuun.",
