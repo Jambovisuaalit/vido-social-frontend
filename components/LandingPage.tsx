@@ -29,7 +29,10 @@ const faqs = [
 ];
 
 export default function LandingPage() {
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "";
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "+358 40 724 7621";
+  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "ville@vidosocial.com";
+  const contactPhone = process.env.NEXT_PUBLIC_CONTACT_PHONE || "+358 40 724 7621";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://vidosocial.com";
   const linkedinUrl = process.env.NEXT_PUBLIC_VILLE_LINKEDIN || "https://www.linkedin.com/in/ville1";
   const proofBefore = process.env.NEXT_PUBLIC_PROOF_BEFORE_URL || "";
   const proofAfter = process.env.NEXT_PUBLIC_PROOF_AFTER_URL || "";
@@ -38,6 +41,9 @@ export default function LandingPage() {
   const businessId = process.env.NEXT_PUBLIC_BUSINESS_ID || "";
 
   const hasProof = Boolean(proofBefore && proofAfter);
+  const normalizedWhatsApp = whatsappNumber.replace(/\D/g, "");
+  const whatsappHref = `https://wa.me/${normalizedWhatsApp}?text=${encodeURIComponent("Hei, haluan kuulla lisää VIDO Socialista.")}`;
+  const telephoneHref = `tel:${contactPhone.replace(/[^+\d]/g, "")}`;
 
   return (
     <main className="overflow-hidden bg-white">
@@ -167,7 +173,7 @@ export default function LandingPage() {
             </div>
           ) : (
             <div className="mt-12 rounded-xl border border-dashed border-brand-navy/20 bg-white p-7 sm:p-9">
-              <p className="text-xs font-black uppercase tracking-[0.14em] text-brand-red">Launch blocker 3/3</p>
+              <p className="text-xs font-black uppercase tracking-[0.14em] text-brand-red">Launch blocker 2/2</p>
               <h3 className="mt-3 text-2xl font-black tracking-[-0.03em] text-brand-navy">Asiakasproof odottaa kirjallista julkaisulupaa.</h3>
               <p className="mt-3 max-w-2xl leading-7 text-brand-charcoal/75">
                 Kun hyväksytty before/after-aineisto on valittu, se kytketään tähän ympäristömuuttujilla. Näin preview pysyy rehellisenä eikä väärää social proofia päädy tuotantoon.
@@ -182,15 +188,18 @@ export default function LandingPage() {
           <div className="grid items-center gap-10 rounded-2xl border border-brand-navy/10 bg-white p-7 shadow-soft lg:grid-cols-[220px_1fr] lg:p-10">
             <div className="flex aspect-square items-center justify-center rounded-xl bg-brand-navy text-6xl font-black tracking-[-0.08em] text-white">VO<span className="text-brand-red">.</span></div>
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.14em] text-brand-red">VIDO Socialin takana</p>
+              <p className="text-xs font-black uppercase tracking-[0.14em] text-brand-red">VIDO Socialin perustaja</p>
               <h2 className="mt-3 text-3xl font-black tracking-[-0.035em] text-brand-navy">Ville Olenius</h2>
               <p className="mt-1 font-semibold text-brand-gray">Co-Founder & Head of Sales</p>
               <p className="mt-5 max-w-3xl leading-7 text-brand-charcoal/75">
                 Ville vastaa VIDO Socialin myynnistä, asiakkuuksista ja kaupallisesta kehityksestä. Hänen taustansa yhdistää yrittäjyyden, myynnin johtamisen, digitaalisen markkinoinnin sekä teknologia- ja prosessiosaamisen.
               </p>
-              <a href={linkedinUrl} data-event="linkedin_click" target="_blank" rel="noreferrer" className="mt-5 inline-flex text-sm font-bold text-brand-navy underline decoration-brand-red decoration-2 underline-offset-4">
-                Ville LinkedInissä
-              </a>
+              <div className="mt-5 flex flex-wrap gap-x-5 gap-y-3 text-sm font-bold">
+                <a href={linkedinUrl} data-event="linkedin_click" target="_blank" rel="noreferrer" className="text-brand-navy underline decoration-brand-red decoration-2 underline-offset-4">Ville LinkedInissä</a>
+                <a href={`mailto:${contactEmail}`} className="text-brand-navy underline decoration-brand-red decoration-2 underline-offset-4">{contactEmail}</a>
+                <a href={telephoneHref} className="text-brand-navy underline decoration-brand-red decoration-2 underline-offset-4">{contactPhone}</a>
+                <a href={whatsappHref} data-event="whatsapp_click" target="_blank" rel="noreferrer" className="text-brand-navy underline decoration-brand-red decoration-2 underline-offset-4">WhatsApp Business</a>
+              </div>
             </div>
           </div>
         </Container>
@@ -257,6 +266,10 @@ export default function LandingPage() {
               <p className="text-xs font-black uppercase tracking-[0.14em] text-brand-red">Aloita tästä</p>
               <h2 className="mt-4 text-4xl font-black tracking-[-0.045em] text-brand-navy sm:text-5xl">Seuraava työmaa voi olla myös seuraava referenssinne.</h2>
               <p className="mt-5 text-lg leading-8 text-brand-charcoal/75">Täytä neljä tietoa. Emme ohjaa tässä vaiheessa verkkomaksuun — yhteydenotto käynnistää Startin onboarding-polun.</p>
+              <div className="mt-6 space-y-2 text-sm font-semibold text-brand-charcoal/80">
+                <p>Sähköposti: <a href={`mailto:${contactEmail}`} className="text-brand-navy underline underline-offset-4">{contactEmail}</a></p>
+                <p>Puhelin / WhatsApp: <a href={whatsappHref} data-event="whatsapp_click" target="_blank" rel="noreferrer" className="text-brand-navy underline underline-offset-4">{contactPhone}</a></p>
+              </div>
             </div>
             <LeadForm whatsappNumber={whatsappNumber} />
           </div>
@@ -269,7 +282,13 @@ export default function LandingPage() {
             <div>
               <VidoLogo className="h-auto w-40" />
               <p className="mt-4 text-sm text-brand-gray">Työmaat näkyviksi. Referenssit myyntiin.</p>
-              <p className="mt-2 text-xs text-brand-gray">{legalEntity}{businessId ? ` · Y-tunnus ${businessId}` : ""}</p>
+              <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs text-brand-charcoal/70">
+                <a href={`mailto:${contactEmail}`} className="hover:text-brand-navy">{contactEmail}</a>
+                <a href={telephoneHref} className="hover:text-brand-navy">{contactPhone}</a>
+                <a href={whatsappHref} data-event="whatsapp_click" target="_blank" rel="noreferrer" className="hover:text-brand-navy">WhatsApp Business</a>
+                <a href={siteUrl} className="hover:text-brand-navy">vidosocial.com</a>
+              </div>
+              <p className="mt-3 text-xs text-brand-gray">{legalEntity}{businessId ? ` · Y-tunnus ${businessId}` : ""}</p>
             </div>
             <nav aria-label="Lakilinkit" className="flex flex-wrap gap-5 text-sm font-semibold text-brand-charcoal/70">
               <a href="/tietosuoja" className="hover:text-brand-navy">Tietosuoja</a>
