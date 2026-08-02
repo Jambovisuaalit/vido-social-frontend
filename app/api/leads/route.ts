@@ -51,44 +51,39 @@ export async function POST(request: NextRequest) {
 
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  const resendApiKey = process.env.RESEND_API_KEY;
-  const notificationTo = process.env.LEAD_NOTIFICATION_TO;
-  const resendFrom = process.env.RESEND_FROM_EMAIL;
 
-  const missing = [
-    ["SUPABASE_URL", supabaseUrl],
-    ["SUPABASE_SERVICE_ROLE_KEY", supabaseServiceRoleKey],
-    ["RESEND_API_KEY", resendApiKey],
-    ["LEAD_NOTIFICATION_TO", notificationTo],
-    ["RESEND_FROM_EMAIL", resendFrom]
-  ]
-    .filter(([, value]) => !value)
-    .map(([key]) => key);
-
-  if (missing.length) {
-    console.error("VIDO lead pipeline missing environment configuration", missing);
+  if (!supabaseUrl || !supabaseServiceRoleKey) {
+    console.error("VIDO lead pipeline missing Supabase server configuration");
     return NextResponse.json({ error: "Yhteydenottopalvelun asetuksia viimeistellään." }, { status: 503 });
   }
+
+  const page = text(payload.page, 200) || "/";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://vido-social-frontend.vercel.app";
+  const landingPage = new URL(page, siteUrl).toString();
 
   const lead = {
     company,
     name,
     phone,
     email,
+    message: null,
+    consent: false,
+    consent_version: null,
+    service_interest: "some",
     source: text(payload.source, 80) || "website_startti",
-    page: text(payload.page, 200) || "/",
+    landing_page: landingPage,
     referrer: nullableText(payload.referrer, 500),
     utm_source: nullableText(payload.utm_source, 120),
     utm_medium: nullableText(payload.utm_medium, 120),
     utm_campaign: nullableText(payload.utm_campaign, 160),
     status: "NEW",
-    created_at: new Date().toISOString()
+    user_agent: request.headers.get("user-agent")?.slice(0, 500) || null
   };
 
-  const supabaseResponse = await fetch(`${supabaseUrl}/rest/v1/leads`, {
+  const supabaseResponse = await fetch(`${supabaseUrl}/rest/v1/vido_leads`, {
     method: "POST",
     headers: {
-      apikey: supabaseServiceRoleKey!,
+      apikey: supabaseServiceRoleKey,
       Authorization: `Bearer ${supabaseServiceRoleKey}`,
       "Content-Type": "application/json",
       Prefer: "return=minimal"
@@ -103,38 +98,47 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Yhteydenoton tallennus epäonnistui." }, { status: 502 });
   }
 
-  const resendResponse = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${resendApiKey}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      from: resendFrom,
-      to: [notificationTo],
-      subject: `Uusi VIDO Startti -liidi: ${company}`,
-      text: [
-        "Uusi VIDO Startti -liidi",
-        "",
-        `Yritys: ${company}`,
-        `Nimi: ${name}`,
-        `Puhelin: ${phone}`,
-        `Sähköposti: ${email}`,
-        `Lähde: ${lead.source}`,
-        `Sivu: ${lead.page}`,
-        `UTM source: ${lead.utm_source || "-"}`,
-        `UTM medium: ${lead.utm_medium || "-"}`,
-        `UTM campaign: ${lead.utm_campaign || "-"}`
-      ].join("\n")
-    }),
-    cache: "no-store"
-  });
+  let notificationSent = false;
+  const resendApiKey = process.env.RESEND_API_KEY;
+  const notificationTo = process.env.LEAD_NOTIFICATION_TO;
+  const resendFrom = process.env.RESEND_FROM_EMAIL;
 
-  if (!resendResponse.ok) {
-    const detail = await resendResponse.text();
-    console.error("VIDO Resend notification failed", resendResponse.status, detail);
-    return NextResponse.json({ error: "Yhteydenotto tallennettiin, mutta ilmoituksen lähetys epäonnistui." }, { status: 502 });
+  if (resendApiKey && notificationTo && resendFrom) {
+    const resendResponse = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${resendApiKey}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        from: resendFrom,
+        to: [notificationTo],
+        reply_to: email,
+        subject: `Uusi VIDO Startti -liidi: ${company}`,
+        text: [
+          "Uusi VIDO Startti -liidi",
+          "",
+          `Yritys: ${company}`,
+          `Nimi: ${name}`,
+          `Puhelin: ${phone}`,
+          `Sähköposti: ${email}`,
+          `Lähde: ${lead.source}`,
+          `Sivu: ${lead.landing_page}`,
+          `UTM source: ${lead.utm_source || "-"}`,
+          `UTM medium: ${lead.utm_medium || "-"}`,
+          `UTM campaign: ${lead.utm_campaign || "-"}`
+        ].join("\n")
+      }),
+      cache: "no-store"
+    });
+
+    notificationSent = resendResponse.ok;
+    if (!resendResponse.ok) {
+      console.error("VIDO Resend notification failed", resendResponse.status, await resendResponse.text());
+    }
+  } else {
+    console.warn("VIDO lead stored, but Resend notification is not configured");
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, notification_sent: notificationSent }, { status: 201 });
 }
