@@ -21,6 +21,11 @@ PR: #5
 - [x] Public contact email set to `ville@vidosocial.com`
 - [x] Public phone and WhatsApp Business set to `+358 40 724 7621`
 - [x] Ville Olenius identified publicly as VIDO Social founder/contact person
+- [x] Legal contracting/controller entity confirmed as `Ville Olenius Tmi`
+- [x] Business ID confirmed as `3581471-7`
+- [x] Marketing name confirmed as `VIDO`
+- [x] Postal address recorded as `Niittytie 4, 03100 NLA`
+- [x] Domicile confirmed as `Vihti`
 - [x] Mobile sticky CTA implemented
 - [x] Ville trust section implemented
 - [x] Real proof component implemented with fail-closed gating
@@ -28,25 +33,25 @@ PR: #5
 - [ ] Vercel Preview deployment available for this branch
 - [ ] Preview desktop/mobile/functional/SEO QA completed
 
-## External production blockers
+## External production blocker
 
-Two business facts remain unresolved before production launch:
+Only one business fact remains unresolved before production launch:
 
-1. `NEXT_PUBLIC_LEGAL_ENTITY` + `NEXT_PUBLIC_BUSINESS_ID`
-2. Approved customer proof: `NEXT_PUBLIC_PROOF_CLIENT_NAME`, `NEXT_PUBLIC_PROOF_BEFORE_URL`, `NEXT_PUBLIC_PROOF_AFTER_URL`
+1. Approved customer proof: `NEXT_PUBLIC_PROOF_CLIENT_NAME`, `NEXT_PUBLIC_PROOF_BEFORE_URL`, `NEXT_PUBLIC_PROOF_AFTER_URL`
 
-Public WhatsApp Business is confirmed and no longer a blocker:
+No placeholder customer logo, testimonial, case result or fake before/after asset may be used to bypass the proof blocker.
 
-- `+358 40 724 7621`
+## Canonical public and legal identity
 
-Public contact details:
-
-- Founder/contact: Ville Olenius
+- Legal name: `Ville Olenius Tmi`
+- Business ID: `3581471-7`
+- Marketing name: `VIDO`
+- Founder / entrepreneur: `Ville Olenius`
 - Email: `ville@vidosocial.com`
 - Website: `https://vidosocial.com`
 - Phone / WhatsApp Business: `+358 40 724 7621`
-
-No placeholder customer logo, testimonial, case result or fake before/after asset may be used to bypass the proof blocker.
+- Postal address: `Niittytie 4, 03100 NLA`
+- Domicile: `Vihti`
 
 ## Runtime configuration
 
@@ -65,12 +70,17 @@ A verified VIDO sender domain is required before treating Resend notifications a
 
 Analytics remains disabled until `NEXT_PUBLIC_GA_MEASUREMENT_ID` is configured and the visitor explicitly consents.
 
-Optional public overrides (canonical defaults are now committed):
+Optional public overrides (canonical defaults are committed):
 
 - `NEXT_PUBLIC_SITE_URL=https://vidosocial.com`
 - `NEXT_PUBLIC_CONTACT_EMAIL=ville@vidosocial.com`
 - `NEXT_PUBLIC_CONTACT_PHONE=+358 40 724 7621`
 - `NEXT_PUBLIC_WHATSAPP_NUMBER=+358 40 724 7621`
+- `NEXT_PUBLIC_LEGAL_ENTITY=Ville Olenius Tmi`
+- `NEXT_PUBLIC_BUSINESS_ID=3581471-7`
+- `NEXT_PUBLIC_MARKETING_NAME=VIDO`
+- `NEXT_PUBLIC_POSTAL_ADDRESS=Niittytie 4, 03100 NLA`
+- `NEXT_PUBLIC_DOMICILE=Vihti`
 
 ## Supabase security model
 
@@ -80,6 +90,6 @@ Other advisor findings in the shared VIDO project concern pre-existing tables/fu
 
 ## Merge policy
 
-`feature/next-landing-v1` → GitHub Actions build → Vercel Preview → functional/mobile/desktop/SEO QA → resolve two remaining external blockers → squash merge to `main` → production deploy.
+`feature/next-landing-v1` → GitHub Actions build → Vercel Preview → functional/mobile/desktop/SEO QA → resolve approved proof blocker → squash merge to `main` → production deploy.
 
-Do not merge if Preview is unavailable, QA fails, the durable lead pipeline fails, or either remaining external production blocker is unresolved.
+Do not merge if Preview is unavailable, QA fails, the durable lead pipeline fails, or approved customer proof is unresolved.
