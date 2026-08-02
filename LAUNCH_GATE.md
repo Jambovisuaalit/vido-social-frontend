@@ -17,6 +17,10 @@ PR: #5
 - [x] Consent-gated GA4 events implemented
 - [x] Privacy policy and cookie policy routes implemented
 - [x] Canonical metadata, schema, sitemap and robots implemented
+- [x] Canonical public site URL set to `https://vidosocial.com`
+- [x] Public contact email set to `ville@vidosocial.com`
+- [x] Public phone and WhatsApp Business set to `+358 40 724 7621`
+- [x] Ville Olenius identified publicly as VIDO Social founder/contact person
 - [x] Mobile sticky CTA implemented
 - [x] Ville trust section implemented
 - [x] Real proof component implemented with fail-closed gating
@@ -26,13 +30,23 @@ PR: #5
 
 ## External production blockers
 
-Production launch remains blocked until these facts are confirmed and configured:
+Two business facts remain unresolved before production launch:
 
 1. `NEXT_PUBLIC_LEGAL_ENTITY` + `NEXT_PUBLIC_BUSINESS_ID`
-2. `NEXT_PUBLIC_WHATSAPP_NUMBER`
-3. Approved customer proof: `NEXT_PUBLIC_PROOF_CLIENT_NAME`, `NEXT_PUBLIC_PROOF_BEFORE_URL`, `NEXT_PUBLIC_PROOF_AFTER_URL`
+2. Approved customer proof: `NEXT_PUBLIC_PROOF_CLIENT_NAME`, `NEXT_PUBLIC_PROOF_BEFORE_URL`, `NEXT_PUBLIC_PROOF_AFTER_URL`
 
-No placeholder customer logo, testimonial, case result or fake before/after asset may be used to bypass blocker #3.
+Public WhatsApp Business is confirmed and no longer a blocker:
+
+- `+358 40 724 7621`
+
+Public contact details:
+
+- Founder/contact: Ville Olenius
+- Email: `ville@vidosocial.com`
+- Website: `https://vidosocial.com`
+- Phone / WhatsApp Business: `+358 40 724 7621`
+
+No placeholder customer logo, testimonial, case result or fake before/after asset may be used to bypass the proof blocker.
 
 ## Runtime configuration
 
@@ -51,6 +65,13 @@ A verified VIDO sender domain is required before treating Resend notifications a
 
 Analytics remains disabled until `NEXT_PUBLIC_GA_MEASUREMENT_ID` is configured and the visitor explicitly consents.
 
+Optional public overrides (canonical defaults are now committed):
+
+- `NEXT_PUBLIC_SITE_URL=https://vidosocial.com`
+- `NEXT_PUBLIC_CONTACT_EMAIL=ville@vidosocial.com`
+- `NEXT_PUBLIC_CONTACT_PHONE=+358 40 724 7621`
+- `NEXT_PUBLIC_WHATSAPP_NUMBER=+358 40 724 7621`
+
 ## Supabase security model
 
 `public.vido_leads` has RLS enabled and intentionally has no public policies. The website writes through the server-side service role only. The Supabase advisor therefore reports `rls_enabled_no_policy` as informational for this table; that is intentional for this architecture.
@@ -59,6 +80,6 @@ Other advisor findings in the shared VIDO project concern pre-existing tables/fu
 
 ## Merge policy
 
-`feature/next-landing-v1` → GitHub Actions build → Vercel Preview → functional/mobile/desktop/SEO QA → resolve three external blockers → squash merge to `main` → production deploy.
+`feature/next-landing-v1` → GitHub Actions build → Vercel Preview → functional/mobile/desktop/SEO QA → resolve two remaining external blockers → squash merge to `main` → production deploy.
 
-Do not merge if Preview is unavailable, QA fails, the durable lead pipeline fails, or any of the three external production blockers is unresolved.
+Do not merge if Preview is unavailable, QA fails, the durable lead pipeline fails, or either remaining external production blocker is unresolved.
