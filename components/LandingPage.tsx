@@ -37,8 +37,8 @@ export default function LandingPage() {
   const proofBefore = process.env.NEXT_PUBLIC_PROOF_BEFORE_URL || "";
   const proofAfter = process.env.NEXT_PUBLIC_PROOF_AFTER_URL || "";
   const proofClient = process.env.NEXT_PUBLIC_PROOF_CLIENT_NAME || "Asiakascase";
-  const legalEntity = process.env.NEXT_PUBLIC_LEGAL_ENTITY || "VIDO Social";
-  const businessId = process.env.NEXT_PUBLIC_BUSINESS_ID || "";
+  const legalEntity = process.env.NEXT_PUBLIC_LEGAL_ENTITY || "Ville Olenius Tmi";
+  const businessId = process.env.NEXT_PUBLIC_BUSINESS_ID || "3581471-7";
 
   const hasProof = Boolean(proofBefore && proofAfter);
   const normalizedWhatsApp = whatsappNumber.replace(/\D/g, "");
@@ -173,7 +173,7 @@ export default function LandingPage() {
             </div>
           ) : (
             <div className="mt-12 rounded-xl border border-dashed border-brand-navy/20 bg-white p-7 sm:p-9">
-              <p className="text-xs font-black uppercase tracking-[0.14em] text-brand-red">Launch blocker 2/2</p>
+              <p className="text-xs font-black uppercase tracking-[0.14em] text-brand-red">Launch blocker 1/1</p>
               <h3 className="mt-3 text-2xl font-black tracking-[-0.03em] text-brand-navy">Asiakasproof odottaa kirjallista julkaisulupaa.</h3>
               <p className="mt-3 max-w-2xl leading-7 text-brand-charcoal/75">
                 Kun hyväksytty before/after-aineisto on valittu, se kytketään tähän ympäristömuuttujilla. Näin preview pysyy rehellisenä eikä väärää social proofia päädy tuotantoon.
@@ -288,7 +288,7 @@ export default function LandingPage() {
                 <a href={whatsappHref} data-event="whatsapp_click" target="_blank" rel="noreferrer" className="hover:text-brand-navy">WhatsApp Business</a>
                 <a href={siteUrl} className="hover:text-brand-navy">vidosocial.com</a>
               </div>
-              <p className="mt-3 text-xs text-brand-gray">{legalEntity}{businessId ? ` · Y-tunnus ${businessId}` : ""}</p>
+              <p className="mt-3 text-xs text-brand-gray">{legalEntity} · Y-tunnus {businessId}</p>
             </div>
             <nav aria-label="Lakilinkit" className="flex flex-wrap gap-5 text-sm font-semibold text-brand-charcoal/70">
               <a href="/tietosuoja" className="hover:text-brand-navy">Tietosuoja</a>
