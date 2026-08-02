@@ -31,8 +31,24 @@ PR: #5
 - [x] MVP intentionally launches without customer logos, testimonials, before/after assets or case studies
 - [x] Customer-proof section replaced with factual delivery-process proof
 - [x] GitHub Actions production build passes on Next.js 16.2.11
+- [x] Pull-request workflow wired to build and deploy a Vercel Preview before merge
+- [x] Main-branch workflow wired for production deployment after an approved merge
+- [ ] GitHub Actions repository secret `VERCEL_TOKEN` configured
 - [ ] Vercel Preview deployment available for this branch
 - [ ] Preview desktop/mobile/functional/SEO QA completed
+
+## Current technical blocker
+
+GitHub Actions run #46 validated the Next.js application successfully, then stopped at the Vercel Preview credential gate because repository secret `VERCEL_TOKEN` is not configured.
+
+No merge or production deployment is permitted until the secret exists, the preview deployment succeeds and QA passes.
+
+Once `VERCEL_TOKEN` is configured, rerun the failed preview job. The workflow will:
+
+1. pull the Vercel preview environment for project `prj_nLX0pIdNKqtYZAK45fyHezal2q3S`
+2. build the prebuilt preview artifact
+3. deploy a non-production Vercel URL
+4. expose the preview URL in the workflow output for QA
 
 ## Business launch blockers
 
@@ -91,4 +107,4 @@ Other advisor findings in the shared VIDO project concern pre-existing tables/fu
 
 `feature/next-landing-v1` → GitHub Actions build → Vercel Preview → functional/mobile/desktop/SEO QA → squash merge to `main` → production deploy.
 
-Do not merge if Preview is unavailable, QA fails or the durable lead pipeline fails.
+Do not merge if `VERCEL_TOKEN` is missing, Preview is unavailable, QA fails or the durable lead pipeline fails.
