@@ -1,6 +1,6 @@
 import LandingPage from "@/components/LandingPage";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://vido-social-frontend.vercel.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://vidosocial.com";
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -11,6 +11,12 @@ const structuredData = {
       name: "VIDO Social",
       url: siteUrl,
       logo: `${siteUrl}/brand/VIDO_Social_Primary_Horizontal.svg`,
+      email: "ville@vidosocial.com",
+      telephone: "+358407247621",
+      founder: {
+        "@type": "Person",
+        name: "Ville Olenius"
+      },
       areaServed: "FI"
     },
     {
