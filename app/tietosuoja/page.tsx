@@ -9,7 +9,8 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   const legalEntity = process.env.NEXT_PUBLIC_LEGAL_ENTITY || "VIDO Social";
   const businessId = process.env.NEXT_PUBLIC_BUSINESS_ID || "Vahvistetaan ennen tuotantojulkaisua";
-  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@vidosocial.com";
+  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "ville@vidosocial.com";
+  const contactPhone = process.env.NEXT_PUBLIC_CONTACT_PHONE || "+358 40 724 7621";
 
   return (
     <main className="min-h-screen bg-white py-10 sm:py-16">
@@ -23,7 +24,7 @@ export default function PrivacyPage() {
           <div className="mt-10 space-y-9 text-brand-charcoal/80">
             <section>
               <h2 className="text-xl font-bold text-brand-navy">1. Rekisterinpitäjä</h2>
-              <p className="mt-3 leading-7">{legalEntity}<br />Y-tunnus: {businessId}<br />Sähköposti: {contactEmail}</p>
+              <p className="mt-3 leading-7">{legalEntity}<br />Y-tunnus: {businessId}<br />Sähköposti: {contactEmail}<br />Puhelin / WhatsApp Business: {contactPhone}</p>
             </section>
             <section>
               <h2 className="text-xl font-bold text-brand-navy">2. Mitä tietoja käsittelemme</h2>
