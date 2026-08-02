@@ -28,18 +28,17 @@ PR: #5
 - [x] Domicile confirmed as `Vihti`
 - [x] Mobile sticky CTA implemented
 - [x] Ville trust section implemented
-- [x] Real proof component implemented with fail-closed gating
+- [x] MVP intentionally launches without customer logos, testimonials, before/after assets or case studies
+- [x] Customer-proof section replaced with factual delivery-process proof
 - [x] GitHub Actions production build passes on Next.js 16.2.11
 - [ ] Vercel Preview deployment available for this branch
 - [ ] Preview desktop/mobile/functional/SEO QA completed
 
-## External production blocker
+## Business launch blockers
 
-Only one business fact remains unresolved before production launch:
+None.
 
-1. Approved customer proof: `NEXT_PUBLIC_PROOF_CLIENT_NAME`, `NEXT_PUBLIC_PROOF_BEFORE_URL`, `NEXT_PUBLIC_PROOF_AFTER_URL`
-
-No placeholder customer logo, testimonial, case result or fake before/after asset may be used to bypass the proof blocker.
+VIDO Social will launch without customer case studies. No placeholder logo, fabricated testimonial, invented result or fake before/after asset may be used. Real customer cases can be added later only after explicit publication approval.
 
 ## Canonical public and legal identity
 
@@ -90,6 +89,6 @@ Other advisor findings in the shared VIDO project concern pre-existing tables/fu
 
 ## Merge policy
 
-`feature/next-landing-v1` → GitHub Actions build → Vercel Preview → functional/mobile/desktop/SEO QA → resolve approved proof blocker → squash merge to `main` → production deploy.
+`feature/next-landing-v1` → GitHub Actions build → Vercel Preview → functional/mobile/desktop/SEO QA → squash merge to `main` → production deploy.
 
-Do not merge if Preview is unavailable, QA fails, the durable lead pipeline fails, or approved customer proof is unresolved.
+Do not merge if Preview is unavailable, QA fails or the durable lead pipeline fails.
