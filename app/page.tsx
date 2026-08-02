@@ -1,5 +1,60 @@
 import LandingPage from "@/components/LandingPage";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://vido-social-frontend.vercel.app";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: "VIDO Social",
+      url: siteUrl,
+      logo: `${siteUrl}/brand/VIDO_Social_Primary_Horizontal.svg`,
+      areaServed: "FI"
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: "VIDO Social",
+      inLanguage: "fi-FI",
+      publisher: { "@id": `${siteUrl}/#organization` }
+    },
+    {
+      "@type": "Service",
+      "@id": `${siteUrl}/#service`,
+      name: "VIDO Social",
+      serviceType: "Sosiaalisen median sisällöntuotanto ja digitaalinen näkyvyys",
+      provider: { "@id": `${siteUrl}/#organization` },
+      areaServed: { "@type": "Country", name: "Finland" },
+      audience: {
+        "@type": "BusinessAudience",
+        audienceType: "Rakennus-, LVI-, sähkö-, saneeraus- ja paikalliset palveluyritykset"
+      },
+      offers: [
+        {
+          "@type": "Offer",
+          name: "VIDO Startti",
+          price: "290",
+          priceCurrency: "EUR"
+        },
+        {
+          "@type": "Offer",
+          name: "VIDO Social",
+          price: "500",
+          priceCurrency: "EUR"
+        }
+      ]
+    }
+  ]
+};
+
 export default function Page() {
-  return <LandingPage />;
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+      <LandingPage />
+    </>
+  );
 }
