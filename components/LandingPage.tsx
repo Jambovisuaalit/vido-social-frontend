@@ -1,158 +1,290 @@
-import { Badge, Button, Container, SectionTitle } from "./ui";
+import AnalyticsConsent from "./AnalyticsConsent";
+import LeadForm from "./LeadForm";
+import { Badge, Button, Container, SectionTitle, VidoLogo } from "./ui";
 
 const problems = [
   "Työmaakuvat jäävät puhelimeen.",
   "Some päivittyy satunnaisesti kiireen keskellä.",
-  "Seuraava asiakas ei näe todellista työnjälkeä verkossa."
+  "Digitaalinen ensivaikutelma jää työn laatua heikommaksi."
 ];
 
 const benefits = [
-  ["Työ näkyväksi", "Muutamme työmaat, valmiit kohteet ja asennukset jatkuvaksi sisältö- ja referenssipankiksi."],
-  ["Ei uutta markkinointityötä", "Te lähetätte kuvat WhatsAppilla. Me hoidamme tekstit, grafiikat ja julkaisukokonaisuuden."],
-  ["Referenssit ennen somehömppää", "Sisällön tehtävä on näyttää mitä yrityksenne tekee ja millaista työnjälkeä asiakas voi odottaa."]
+  ["Työ näkyväksi", "Työmaat, valmiit kohteet ja asennukset muuttuvat jatkuvaksi sisältö- ja referenssipankiksi."],
+  ["Ei uutta työtehtävää", "Te lähetätte materiaalin WhatsAppilla. VIDO hoitaa tekstit, grafiikat ja sovitun julkaisuprosessin."],
+  ["Referenssit ennen somehömppää", "Sisällön tehtävä on näyttää asiakkaalle, mitä osaatte tehdä ja millaista työnjälkeä voi odottaa."]
 ];
 
 const steps = [
-  ["01", "Ota kuvat", "Kuvaa työmaa, valmis kohde, asennus tai muu työnne tavalliseen tapaan."],
-  ["02", "Lähetä WhatsAppilla", "Lähetä käyttökelpoiset kuvat VIDOlIe. Et tarvitse valmiita kuvatekstejä tai sisältösuunnitelmaa."],
-  ["03", "Me hoidamme loput", "VIDO tekee sisällöt, tekstit ja grafiikat valmiiksi. Tarkistat sisällöt ennen julkaisua."]
+  ["01", "Ota kuvat", "Kuvaa työmaa, valmis kohde, asennus tai muu työnjälki tavalliseen tapaan."],
+  ["02", "Lähetä WhatsAppilla", "Lähetä kuvat VIDOlle. Valmiita tekstejä, sisältöideoita tai erillistä järjestelmää ei tarvita."],
+  ["03", "VIDO hoitaa loput", "Rakennamme sisällöt, visuaalit ja julkaisukokonaisuuden sovitun hyväksyntämallin mukaan."]
 ];
 
 const faqs = [
-  ["Meillä ei ole aikaa hoitaa somea. Miksi tämä olisi eri asia?", "Juuri siksi VIDO on rakennettu näin. Teidän ei tarvitse ryhtyä sisällöntuottajaksi: otatte kuvat työstä ja lähetätte materiaalin WhatsAppilla. VIDO hoitaa sisällön tekemisen."],
-  ["Me saamme jo asiakkaita suositusten kautta. Tarvitsemmeko tätä?", "Hyvä maine ja suositukset ovat vahva lähtökohta. VIDO tekee saman luottamuksen näkyväksi myös ihmiselle, joka kuulee yrityksestänne ensimmäistä kertaa ja tarkistaa teidät verkosta ennen yhteydenottoa."],
-  ["Voisimme julkaista kuvat itse. Miksi maksaisimme siitä?", "Voitte. Kysymys on siitä, tapahtuuko se johdonmukaisesti joka kuukausi muun työn ohessa. VIDO tekee satunnaisista työmaakuvista jatkuvan prosessin."],
-  ["Takaako VIDO meille uusia asiakkaita?", "Ei. Emme lupaa tiettyä määrää kauppoja tai liidejä pelkän somesisällön perusteella. Tehtävämme on tehdä osaaminen, aktiivisuus ja työnjälki jatkuvasti näkyväksi ja rakentaa referenssipankkia, joka tukee ostopäätöstä."],
-  ["Pitääkö meidän sitoutua pitkäksi aikaa?", "Ei. Voit aloittaa 290 € VIDO Startilla ilman jatkositoutumista. Jatkuva VIDO Social maksaa 500 €/kk + ALV ja on kuukausittain irtisanottava."]
+  ["Meillä ei ole aikaa hoitaa somea.", "Juuri siksi palvelu on rakennettu asynkroniseksi. Teidän tehtävänne on toimittaa materiaali työn yhteydessä. VIDO hoitaa sovitun sisältötuotannon."],
+  ["Voisimme julkaista kuvat itse. Miksi maksaisimme tästä?", "Voitte. Palvelun arvo on jatkuvuudessa: materiaali muuttuu järjestelmällisesti julkaisuiksi myös kiireisinä kuukausina."],
+  ["Entä jos kuvia ei ole tarpeeksi?", "Työmaat, valmiit kohteet, ennen–jälkeen-kuvat, palvelut, tekijät, kalusto ja käytännön vinkit muodostavat yhdessä sisältöpankin."],
+  ["Takaako VIDO uusia asiakkaita?", "Ei. Emme lupaa tiettyä liidi- tai kauppamäärää orgaanisella sisällöllä. Rakennamme jatkuvaa näkyvyyttä ja todistetta osaamisesta."],
+  ["Pitääkö sitoutua pitkäksi aikaa?", "Ei. VIDO Startti on kertaluonteinen 290 € + ALV. Jatkuva VIDO Social on 500 €/kk + ALV ja kuukausittain irtisanottava."]
 ];
 
 export default function LandingPage() {
-  return <main className="overflow-hidden">
-    <header className="sticky top-0 z-50 border-b border-line-subtle bg-bg-950/90 backdrop-blur-xl">
-      <Container className="flex h-16 items-center justify-between">
-        <a href="#top" className="text-base font-bold tracking-[0.14em]">VIDO <span className="text-cyan-300">SOCIAL</span></a>
-        <nav className="hidden items-center gap-7 md:flex">
-          <a href="#solution" className="text-sm text-ink-secondary hover:text-ink-primary">Ratkaisu</a>
-          <a href="#how" className="text-sm text-ink-secondary hover:text-ink-primary">Miten toimii</a>
-          <a href="#proof" className="text-sm text-ink-secondary hover:text-ink-primary">Todisteet</a>
-          <a href="#pricing" className="text-sm text-ink-secondary hover:text-ink-primary">Hinnoittelu</a>
-        </nav>
-        <Button href="#pricing">Aloita 290 €</Button>
-      </Container>
-    </header>
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "";
+  const linkedinUrl = process.env.NEXT_PUBLIC_VILLE_LINKEDIN || "https://www.linkedin.com/in/ville1";
+  const proofBefore = process.env.NEXT_PUBLIC_PROOF_BEFORE_URL || "";
+  const proofAfter = process.env.NEXT_PUBLIC_PROOF_AFTER_URL || "";
+  const proofClient = process.env.NEXT_PUBLIC_PROOF_CLIENT_NAME || "Asiakascase";
+  const legalEntity = process.env.NEXT_PUBLIC_LEGAL_ENTITY || "VIDO Social";
+  const businessId = process.env.NEXT_PUBLIC_BUSINESS_ID || "";
 
-    <section id="top" className="relative border-b border-line-subtle py-20 sm:py-28 lg:py-32">
-      <Container>
-        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_.9fr]">
-          <div>
-            <Badge>Rakennus • LVI • Sähkö • Saneeraus</Badge>
-            <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-[1.02] tracking-[-0.045em] sm:text-6xl lg:text-7xl">Työmaakuvat WhatsAppiin. <span className="text-cyan-300">Me hoidamme yrityksesi somen.</span></h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-ink-secondary">Rakennus- ja palveluyritysten jatkuva somenäkyvyys ilman, että yrittäjän tarvitsee käyttää aikaansa sisällöntuotantoon.</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row"><Button href="#pricing">Aloita 290 €</Button><Button href="#how" variant="secondary">Katso miten toimii</Button></div>
-            <p className="mt-4 text-sm text-ink-muted">Ei pitkää sopimusta. Hyväksyt sisällöt ennen julkaisua.</p>
-          </div>
-          <div className="relative mx-auto w-full max-w-xl">
-            <div className="absolute -inset-12 bg-cyan-500/10 blur-3xl" />
-            <div className="relative grid gap-3 rounded-xl border border-line bg-bg-850 p-4 shadow-panel sm:grid-cols-2">
-              <div className="min-h-72 rounded-lg border border-line-subtle bg-bg-900 p-5">
-                <div className="text-xs font-semibold uppercase tracking-wider text-ink-muted">Työmaalta</div>
-                <div className="mt-12 grid grid-cols-3 gap-2">
-                  {[1,2,3,4,5,6].map((item) => <div key={item} className="aspect-square rounded-md border border-line bg-surface-700" />)}
-                </div>
-                <p className="mt-6 text-sm text-ink-muted">Kuvat, jotka muuten jäävät kamerarullaan.</p>
+  const hasProof = Boolean(proofBefore && proofAfter);
+
+  return (
+    <main className="overflow-hidden bg-white">
+      <header className="sticky top-0 z-50 border-b border-brand-navy/8 bg-white/95 backdrop-blur-xl">
+        <Container className="flex h-18 items-center justify-between gap-5">
+          <a href="#top" aria-label="VIDO Social etusivulle" className="block w-36 sm:w-44">
+            <VidoLogo className="h-auto w-full" />
+          </a>
+          <nav aria-label="Päänavigaatio" className="hidden items-center gap-7 lg:flex">
+            <a href="#how" className="text-sm font-medium text-brand-charcoal/75 hover:text-brand-navy">Miten toimii</a>
+            <a href="#proof" className="text-sm font-medium text-brand-charcoal/75 hover:text-brand-navy">Referenssit</a>
+            <a href="#pricing" className="text-sm font-medium text-brand-charcoal/75 hover:text-brand-navy">Hinnasto</a>
+            <a href="#faq" className="text-sm font-medium text-brand-charcoal/75 hover:text-brand-navy">FAQ</a>
+          </nav>
+          <Button href="#start" event="hero_cta" className="hidden sm:inline-flex">Aloita 290 €</Button>
+        </Container>
+      </header>
+
+      <section id="top" className="hero-grid relative border-b border-brand-navy/8 py-18 sm:py-24 lg:py-30">
+        <div aria-hidden="true" className="absolute right-[-120px] top-[-80px] h-80 w-80 rounded-full bg-brand-red/8 blur-3xl" />
+        <Container>
+          <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_.9fr]">
+            <div>
+              <Badge>Rakennus · LVI · Sähkö · Saneeraus</Badge>
+              <h1 className="mt-6 max-w-4xl text-4xl font-black leading-[1.02] tracking-[-0.05em] text-brand-navy sm:text-6xl lg:text-7xl">
+                Työmaakuvat WhatsAppiin.
+                <span className="mt-2 block text-brand-red">Me hoidamme yrityksesi somen.</span>
+              </h1>
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-brand-charcoal/80 sm:text-xl">
+                Jatkuva näkyvyys paikalliselle palveluyritykselle ilman sisällöntuotantoa, IT-säätöä tai turhia palavereita.
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Button href="#start" event="hero_cta">Aloita VIDO Startti — 290 €</Button>
+                <Button href="#how" variant="secondary">Katso miten toimii</Button>
               </div>
-              <div className="min-h-72 rounded-lg border border-cyan-600/40 bg-bg-900 p-5 shadow-cyan">
-                <div className="text-xs font-semibold uppercase tracking-wider text-cyan-300">VIDO-julkaisu</div>
-                <div className="mt-8 rounded-lg border border-line bg-bg-850 p-4">
-                  <div className="h-32 rounded-md bg-gradient-to-br from-surface-600 to-bg-800" />
-                  <div className="mt-4 h-3 w-3/4 rounded bg-ink-primary/80" />
-                  <div className="mt-2 h-2 w-full rounded bg-ink-muted/30" />
-                  <div className="mt-2 h-2 w-5/6 rounded bg-ink-muted/30" />
-                </div>
-                <p className="mt-6 text-sm text-ink-secondary">Työ → sisältö → julkaisu → referenssi.</p>
+              <p className="mt-4 text-sm text-brand-gray">Ei jatkositoutumista Startissa. Hyväksyt sisällöt ennen julkaisua.</p>
+            </div>
+
+            <div className="rounded-2xl bg-brand-navy p-6 text-white shadow-soft sm:p-8">
+              <div className="flex items-center justify-between gap-4">
+                <Badge inverse>VIDO-prosessi</Badge>
+                <span className="text-xs font-semibold uppercase tracking-[0.14em] text-white/45">Asynkroninen</span>
+              </div>
+              <div className="mt-9 space-y-4">
+                {steps.map(([number, title, body]) => (
+                  <div key={number} className="grid grid-cols-[42px_1fr] gap-4 rounded-xl border border-white/10 bg-white/[0.04] p-4">
+                    <div className="font-black text-brand-red">{number}</div>
+                    <div>
+                      <p className="font-semibold">{title}</p>
+                      <p className="mt-1 text-sm leading-6 text-white/60">{body}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-        </div>
-      </Container>
-    </section>
+        </Container>
+      </section>
 
-    <section className="border-b border-line-subtle py-10">
-      <Container><div className="grid gap-4 text-center text-sm text-ink-muted sm:grid-cols-3"><div>12 valmista julkaisua / kk</div><div>Instagram + Facebook</div><div>Materiaalit helposti WhatsAppilla</div></div></Container>
-    </section>
+      <section className="border-b border-brand-navy/8 bg-white py-8">
+        <Container>
+          <div className="grid gap-4 text-center text-sm font-semibold text-brand-charcoal/75 sm:grid-cols-3">
+            <div>12 valmista julkaisua / kk</div>
+            <div>Facebook + Instagram</div>
+            <div>Materiaalit WhatsAppilla</div>
+          </div>
+        </Container>
+      </section>
 
-    <section className="py-20 sm:py-28">
-      <Container>
-        <SectionTitle eyebrow="Ongelma" title="Hyvä työ ei auta markkinoinnissa, jos se jää puhelimeen." body="Työmaa valmistuu, kuvat otetaan ja seuraava kohde alkaa. Samaan aikaan potentiaalinen asiakas arvioi yritystänne sen perusteella, mitä verkossa sattuu juuri silloin olemaan." />
-        <div className="mt-10 grid gap-4 md:grid-cols-3">{problems.map((p,i)=><div key={p} className="rounded-lg border border-line-subtle bg-bg-850 p-6"><div className="text-sm font-semibold text-cyan-300">0{i+1}</div><p className="mt-10 text-xl font-semibold tracking-tight">{p}</p></div>)}</div>
-      </Container>
-    </section>
+      <section className="py-20 sm:py-28">
+        <Container>
+          <SectionTitle eyebrow="Ongelma" title="Hyvä työ ei auta myyntiä, jos kukaan ei näe sitä." body="Materiaalia syntyy jo joka päivä. Ongelma alkaa sen jälkeen: jonkun pitäisi valita kuvat, kirjoittaa tekstit, tehdä visuaalit ja pitää näkyvyys käynnissä myös ensi kuussa." />
+          <div className="mt-12 grid gap-4 md:grid-cols-3">
+            {problems.map((problem, index) => (
+              <article key={problem} className="rounded-xl border border-brand-navy/10 bg-white p-6 shadow-[0_10px_35px_rgba(15,23,42,0.05)]">
+                <p className="text-sm font-black text-brand-red">0{index + 1}</p>
+                <p className="mt-10 text-xl font-bold tracking-[-0.02em] text-brand-navy">{problem}</p>
+              </article>
+            ))}
+          </div>
+        </Container>
+      </section>
 
-    <section className="border-y border-line-subtle bg-bg-900 py-20 sm:py-28">
-      <Container>
-        <SectionTitle eyebrow="Agitaatio" title="Kun some jää yrittäjän vastuulle, se jää helposti tekemättä." body="Materiaalia syntyy jo joka päivä. Ongelma alkaa sen jälkeen: jonkun pitäisi valita kuvat, kirjoittaa tekstit, tehdä grafiikat ja pitää näkyvyys käynnissä myös ensi kuussa." />
-        <div className="mt-10 max-w-3xl border-l-2 border-cyan-500 pl-6 text-2xl font-semibold leading-9">Jokainen puhelimeen jäävä valmis kohde on käyttämätön referenssi.</div>
-      </Container>
-    </section>
+      <section className="brand-noise bg-brand-navy py-20 sm:py-28">
+        <Container>
+          <SectionTitle inverse eyebrow="Ratkaisu" title="Te teette työn. Me teemme sen näkyväksi." body="VIDO on ulkoistettu näkyvyysprosessi yrityksille, joilla on oikeita töitä ja referenssejä, mutta ei aikaa pyörittää omaa sisältötuotantoa." />
+          <div className="mt-12 grid gap-4 lg:grid-cols-3">
+            {benefits.map(([title, body]) => (
+              <article key={title} className="rounded-xl border border-white/10 bg-white/[0.04] p-7">
+                <h3 className="text-xl font-bold text-white">{title}</h3>
+                <p className="mt-4 leading-7 text-white/65">{body}</p>
+              </article>
+            ))}
+          </div>
+        </Container>
+      </section>
 
-    <section id="solution" className="py-20 sm:py-28">
-      <Container>
-        <SectionTitle eyebrow="Ratkaisu" title="Te teette työn. Me teemme sen näkyväksi." body="Teidän ei tarvitse opetella uusia ohjelmistoja, suunnitella sisältökalenteria tai keksiä joka viikko jotain julkaistavaa." />
-        <div className="mt-10 grid gap-4 lg:grid-cols-3">{benefits.map(([title,body])=><div key={title} className="rounded-lg border border-line-subtle bg-bg-850 p-7 transition hover:border-line-strong"><h3 className="text-xl font-semibold">{title}</h3><p className="mt-4 leading-7 text-ink-secondary">{body}</p></div>)}</div>
-      </Container>
-    </section>
+      <section id="how" className="py-20 sm:py-28">
+        <Container>
+          <SectionTitle eyebrow="Miten toimii" title="Kolme vaihetta. Ei markkinointiprojektia johdettavaksi." />
+          <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-brand-navy/10 bg-brand-navy/10 lg:grid-cols-3">
+            {steps.map(([number, title, body]) => (
+              <article key={number} className="bg-white p-7 sm:p-8">
+                <p className="text-sm font-black text-brand-red">{number}</p>
+                <h3 className="mt-10 text-2xl font-bold tracking-[-0.025em] text-brand-navy">{title}</h3>
+                <p className="mt-4 leading-7 text-brand-charcoal/75">{body}</p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-8"><Button href="#start" event="pricing_cta">Aloita VIDO Startti</Button></div>
+        </Container>
+      </section>
 
-    <section id="how" className="border-y border-line-subtle bg-bg-900 py-20 sm:py-28">
-      <Container>
-        <SectionTitle eyebrow="Miten toimii" title="Kolme vaihetta. Ei markkinointiprojektia johdettavaksi." />
-        <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-line-subtle bg-line-subtle lg:grid-cols-3">{steps.map(([num,title,body])=><div key={num} className="bg-bg-850 p-7 sm:p-8"><div className="font-mono text-sm text-cyan-300">{num}</div><h3 className="mt-10 text-2xl font-semibold">{title}</h3><p className="mt-4 leading-7 text-ink-secondary">{body}</p></div>)}</div>
-        <div className="mt-8"><Button href="#pricing">Aloita VIDO Startti</Button></div>
-      </Container>
-    </section>
+      <section id="proof" className="border-y border-brand-navy/8 bg-brand-light py-20 sm:py-28">
+        <Container>
+          <SectionTitle eyebrow="Todiste" title="Tavallisesta työmaakuvasta valmiiksi referenssiksi." body="Productionissa näytämme vain asiakkaan luvalla julkaistavaa aineistoa. Emme täytä proof-osiota keksityillä caseilla tai mockupeilla." />
+          {hasProof ? (
+            <div className="mt-12 grid gap-5 lg:grid-cols-2">
+              <figure className="overflow-hidden rounded-xl border border-brand-navy/10 bg-white p-5 shadow-soft">
+                <figcaption className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-gray">Ennen · {proofClient}</figcaption>
+                <img src={proofBefore} alt={`${proofClient} alkuperäinen työmaakuva`} className="mt-4 aspect-[4/3] w-full rounded-lg object-cover" />
+              </figure>
+              <figure className="overflow-hidden rounded-xl border border-brand-red/20 bg-white p-5 shadow-soft">
+                <figcaption className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-red">Jälkeen · VIDO-toteutus</figcaption>
+                <img src={proofAfter} alt={`${proofClient} VIDO-toteutus`} className="mt-4 aspect-[4/3] w-full rounded-lg object-cover" />
+              </figure>
+            </div>
+          ) : (
+            <div className="mt-12 rounded-xl border border-dashed border-brand-navy/20 bg-white p-7 sm:p-9">
+              <p className="text-xs font-black uppercase tracking-[0.14em] text-brand-red">Launch blocker 3/3</p>
+              <h3 className="mt-3 text-2xl font-black tracking-[-0.03em] text-brand-navy">Asiakasproof odottaa kirjallista julkaisulupaa.</h3>
+              <p className="mt-3 max-w-2xl leading-7 text-brand-charcoal/75">
+                Kun hyväksytty before/after-aineisto on valittu, se kytketään tähän ympäristömuuttujilla. Näin preview pysyy rehellisenä eikä väärää social proofia päädy tuotantoon.
+              </p>
+            </div>
+          )}
+        </Container>
+      </section>
 
-    <section id="proof" className="py-20 sm:py-28">
-      <Container>
-        <SectionTitle eyebrow="Todisteet" title="Tavallisesta työmaakuvasta valmiiksi referenssiksi." body="VIDOn lähtökohta ei ole geneerinen somesisältö. Lähtökohta on yrityksenne oikea työ." />
-        <div className="mt-12 grid gap-4 lg:grid-cols-2">
-          <div className="rounded-xl border border-line-subtle bg-bg-850 p-6"><div className="text-xs font-semibold uppercase tracking-wider text-ink-muted">Ennen</div><div className="mt-5 aspect-[4/3] rounded-lg border border-line bg-surface-700" /><p className="mt-5 text-ink-secondary">Tavallinen työmaakuva asiakkaan puhelimesta.</p></div>
-          <div className="rounded-xl border border-cyan-600/40 bg-bg-850 p-6 shadow-cyan"><div className="text-xs font-semibold uppercase tracking-wider text-cyan-300">Jälkeen</div><div className="mt-5 aspect-[4/3] rounded-lg border border-line bg-gradient-to-br from-surface-600 to-bg-900 p-6"><div className="flex h-full flex-col justify-end"><Badge>Valmis kohde</Badge><div className="mt-4 text-2xl font-bold">Työnjälki näkyväksi.</div><p className="mt-2 max-w-sm text-sm text-ink-secondary">Selkeä julkaisu, oikea konteksti ja yrityksen oma työnjälki.</p></div></div><p className="mt-5 text-ink-secondary">Työ → sisältö → julkaisu → referenssi.</p></div>
-        </div>
-        <p className="mt-6 max-w-3xl text-sm leading-6 text-ink-muted">VIDO ei vielä väitä tiettyä ROI- tai liiditulosta ilman dokumentoitua asiakasdataa. Todisteena näytämme sen, minkä voimme oikeasti toimittaa: prosessin, sisällöt ja työnäytteet.</p>
-      </Container>
-    </section>
+      <section className="py-20 sm:py-28">
+        <Container>
+          <div className="grid items-center gap-10 rounded-2xl border border-brand-navy/10 bg-white p-7 shadow-soft lg:grid-cols-[220px_1fr] lg:p-10">
+            <div className="flex aspect-square items-center justify-center rounded-xl bg-brand-navy text-6xl font-black tracking-[-0.08em] text-white">VO<span className="text-brand-red">.</span></div>
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.14em] text-brand-red">VIDO Socialin takana</p>
+              <h2 className="mt-3 text-3xl font-black tracking-[-0.035em] text-brand-navy">Ville Olenius</h2>
+              <p className="mt-1 font-semibold text-brand-gray">Co-Founder & Head of Sales</p>
+              <p className="mt-5 max-w-3xl leading-7 text-brand-charcoal/75">
+                Ville vastaa VIDO Socialin myynnistä, asiakkuuksista ja kaupallisesta kehityksestä. Hänen taustansa yhdistää yrittäjyyden, myynnin johtamisen, digitaalisen markkinoinnin sekä teknologia- ja prosessiosaamisen.
+              </p>
+              <a href={linkedinUrl} data-event="linkedin_click" target="_blank" rel="noreferrer" className="mt-5 inline-flex text-sm font-bold text-brand-navy underline decoration-brand-red decoration-2 underline-offset-4">
+                Ville LinkedInissä
+              </a>
+            </div>
+          </div>
+        </Container>
+      </section>
 
-    <section id="pricing" className="border-y border-line-subtle bg-bg-900 py-20 sm:py-28">
-      <Container>
-        <SectionTitle eyebrow="Hinnoittelu" title="Aloita pienellä riskillä." body="Valitse kertaluonteinen Startti tai ulkoista jatkuva sisällöntuotanto kuukausipalveluna." />
-        <div className="mt-12 grid gap-5 lg:grid-cols-2">
-          <div className="rounded-xl border border-line-strong bg-bg-850 p-7 sm:p-8"><div className="text-sm font-semibold text-ink-secondary">VIDO Startti</div><div className="mt-4 text-5xl font-bold">290 € <span className="text-sm font-normal text-ink-muted">+ ALV</span></div><p className="mt-5 leading-7 text-ink-secondary">Sopii yritykselle, joka haluaa ensin nähdä käytännössä, mitä omasta materiaalista voidaan tehdä.</p><ul className="mt-7 space-y-3 text-sm text-ink-secondary"><li>✓ Ensimmäinen sisältöpaketti</li><li>✓ Asiakkaan omasta materiaalista</li><li>✓ Sisällöt hyväksyttäväksi</li><li>✓ Ei jatkositoutumista</li></ul><div className="mt-8"><Button href="#contact">Aloita 290 €</Button></div></div>
-          <div className="relative rounded-xl border border-cyan-600/50 bg-bg-850 p-7 shadow-cyan sm:p-8"><div className="absolute right-6 top-6"><Badge>Jatkuva näkyvyys</Badge></div><div className="text-sm font-semibold text-ink-secondary">VIDO Social</div><div className="mt-4 text-5xl font-bold">500 € <span className="text-sm font-normal text-ink-muted">/ kk + ALV</span></div><p className="mt-5 leading-7 text-ink-secondary">Jatkuva Instagram- ja Facebook-sisältö ilman yrittäjän omaa sisällöntuotantoa.</p><ul className="mt-7 space-y-3 text-sm text-ink-secondary"><li>✓ 12 valmista julkaisua / kk</li><li>✓ Instagram + Facebook</li><li>✓ Tekstit ja grafiikat</li><li>✓ Julkaisukalenteri</li><li>✓ WhatsApp-materiaalivirta</li><li>✓ 1 korjauskierros</li><li>✓ Kuukausittain irtisanottava</li></ul><div className="mt-8"><Button href="#contact">Valitse VIDO Social</Button></div></div>
-        </div>
-      </Container>
-    </section>
+      <section id="pricing" className="bg-brand-navy py-20 sm:py-28">
+        <Container>
+          <SectionTitle inverse eyebrow="Hinnoittelu" title="Aloita pienellä riskillä." body="Yksi selkeä sisääntulotuote ja yksi jatkuva palvelu. Ei raskasta tarjousprosessia." />
+          <div className="mt-12 grid gap-5 lg:grid-cols-2">
+            <article className="rounded-xl border border-white/12 bg-white p-7 text-brand-navy sm:p-8">
+              <p className="text-sm font-semibold text-brand-gray">VIDO Startti</p>
+              <p className="mt-4 text-5xl font-black tracking-[-0.05em]">290 € <span className="text-sm font-medium tracking-normal text-brand-gray">+ ALV</span></p>
+              <p className="mt-5 leading-7 text-brand-charcoal/75">Kertaluonteinen tapa nähdä, mitä yrityksesi omasta materiaalista voidaan tehdä.</p>
+              <ul className="mt-7 space-y-3 text-sm text-brand-charcoal/80">
+                <li>✓ 4 valmista julkaisua</li>
+                <li>✓ Facebook + Instagram</li>
+                <li>✓ Tekstit + grafiikat</li>
+                <li>✓ 1 korjauskierros</li>
+                <li>✓ Ei jatkositoutumista</li>
+              </ul>
+              <div className="mt-8"><Button href="#start" event="pricing_cta">Aloita 290 €</Button></div>
+            </article>
 
-    <section className="py-20 sm:py-28">
-      <Container>
-        <SectionTitle eyebrow="FAQ" title="Kysymykset, jotka kannattaa ratkaista ennen ostamista." />
-        <div className="mt-10 divide-y divide-line-subtle border-y border-line-subtle">{faqs.map(([q,a])=><details key={q} className="group py-6"><summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-semibold"><span>{q}</span><span className="text-cyan-300 transition group-open:rotate-45">+</span></summary><p className="mt-4 max-w-3xl leading-7 text-ink-secondary">{a}</p></details>)}</div>
-      </Container>
-    </section>
+            <article className="rounded-xl border border-brand-red/50 bg-white/[0.05] p-7 text-white shadow-red sm:p-8">
+              <Badge inverse>Jatkuva näkyvyys</Badge>
+              <p className="mt-5 text-sm font-semibold text-white/60">VIDO Social</p>
+              <p className="mt-3 text-5xl font-black tracking-[-0.05em]">500 € <span className="text-sm font-medium tracking-normal text-white/50">/ kk + ALV</span></p>
+              <p className="mt-5 leading-7 text-white/70">Kun haluat tehdä näkyvyydestä jatkuvaa ilman uutta työtehtävää yrittäjälle.</p>
+              <ul className="mt-7 space-y-3 text-sm text-white/75">
+                <li>✓ 12 julkaisua / kk</li>
+                <li>✓ Facebook + Instagram</li>
+                <li>✓ Tekstit + grafiikat</li>
+                <li>✓ WhatsApp-materiaalivirta</li>
+                <li>✓ Julkaisukalenteri + hyväksyntä</li>
+                <li>✓ Kuukausiraportointi</li>
+              </ul>
+              <div className="mt-8"><Button href="#start" event="pricing_cta">Aloita Startilla</Button></div>
+            </article>
+          </div>
+        </Container>
+      </section>
 
-    <section id="contact" className="border-t border-line-subtle py-20 sm:py-28">
-      <Container>
-        <div className="grid gap-10 rounded-xl border border-cyan-600/40 bg-bg-850 p-7 shadow-cyan sm:p-10 lg:grid-cols-[1fr_.8fr] lg:p-12">
-          <div><Badge>Seuraava askel</Badge><h2 className="mt-6 text-4xl font-bold tracking-[-0.04em] sm:text-5xl">Seuraava työmaa voi olla myös seuraava referenssinne.</h2><p className="mt-5 max-w-2xl text-lg leading-8 text-ink-secondary">Teidän ei tarvitse keksiä lisää markkinointia. Teette jo joka päivä sen materiaalin, jota yrityksenne tarvitsee.</p><p className="mt-6 font-semibold">Ota kuvat. Lähetä ne WhatsAppilla. <span className="text-cyan-300">Me hoidamme loput.</span></p></div>
-          <form className="space-y-4 rounded-lg border border-line-subtle bg-bg-900 p-5 sm:p-6" action="mailto:hello@vidosocial.fi" method="post" encType="text/plain">
-            <div><label className="mb-2 block text-sm font-medium text-ink-secondary" htmlFor="company">Yritys</label><input id="company" name="company" required className="w-full rounded-md border border-line bg-bg-950 px-4 py-3 text-ink-primary outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20" /></div>
-            <div><label className="mb-2 block text-sm font-medium text-ink-secondary" htmlFor="name">Nimi</label><input id="name" name="name" required className="w-full rounded-md border border-line bg-bg-950 px-4 py-3 text-ink-primary outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20" /></div>
-            <div><label className="mb-2 block text-sm font-medium text-ink-secondary" htmlFor="contact">Puhelin tai sähköposti</label><input id="contact" name="contact" required className="w-full rounded-md border border-line bg-bg-950 px-4 py-3 text-ink-primary outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20" /></div>
-            <button type="submit" className="w-full rounded-md bg-cyan-glow px-5 py-3 text-sm font-semibold text-ink-inverse shadow-cyan transition hover:brightness-110 active:scale-[0.99]">Aloita 290 €</button>
-            <p className="text-xs leading-5 text-ink-muted">Ei pitkää sopimusta. Ei jatkuvia palavereita. Hyväksyt sisällöt ennen julkaisua.</p>
-          </form>
-        </div>
-      </Container>
-    </section>
+      <section id="faq" className="py-20 sm:py-28">
+        <Container>
+          <SectionTitle eyebrow="FAQ" title="Yleisimmät kysymykset ennen aloittamista." />
+          <div className="mt-12 max-w-4xl divide-y divide-brand-navy/10 border-y border-brand-navy/10">
+            {faqs.map(([question, answer]) => (
+              <details key={question} className="group py-6">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-bold text-brand-navy">
+                  <span>{question}</span>
+                  <span aria-hidden="true" className="text-2xl text-brand-red transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <p className="mt-4 max-w-3xl leading-7 text-brand-charcoal/75">{answer}</p>
+              </details>
+            ))}
+          </div>
+        </Container>
+      </section>
 
-    <footer className="border-t border-line-subtle py-10"><Container className="flex flex-col gap-4 text-sm text-ink-muted sm:flex-row sm:items-center sm:justify-between"><div><span className="font-bold tracking-wider text-ink-primary">VIDO SOCIAL</span> — työmaat näkyviksi.</div><div>Rakennus • LVI • Sähkö • Saneeraus</div></Container></footer>
-  </main>;
+      <section id="start" className="border-t border-brand-navy/8 bg-brand-light py-20 sm:py-28">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-start">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.14em] text-brand-red">Aloita tästä</p>
+              <h2 className="mt-4 text-4xl font-black tracking-[-0.045em] text-brand-navy sm:text-5xl">Seuraava työmaa voi olla myös seuraava referenssinne.</h2>
+              <p className="mt-5 text-lg leading-8 text-brand-charcoal/75">Täytä neljä tietoa. Emme ohjaa tässä vaiheessa verkkomaksuun — yhteydenotto käynnistää Startin onboarding-polun.</p>
+            </div>
+            <LeadForm whatsappNumber={whatsappNumber} />
+          </div>
+        </Container>
+      </section>
+
+      <footer className="border-t border-brand-navy/8 bg-white py-10 pb-24 sm:pb-10">
+        <Container>
+          <div className="flex flex-col gap-7 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <VidoLogo className="h-auto w-40" />
+              <p className="mt-4 text-sm text-brand-gray">Työmaat näkyviksi. Referenssit myyntiin.</p>
+              <p className="mt-2 text-xs text-brand-gray">{legalEntity}{businessId ? ` · Y-tunnus ${businessId}` : ""}</p>
+            </div>
+            <nav aria-label="Lakilinkit" className="flex flex-wrap gap-5 text-sm font-semibold text-brand-charcoal/70">
+              <a href="/tietosuoja" className="hover:text-brand-navy">Tietosuoja</a>
+              <a href="/evasteet" className="hover:text-brand-navy">Evästeet</a>
+              <a href="#start" className="hover:text-brand-navy">Yhteys</a>
+            </nav>
+          </div>
+        </Container>
+      </footer>
+
+      <div className="fixed inset-x-3 bottom-3 z-40 sm:hidden">
+        <Button href="#start" event="sticky_cta" className="w-full shadow-[0_12px_35px_rgba(15,23,42,0.22)]">Aloita 290 €</Button>
+      </div>
+
+      <AnalyticsConsent />
+    </main>
+  );
 }
