@@ -20,6 +20,13 @@ const steps = [
   ["03", "VIDO hoitaa loput", "Rakennamme sisällöt, visuaalit ja julkaisukokonaisuuden sovitun hyväksyntämallin mukaan."]
 ];
 
+const deliverables = [
+  ["Materiaali sisään", "Työmaa- ja kohdekuvat sekä tarvittaessa lyhyt konteksti WhatsAppilla."],
+  ["VIDO-tuotanto", "Kuvavalinta, teksti, CTA, grafiikka ja kanavakohtainen viimeistely."],
+  ["Hyväksyntä", "Sisällöt tarkistetaan sovitulla tavalla ennen julkaisua tai ajastusta."],
+  ["Jatkuvuus", "Startissa 4 valmista julkaisua. Socialissa 12 julkaisua kuukaudessa Facebookiin ja Instagramiin."]
+];
+
 const faqs = [
   ["Meillä ei ole aikaa hoitaa somea.", "Juuri siksi palvelu on rakennettu asynkroniseksi. Teidän tehtävänne on toimittaa materiaali työn yhteydessä. VIDO hoitaa sovitun sisältötuotannon."],
   ["Voisimme julkaista kuvat itse. Miksi maksaisimme tästä?", "Voitte. Palvelun arvo on jatkuvuudessa: materiaali muuttuu järjestelmällisesti julkaisuiksi myös kiireisinä kuukausina."],
@@ -34,13 +41,9 @@ export default function LandingPage() {
   const contactPhone = process.env.NEXT_PUBLIC_CONTACT_PHONE || "+358 40 724 7621";
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://vidosocial.com";
   const linkedinUrl = process.env.NEXT_PUBLIC_VILLE_LINKEDIN || "https://www.linkedin.com/in/ville1";
-  const proofBefore = process.env.NEXT_PUBLIC_PROOF_BEFORE_URL || "";
-  const proofAfter = process.env.NEXT_PUBLIC_PROOF_AFTER_URL || "";
-  const proofClient = process.env.NEXT_PUBLIC_PROOF_CLIENT_NAME || "Asiakascase";
   const legalEntity = process.env.NEXT_PUBLIC_LEGAL_ENTITY || "Ville Olenius Tmi";
   const businessId = process.env.NEXT_PUBLIC_BUSINESS_ID || "3581471-7";
 
-  const hasProof = Boolean(proofBefore && proofAfter);
   const normalizedWhatsApp = whatsappNumber.replace(/\D/g, "");
   const whatsappHref = `https://wa.me/${normalizedWhatsApp}?text=${encodeURIComponent("Hei, haluan kuulla lisää VIDO Socialista.")}`;
   const telephoneHref = `tel:${contactPhone.replace(/[^+\d]/g, "")}`;
@@ -54,7 +57,7 @@ export default function LandingPage() {
           </a>
           <nav aria-label="Päänavigaatio" className="hidden items-center gap-7 lg:flex">
             <a href="#how" className="text-sm font-medium text-brand-charcoal/75 hover:text-brand-navy">Miten toimii</a>
-            <a href="#proof" className="text-sm font-medium text-brand-charcoal/75 hover:text-brand-navy">Referenssit</a>
+            <a href="#delivery" className="text-sm font-medium text-brand-charcoal/75 hover:text-brand-navy">Mitä saat</a>
             <a href="#pricing" className="text-sm font-medium text-brand-charcoal/75 hover:text-brand-navy">Hinnasto</a>
             <a href="#faq" className="text-sm font-medium text-brand-charcoal/75 hover:text-brand-navy">FAQ</a>
           </nav>
@@ -157,29 +160,22 @@ export default function LandingPage() {
         </Container>
       </section>
 
-      <section id="proof" className="border-y border-brand-navy/8 bg-brand-light py-20 sm:py-28">
+      <section id="delivery" className="border-y border-brand-navy/8 bg-brand-light py-20 sm:py-28">
         <Container>
-          <SectionTitle eyebrow="Todiste" title="Tavallisesta työmaakuvasta valmiiksi referenssiksi." body="Productionissa näytämme vain asiakkaan luvalla julkaistavaa aineistoa. Emme täytä proof-osiota keksityillä caseilla tai mockupeilla." />
-          {hasProof ? (
-            <div className="mt-12 grid gap-5 lg:grid-cols-2">
-              <figure className="overflow-hidden rounded-xl border border-brand-navy/10 bg-white p-5 shadow-soft">
-                <figcaption className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-gray">Ennen · {proofClient}</figcaption>
-                <img src={proofBefore} alt={`${proofClient} alkuperäinen työmaakuva`} className="mt-4 aspect-[4/3] w-full rounded-lg object-cover" />
-              </figure>
-              <figure className="overflow-hidden rounded-xl border border-brand-red/20 bg-white p-5 shadow-soft">
-                <figcaption className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-red">Jälkeen · VIDO-toteutus</figcaption>
-                <img src={proofAfter} alt={`${proofClient} VIDO-toteutus`} className="mt-4 aspect-[4/3] w-full rounded-lg object-cover" />
-              </figure>
-            </div>
-          ) : (
-            <div className="mt-12 rounded-xl border border-dashed border-brand-navy/20 bg-white p-7 sm:p-9">
-              <p className="text-xs font-black uppercase tracking-[0.14em] text-brand-red">Launch blocker 1/1</p>
-              <h3 className="mt-3 text-2xl font-black tracking-[-0.03em] text-brand-navy">Asiakasproof odottaa kirjallista julkaisulupaa.</h3>
-              <p className="mt-3 max-w-2xl leading-7 text-brand-charcoal/75">
-                Kun hyväksytty before/after-aineisto on valittu, se kytketään tähän ympäristömuuttujilla. Näin preview pysyy rehellisenä eikä väärää social proofia päädy tuotantoon.
-              </p>
-            </div>
-          )}
+          <SectionTitle eyebrow="Mitä saat" title="Selkeä tuotantoprosessi materiaalista valmiiksi julkaisuksi." body="Aloitamme ilman asiakaslogoja, referenssiväitteitä tai before–after-caseja. Sivusto näyttää täsmällisesti palvelun toimitusmallin ja sen, mitä asiakas saa." />
+          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {deliverables.map(([title, body], index) => (
+              <article key={title} className="rounded-xl border border-brand-navy/10 bg-white p-6 shadow-[0_10px_35px_rgba(15,23,42,0.05)]">
+                <p className="text-sm font-black text-brand-red">0{index + 1}</p>
+                <h3 className="mt-8 text-xl font-bold tracking-[-0.02em] text-brand-navy">{title}</h3>
+                <p className="mt-3 text-sm leading-6 text-brand-charcoal/75">{body}</p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-8 rounded-xl bg-brand-navy p-6 text-white sm:p-8">
+            <p className="text-xs font-black uppercase tracking-[0.14em] text-brand-red">MVP-periaate</p>
+            <p className="mt-3 max-w-3xl text-lg font-semibold leading-8">Emme julkaise keksittyjä asiakastarinoita. Oikeat caset lisätään myöhemmin vain asiakkaan luvalla, eikä niiden puuttuminen estä VIDO Socialin käynnistämistä.</p>
+          </div>
         </Container>
       </section>
 
