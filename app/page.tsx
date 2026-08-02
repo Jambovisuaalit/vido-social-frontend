@@ -8,7 +8,10 @@ const structuredData = {
     {
       "@type": "Organization",
       "@id": `${siteUrl}/#organization`,
-      name: "VIDO Social",
+      name: "VIDO",
+      alternateName: "VIDO Social",
+      legalName: "Ville Olenius Tmi",
+      taxID: "3581471-7",
       url: siteUrl,
       logo: `${siteUrl}/brand/VIDO_Social_Primary_Horizontal.svg`,
       email: "ville@vidosocial.com",
@@ -16,6 +19,14 @@ const structuredData = {
       founder: {
         "@type": "Person",
         name: "Ville Olenius"
+      },
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Niittytie 4",
+        postalCode: "03100",
+        addressLocality: "NLA",
+        addressRegion: "Vihti",
+        addressCountry: "FI"
       },
       areaServed: "FI"
     },
