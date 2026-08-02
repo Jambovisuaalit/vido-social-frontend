@@ -7,10 +7,13 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyPage() {
-  const legalEntity = process.env.NEXT_PUBLIC_LEGAL_ENTITY || "VIDO Social";
-  const businessId = process.env.NEXT_PUBLIC_BUSINESS_ID || "Vahvistetaan ennen tuotantojulkaisua";
+  const legalEntity = process.env.NEXT_PUBLIC_LEGAL_ENTITY || "Ville Olenius Tmi";
+  const businessId = process.env.NEXT_PUBLIC_BUSINESS_ID || "3581471-7";
+  const marketingName = process.env.NEXT_PUBLIC_MARKETING_NAME || "VIDO";
   const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "ville@vidosocial.com";
   const contactPhone = process.env.NEXT_PUBLIC_CONTACT_PHONE || "+358 40 724 7621";
+  const postalAddress = process.env.NEXT_PUBLIC_POSTAL_ADDRESS || "Niittytie 4, 03100 NLA";
+  const domicile = process.env.NEXT_PUBLIC_DOMICILE || "Vihti";
 
   return (
     <main className="min-h-screen bg-white py-10 sm:py-16">
@@ -24,7 +27,16 @@ export default function PrivacyPage() {
           <div className="mt-10 space-y-9 text-brand-charcoal/80">
             <section>
               <h2 className="text-xl font-bold text-brand-navy">1. Rekisterinpitäjä</h2>
-              <p className="mt-3 leading-7">{legalEntity}<br />Y-tunnus: {businessId}<br />Sähköposti: {contactEmail}<br />Puhelin / WhatsApp Business: {contactPhone}</p>
+              <p className="mt-3 leading-7">
+                {legalEntity}<br />
+                Markkinointinimi: {marketingName}<br />
+                Y-tunnus: {businessId}<br />
+                Yrittäjä: Ville Olenius<br />
+                Postiosoite: {postalAddress}<br />
+                Kotipaikka: {domicile}<br />
+                Sähköposti: {contactEmail}<br />
+                Puhelin / WhatsApp Business: {contactPhone}
+              </p>
             </section>
             <section>
               <h2 className="text-xl font-bold text-brand-navy">2. Mitä tietoja käsittelemme</h2>
