@@ -3,7 +3,8 @@ import { Container, VidoLogo } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Evästekäytäntö",
-  description: "VIDO Socialin eväste- ja analytiikkakäytäntö."
+  description: "VIDO Socialin eväste- ja analytiikkakäytäntö.",
+  alternates: { canonical: "/evasteet" }
 };
 
 export default function CookiePage() {

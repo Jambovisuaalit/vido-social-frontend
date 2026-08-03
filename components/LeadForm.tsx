@@ -18,7 +18,7 @@ export default function LeadForm({ whatsappNumber = "" }: { whatsappNumber?: str
   function onStart() {
     if (started.current) return;
     started.current = true;
-    emitAnalytics("form_start", { form: "startti" });
+    emitAnalytics("form_start", { form: "social" });
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -33,8 +33,9 @@ export default function LeadForm({ whatsappNumber = "" }: { whatsappNumber?: str
       name: String(form.get("name") || ""),
       phone: String(form.get("phone") || ""),
       email: String(form.get("email") || ""),
+      consent: form.get("consent") === "on",
       website: String(form.get("website") || ""),
-      source: "website_startti",
+      source: "website_social",
       page: window.location.pathname,
       referrer: document.referrer || null,
       utm_source: params.get("utm_source"),
@@ -53,17 +54,17 @@ export default function LeadForm({ whatsappNumber = "" }: { whatsappNumber?: str
       if (!response.ok) throw new Error(data.error || "Lähetys epäonnistui.");
 
       setStatus("success");
-      emitAnalytics("form_submit", { form: "startti" });
+      emitAnalytics("form_submit", { form: "social" });
     } catch (error) {
       setStatus("error");
       setMessage(error instanceof Error ? error.message : "Lähetys epäonnistui. Yritä uudelleen.");
-      emitAnalytics("form_error", { form: "startti" });
+      emitAnalytics("form_error", { form: "social" });
     }
   }
 
   const normalizedWhatsApp = cleanWhatsAppNumber(whatsappNumber);
   const whatsappHref = normalizedWhatsApp
-    ? `https://wa.me/${normalizedWhatsApp}?text=${encodeURIComponent("Hei, haluan aloittaa VIDO Startin. Yritykseni on ")}`
+    ? `https://wa.me/${normalizedWhatsApp}?text=${encodeURIComponent("Hei, haluan aloittaa VIDO Socialin. Yritykseni on ")}`
     : "";
 
   if (status === "success") {
@@ -72,7 +73,7 @@ export default function LeadForm({ whatsappNumber = "" }: { whatsappNumber?: str
         <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-red text-xl font-black text-white">✓</div>
         <h3 className="mt-5 text-2xl font-black tracking-[-0.03em] text-brand-navy">Pyyntö vastaanotettu.</h3>
         <p className="mt-3 max-w-xl leading-7 text-brand-charcoal/75">
-          Olemme saaneet yhteystietosi. Seuraava vaihe on materiaalien aloitus ja ensimmäisten työmaakuvien kerääminen.
+          Olemme saaneet yhteystietosi. Vahvistamme palvelun aloituksen ja seuraavat vaiheet henkilökohtaisesti.
         </p>
         {whatsappHref ? (
           <a
@@ -119,6 +120,21 @@ export default function LeadForm({ whatsappNumber = "" }: { whatsappNumber?: str
         <input name="website" type="text" tabIndex={-1} autoComplete="off" />
       </label>
 
+      <label className="mt-5 flex max-w-2xl items-start gap-3 text-sm leading-6 text-brand-charcoal/80">
+        <input
+          name="consent"
+          type="checkbox"
+          required
+          className="mt-1 h-4 w-4 shrink-0 accent-brand-red"
+        />
+        <span>
+          Hyväksyn, että VIDO käsittelee antamiani tietoja yhteydenottoa ja palvelun valmistelua varten. Lue{" "}
+          <a href="/tietosuoja" className="font-semibold text-brand-navy underline underline-offset-4">
+            tietosuojaseloste
+          </a>.
+        </span>
+      </label>
+
       {status === "error" ? (
         <p className="mt-5 rounded-md border border-brand-red/20 bg-brand-red/5 px-4 py-3 text-sm text-brand-red" role="alert">
           {message}
@@ -130,11 +146,11 @@ export default function LeadForm({ whatsappNumber = "" }: { whatsappNumber?: str
         disabled={status === "submitting"}
         className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-md bg-brand-red px-5 py-3 text-sm font-semibold text-white shadow-red transition hover:bg-brand-red-dark disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
-        {status === "submitting" ? "Lähetetään…" : "Aloita VIDO Startti — 290 €"}
+        {status === "submitting" ? "Lähetetään…" : "Pyydä aloitus — 500 €/kk"}
       </button>
 
       <p className="mt-4 text-xs leading-5 text-brand-gray">
-        Lähettämällä lomakkeen pyydät yhteydenottoa VIDO Startista. Tietojen käsittelystä kerrotaan <a href="/tietosuoja" className="font-semibold text-brand-navy underline underline-offset-4">tietosuojaselosteessa</a>.
+        Lomake ei muodosta sopimusta eikä käynnistä maksua. Vahvistamme palvelun sisällön, laskutuksen ja aloitusajan erikseen.
       </p>
     </form>
   );

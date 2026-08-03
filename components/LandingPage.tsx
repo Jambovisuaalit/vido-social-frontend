@@ -24,7 +24,7 @@ const deliverables = [
   ["Materiaali sisään", "Työmaa- ja kohdekuvat sekä tarvittaessa lyhyt konteksti WhatsAppilla."],
   ["VIDO-tuotanto", "Kuvavalinta, teksti, CTA, grafiikka ja kanavakohtainen viimeistely."],
   ["Hyväksyntä", "Sisällöt tarkistetaan sovitulla tavalla ennen julkaisua tai ajastusta."],
-  ["Jatkuvuus", "Startissa 4 valmista julkaisua. Socialissa 12 julkaisua kuukaudessa Facebookiin ja Instagramiin."]
+  ["Jatkuvuus", "12 valmista julkaisua kuukaudessa Facebookiin ja Instagramiin."]
 ];
 
 const faqs = [
@@ -32,7 +32,7 @@ const faqs = [
   ["Voisimme julkaista kuvat itse. Miksi maksaisimme tästä?", "Voitte. Palvelun arvo on jatkuvuudessa: materiaali muuttuu järjestelmällisesti julkaisuiksi myös kiireisinä kuukausina."],
   ["Entä jos kuvia ei ole tarpeeksi?", "Työmaat, valmiit kohteet, ennen–jälkeen-kuvat, palvelut, tekijät, kalusto ja käytännön vinkit muodostavat yhdessä sisältöpankin."],
   ["Takaako VIDO uusia asiakkaita?", "Ei. Emme lupaa tiettyä liidi- tai kauppamäärää orgaanisella sisällöllä. Rakennamme jatkuvaa näkyvyyttä ja todistetta osaamisesta."],
-  ["Pitääkö sitoutua pitkäksi aikaa?", "Ei. VIDO Startti on kertaluonteinen 290 € + ALV. Jatkuva VIDO Social on 500 €/kk + ALV ja kuukausittain irtisanottava."]
+  ["Pitääkö sitoutua pitkäksi aikaa?", "Ei. VIDO Social maksaa 500 €/kk + ALV ja on kuukausittain irtisanottava."]
 ];
 
 export default function LandingPage() {
@@ -49,7 +49,7 @@ export default function LandingPage() {
   const telephoneHref = `tel:${contactPhone.replace(/[^+\d]/g, "")}`;
 
   return (
-    <main className="overflow-hidden bg-white">
+    <main className="overflow-x-clip bg-white">
       <header className="sticky top-0 z-50 border-b border-brand-navy/8 bg-white/95 backdrop-blur-xl">
         <Container className="flex h-18 items-center justify-between gap-5">
           <a href="#top" aria-label="VIDO Social etusivulle" className="block w-36 sm:w-44">
@@ -61,7 +61,7 @@ export default function LandingPage() {
             <a href="#pricing" className="text-sm font-medium text-brand-charcoal/75 hover:text-brand-navy">Hinnasto</a>
             <a href="#faq" className="text-sm font-medium text-brand-charcoal/75 hover:text-brand-navy">FAQ</a>
           </nav>
-          <Button href="#start" event="hero_cta" className="hidden sm:inline-flex">Aloita 290 €</Button>
+          <Button href="#start" event="hero_cta" className="hidden sm:inline-flex">Pyydä aloitus</Button>
         </Container>
       </header>
 
@@ -79,10 +79,10 @@ export default function LandingPage() {
                 Jatkuva näkyvyys paikalliselle palveluyritykselle ilman sisällöntuotantoa, IT-säätöä tai turhia palavereita.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Button href="#start" event="hero_cta">Aloita VIDO Startti — 290 €</Button>
+                <Button href="#start" event="hero_cta">Pyydä aloitus — 500 €/kk</Button>
                 <Button href="#how" variant="secondary">Katso miten toimii</Button>
               </div>
-              <p className="mt-4 text-sm text-brand-gray">Ei jatkositoutumista Startissa. Hyväksyt sisällöt ennen julkaisua.</p>
+              <p className="mt-4 text-sm text-brand-gray">Kuukausittain irtisanottava. Hyväksyt sisällöt ennen julkaisua.</p>
             </div>
 
             <div className="rounded-2xl bg-brand-navy p-6 text-white shadow-soft sm:p-8">
@@ -156,7 +156,7 @@ export default function LandingPage() {
               </article>
             ))}
           </div>
-          <div className="mt-8"><Button href="#start" event="pricing_cta">Aloita VIDO Startti</Button></div>
+          <div className="mt-8"><Button href="#start" event="pricing_cta">Pyydä aloitus</Button></div>
         </Container>
       </section>
 
@@ -203,22 +203,8 @@ export default function LandingPage() {
 
       <section id="pricing" className="bg-brand-navy py-20 sm:py-28">
         <Container>
-          <SectionTitle inverse eyebrow="Hinnoittelu" title="Aloita pienellä riskillä." body="Yksi selkeä sisääntulotuote ja yksi jatkuva palvelu. Ei raskasta tarjousprosessia." />
-          <div className="mt-12 grid gap-5 lg:grid-cols-2">
-            <article className="rounded-xl border border-white/12 bg-white p-7 text-brand-navy sm:p-8">
-              <p className="text-sm font-semibold text-brand-gray">VIDO Startti</p>
-              <p className="mt-4 text-5xl font-black tracking-[-0.05em]">290 € <span className="text-sm font-medium tracking-normal text-brand-gray">+ ALV</span></p>
-              <p className="mt-5 leading-7 text-brand-charcoal/75">Kertaluonteinen tapa nähdä, mitä yrityksesi omasta materiaalista voidaan tehdä.</p>
-              <ul className="mt-7 space-y-3 text-sm text-brand-charcoal/80">
-                <li>✓ 4 valmista julkaisua</li>
-                <li>✓ Facebook + Instagram</li>
-                <li>✓ Tekstit + grafiikat</li>
-                <li>✓ 1 korjauskierros</li>
-                <li>✓ Ei jatkositoutumista</li>
-              </ul>
-              <div className="mt-8"><Button href="#start" event="pricing_cta">Aloita 290 €</Button></div>
-            </article>
-
+          <SectionTitle inverse eyebrow="Hinnoittelu" title="Yksi paketti. Yksi kuukausihinta." body="Jatkuva näkyvyys ilman raskasta tarjousprosessia tai pitkäaikaista sitoutumista." />
+          <div className="mt-12 max-w-2xl">
             <article className="rounded-xl border border-brand-red/50 bg-white/[0.05] p-7 text-white shadow-red sm:p-8">
               <Badge inverse>Jatkuva näkyvyys</Badge>
               <p className="mt-5 text-sm font-semibold text-white/60">VIDO Social</p>
@@ -229,10 +215,11 @@ export default function LandingPage() {
                 <li>✓ Facebook + Instagram</li>
                 <li>✓ Tekstit + grafiikat</li>
                 <li>✓ WhatsApp-materiaalivirta</li>
-                <li>✓ Julkaisukalenteri + hyväksyntä</li>
-                <li>✓ Kuukausiraportointi</li>
+                <li>✓ Julkaisukalenteri ja hyväksyntä ennen julkaisua</li>
+                <li>✓ 1 korjauskierros / sisältö</li>
+                <li>✓ Kuukausittain irtisanottava</li>
               </ul>
-              <div className="mt-8"><Button href="#start" event="pricing_cta">Aloita Startilla</Button></div>
+              <div className="mt-8"><Button href="#start" event="pricing_cta">Pyydä aloitus — 500 €/kk</Button></div>
             </article>
           </div>
         </Container>
@@ -261,7 +248,7 @@ export default function LandingPage() {
             <div>
               <p className="text-xs font-black uppercase tracking-[0.14em] text-brand-red">Aloita tästä</p>
               <h2 className="mt-4 text-4xl font-black tracking-[-0.045em] text-brand-navy sm:text-5xl">Seuraava työmaa voi olla myös seuraava referenssinne.</h2>
-              <p className="mt-5 text-lg leading-8 text-brand-charcoal/75">Täytä neljä tietoa. Emme ohjaa tässä vaiheessa verkkomaksuun — yhteydenotto käynnistää Startin onboarding-polun.</p>
+              <p className="mt-5 text-lg leading-8 text-brand-charcoal/75">Täytä neljä tietoa. Emme ohjaa tässä vaiheessa verkkomaksuun — vahvistamme palvelun, laskutuksen ja aloitusajan henkilökohtaisesti.</p>
               <div className="mt-6 space-y-2 text-sm font-semibold text-brand-charcoal/80">
                 <p>Sähköposti: <a href={`mailto:${contactEmail}`} className="text-brand-navy underline underline-offset-4">{contactEmail}</a></p>
                 <p>Puhelin / WhatsApp: <a href={whatsappHref} data-event="whatsapp_click" target="_blank" rel="noreferrer" className="text-brand-navy underline underline-offset-4">{contactPhone}</a></p>
@@ -296,7 +283,7 @@ export default function LandingPage() {
       </footer>
 
       <div className="fixed inset-x-3 bottom-3 z-40 sm:hidden">
-        <Button href="#start" event="sticky_cta" className="w-full shadow-[0_12px_35px_rgba(15,23,42,0.22)]">Aloita 290 €</Button>
+        <Button href="#start" event="sticky_cta" className="w-full shadow-[0_12px_35px_rgba(15,23,42,0.22)]">Pyydä aloitus — 500 €/kk</Button>
       </div>
 
       <AnalyticsConsent />

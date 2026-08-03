@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 
 export function Container({ children, className = "" }: { children: ReactNode; className?: string }) {
   return <div className={`mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 ${className}`}>{children}</div>;
@@ -82,11 +83,12 @@ export function SectionTitle({
 
 export function VidoLogo({ className = "" }: { className?: string }) {
   return (
-    <img
+    <Image
       src="/brand/VIDO_Social_Primary_Horizontal.svg"
       alt="VIDO Social"
       width={2000}
       height={560}
+      priority
       className={className}
     />
   );

@@ -49,20 +49,13 @@ const structuredData = {
         "@type": "BusinessAudience",
         audienceType: "Rakennus-, LVI-, sähkö-, saneeraus- ja paikalliset palveluyritykset"
       },
-      offers: [
-        {
-          "@type": "Offer",
-          name: "VIDO Startti",
-          price: "290",
-          priceCurrency: "EUR"
-        },
-        {
-          "@type": "Offer",
-          name: "VIDO Social",
-          price: "500",
-          priceCurrency: "EUR"
-        }
-      ]
+      offers: {
+        "@type": "Offer",
+        name: "VIDO Social",
+        price: "500",
+        priceCurrency: "EUR",
+        description: "12 julkaisua kuukaudessa Facebookiin ja Instagramiin; kuukausittain irtisanottava."
+      }
     }
   ]
 };

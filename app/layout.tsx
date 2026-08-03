@@ -30,10 +30,10 @@ export const metadata: Metadata = {
     description: "Työmaakuvat WhatsAppiin. VIDO hoitaa yrityksesi jatkuvan somenäkyvyyden.",
     images: [
       {
-        url: "/brand/VIDO_Social_Primary_Horizontal.svg",
-        width: 2000,
-        height: 560,
-        alt: "VIDO Social"
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "VIDO Social — Työmaat näkyviksi"
       }
     ]
   },
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "VIDO Social | Työmaat näkyviksi",
     description: "Työmaakuvat WhatsAppiin. VIDO hoitaa yrityksesi jatkuvan somenäkyvyyden.",
-    images: ["/brand/VIDO_Social_Primary_Horizontal.svg"]
+    images: ["/opengraph-image"]
   },
   verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
     ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }

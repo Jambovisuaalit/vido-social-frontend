@@ -3,7 +3,8 @@ import { Container, VidoLogo } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Tietosuojaseloste",
-  description: "VIDO Socialin tietosuojaseloste."
+  description: "VIDO Socialin tietosuojaseloste.",
+  alternates: { canonical: "/tietosuoja" }
 };
 
 export default function PrivacyPage() {
@@ -40,11 +41,11 @@ export default function PrivacyPage() {
             </section>
             <section>
               <h2 className="text-xl font-bold text-brand-navy">2. Mitä tietoja käsittelemme</h2>
-              <p className="mt-3 leading-7">Yhteydenottolomakkeella käsittelemme yrityksen nimeä, yhteyshenkilön nimeä, puhelinnumeroa ja sähköpostiosoitetta. Lisäksi voimme tallentaa teknisiä lähdetietoja, kuten sivun, referrerin ja UTM-kampanjatiedot.</p>
+              <p className="mt-3 leading-7">Yhteydenottolomakkeella käsittelemme yrityksen nimeä, yhteyshenkilön nimeä, puhelinnumeroa ja sähköpostiosoitetta. Lisäksi voimme tallentaa teknisiä lähdetietoja, kuten sivun, referrerin ja UTM-kampanjatiedot. Väärinkäytön rajoittamiseksi IP-osoitteesta ja selaimen tunnisteesta muodostetaan yksisuuntainen tiiviste, jota säilytetään enintään 24 tuntia.</p>
             </section>
             <section>
               <h2 className="text-xl font-bold text-brand-navy">3. Käsittelyn tarkoitus ja oikeusperuste</h2>
-              <p className="mt-3 leading-7">Tietoja käytetään VIDO Startti- ja muiden VIDO Social -palveluiden yhteydenottojen käsittelyyn, asiakassuhteen valmisteluun, palvelun toimittamiseen sekä perusteltuun liiketoiminnan seurantaan. Analytiikkaa käytetään vain erillisellä suostumuksella.</p>
+              <p className="mt-3 leading-7">Tietoja käytetään VIDO Social -palvelun yhteydenottojen käsittelyyn, asiakassuhteen valmisteluun, palvelun toimittamiseen sekä perusteltuun liiketoiminnan seurantaan. Analytiikkaa käytetään vain erillisellä suostumuksella.</p>
             </section>
             <section>
               <h2 className="text-xl font-bold text-brand-navy">4. Palveluntarjoajat</h2>

@@ -10,9 +10,11 @@ PR: #5
 - [x] Next.js upgraded to 16.2.11
 - [x] React upgraded to 19.2
 - [x] Tailwind CSS upgraded to 4.3
-- [x] Four-field Startti lead form implemented
+- [x] Four contact fields plus required privacy acknowledgement implemented
+- [x] One public package locked: `VIDO Social 500 €/kk + ALV`, monthly cancellation
 - [x] Canonical `vido_leads` schema deployed to the VIDO Supabase project
 - [x] Supabase lead insert implemented server-side
+- [x] Server-only five-submissions-per-hour lead rate limit implemented
 - [x] Resend lead notification implemented as best-effort after durable Supabase storage
 - [x] Consent-gated GA4 events implemented
 - [x] Privacy policy and cookie policy routes implemented
@@ -31,6 +33,8 @@ PR: #5
 - [x] MVP intentionally launches without customer logos, testimonials, before/after assets or case studies
 - [x] Customer-proof section replaced with factual delivery-process proof
 - [x] GitHub Actions production build passes on Next.js 16.2.11
+- [x] Local production build and TypeScript validation pass on Next.js 16.2.11
+- [x] Negative-path API QA passes for origin, media type, null JSON, honeypot, phone and consent validation
 - [x] Pull-request workflow wired to build and deploy a Vercel Preview before merge
 - [x] Main-branch workflow wired for production deployment after an approved merge
 - [ ] GitHub Actions repository secret `VERCEL_TOKEN` configured
@@ -52,7 +56,8 @@ Once `VERCEL_TOKEN` is configured, rerun the failed preview job. The workflow wi
 
 ## Business launch blockers
 
-None.
+- Resend sender domain, from-address and recipient still require a production delivery test.
+- The custom domain must remain on the current rollback deployment until Preview QA and the new production deployment pass.
 
 VIDO Social will launch without customer case studies. No placeholder logo, fabricated testimonial, invented result or fake before/after asset may be used. Real customer cases can be added later only after explicit publication approval.
 
@@ -99,9 +104,11 @@ Optional public overrides (canonical defaults are committed):
 
 ## Supabase security model
 
-`public.vido_leads` has RLS enabled and intentionally has no public policies. The website writes through the server-side service role only. The Supabase advisor therefore reports `rls_enabled_no_policy` as informational for this table; that is intentional for this architecture.
+Every public table in the shared VIDO project has RLS enabled. Anonymous and authenticated CRUD grants are revoked from fail-closed tables. Callable functions have fixed `pg_catalog, public` search paths and no anonymous/authenticated execution rights.
 
-Other advisor findings in the shared VIDO project concern pre-existing tables/functions and are outside this launch-gate migration.
+`public.vido_leads` and `public.vido_lead_rate_limits` intentionally have no public policies. The website writes through the server-side service role only. The rate limiter stores only a SHA-256 fingerprint and purges counters after 24 hours.
+
+The Supabase security advisor reports zero errors, zero warnings and zero anonymous `SECURITY DEFINER` warnings. Remaining `rls_enabled_no_policy` notices are informational and intentional for the server-only architecture.
 
 ## Merge policy
 
