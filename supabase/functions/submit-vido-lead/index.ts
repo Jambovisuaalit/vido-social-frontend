@@ -68,19 +68,18 @@ async function sha256(value: string): Promise<string> {
     .join("");
 }
 
-function getClientFingerprint(req: Request): string {
+function getClientIp(req: Request): string {
   const forwardedFor = req.headers
     .get("x-forwarded-for")
     ?.split(",")[0]
     ?.trim();
-  const clientIp =
-    req.headers.get("x-vido-client-ip")?.trim().slice(0, 80) ||
+  return (
+    req.headers.get("x-vido-client-ip")?.trim() ||
     req.headers.get("cf-connecting-ip")?.trim() ||
     req.headers.get("x-real-ip")?.trim() ||
     forwardedFor ||
-    "unknown";
-  const userAgent = req.headers.get("user-agent")?.slice(0, 200) || "unknown";
-  return `${clientIp}|${userAgent}`;
+    "unknown"
+  ).slice(0, 80);
 }
 
 function validLandingPage(value: string): string {
@@ -230,7 +229,7 @@ Deno.serve(async (req: Request) => {
       auth: { persistSession: false, autoRefreshToken: false },
     });
 
-    const clientHash = await sha256(getClientFingerprint(req));
+    const clientHash = await sha256(getClientIp(req));
     const { data: slotReserved, error: rateLimitError } = await supabase.rpc(
       "reserve_vido_lead_slot",
       {

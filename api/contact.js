@@ -147,33 +147,46 @@ async function sendEmailNotification(data, requestId) {
     data.message,
   ].join("\n");
 
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from,
-      to: [to],
-      reply_to: data.email,
-      subject: `VIDO Social -yhteydenotto: ${data.company}`,
-      text,
-    }),
-  });
+  try {
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        "Idempotency-Key": `vido-contact-${requestId || "unknown"}`,
+      },
+      body: JSON.stringify({
+        from,
+        to: [to],
+        reply_to: data.email,
+        subject: `VIDO Social -yhteydenotto: ${data.company}`,
+        text,
+      }),
+    });
 
-  if (!response.ok) {
+    if (!response.ok) {
+      console.error(
+        JSON.stringify({
+          event: "contact_notification_failed",
+          request_id: requestId,
+          status: response.status,
+        }),
+      );
+      return false;
+    }
+
+    return true;
+  } catch (error) {
     console.error(
       JSON.stringify({
         event: "contact_notification_failed",
         request_id: requestId,
-        status: response.status,
+        reason: "network_error",
+        message: error instanceof Error ? error.message : "Unknown error",
       }),
     );
     return false;
   }
-
-  return true;
 }
 
 export default async function handler(request, response) {
