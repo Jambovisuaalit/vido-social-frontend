@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Juha Rantakaulio Oy — Lämpötilahallittu logistiikka</title>
+  <meta name="description" content="Lämpötilahallitut kuljetukset, terminaalipalvelut, varastointi ja jakelu Kouvolasta. Juha Rantakaulio Oy — toimintaa vuodesta 1984." />
+  <style>
+    :root {
+      --ink:#0d1110;
+      --ink-2:#151b19;
+      --ink-3:#202724;
+      --paper:#f2f0ea;
+      --paper-2:#e8e5dc;
+      --white:#fffefa;
+      --muted:#9da59f;
+      --line:rgba(255,255,255,.14);
+      --line-dark:rgba(13,17,16,.14);
+      --accent:#d7ff45;
+      --accent-ink:#182000;
+      --max:1240px;
+      --radius:22px;
+      --shadow:0 24px 80px rgba(0,0,0,.18);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    button,input,textarea,select{font:inherit}
+    .container{width:min(calc(100% - 40px),var(--max));margin:0 auto}
+    .eyebrow{font-size:.76rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.65rem;min-height:50px;padding:0 1.15rem;border-radius:999px;font-weight:800;border:1px solid transparent;transition:.2s ease;cursor:pointer}
+    .btn-primary{background:var(--accent);color:var(--accent-ink)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(215,255,69,.16)}
+    .btn-ghost{border-color:rgba(255,255,255,.28);color:var(--white);background:rgba(255,255,255,.04)}
+    .btn-ghost:hover{background:rgba(255,255,255,.09)}
+    .arrow{font-size:1.15em;line-height:1}
+
+    header{position:fixed;z-index:50;left:0;right:0;top:0;border-bottom:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(13,17,16,.92),rgba(13,17,16,.62));backdrop-filter:blur(14px)}
+    nav{height:76px;display:flex;align-items:center;justify-content:space-between;color:var(--white)}
+    .brand{display:flex;align-items:center;gap:.9rem;font-weight:900;letter-spacing:-.02em}
+    .brand-mark{width:42px;height:42px;border-radius:12px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-weight:950;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+    .brand small{display:block;color:#aeb5b0;font-weight:650;font-size:.69rem;letter-spacing:.08em;text-transform:uppercase;margin-top:1px}
+    .navlinks{display:flex;align-items:center;gap:1.45rem;font-size:.9rem;font-weight:700;color:#d5d9d6}
+    .navlinks a:hover{color:var(--white)}
+    .menu{display:none;background:transparent;border:0;color:#fff;font-size:1.5rem}
+
+    .hero{min-height:880px;background:var(--ink);color:var(--white);padding:156px 0 76px;position:relative;overflow:hidden}
+    .hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,rgba(215,255,69,.12),transparent 26%),linear-gradient(110deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:auto,72px 72px;opacity:.8}
+    .hero:after{content:"";position:absolute;left:-10%;right:-10%;bottom:105px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);transform:rotate(-6deg)}
+    .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.08fr .92fr;gap:70px;align-items:center}
+    .hero h1{font-size:clamp(3.4rem,7vw,7.4rem);line-height:.9;letter-spacing:-.065em;margin:.7rem 0 1.4rem;max-width:970px}
+    .hero .lead{font-size:clamp(1.08rem,2vw,1.34rem);color:#c9cfcb;max-width:640px;margin:0 0 2rem}
+    .hero-actions{display:flex;gap:.8rem;flex-wrap:wrap}
+    .hero-proof{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);margin-top:75px;position:relative;z-index:2}
+    .proof{background:rgba(13,17,16,.88);padding:22px 18px}
+    .proof strong{display:block;font-size:1.08rem;color:#fff;margin-bottom:.2rem}
+    .proof span{font-size:.79rem;color:#99a29c}
+
+    .truck-stage{height:510px;position:relative;display:flex;align-items:center;justify-content:center}
+    .truck-stage:before{content:"";position:absolute;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,rgba(215,255,69,.14),rgba(215,255,69,0) 67%);filter:blur(4px)}
+    .truck-card{position:relative;width:100%;aspect-ratio:1.04;border-radius:34px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(145deg,#171e1b,#0c100f);box-shadow:var(--shadow);overflow:hidden}
+    .truck-card .label{position:absolute;z-index:2;top:22px;left:22px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#aeb6b1;font-weight:800}
+    .truck-card .tag{position:absolute;z-index:2;right:18px;bottom:18px;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:9px 13px;font-size:.72rem;font-weight:900}
+    .truck-svg{position:absolute;left:4%;right:4%;bottom:4%;width:92%;height:auto;filter:drop-shadow(0 18px 28px rgba(0,0,0,.48))}
+
+    section{padding:110px 0}
+    .section-head{display:grid;grid-template-columns:.7fr 1.3fr;gap:60px;margin-bottom:50px;align-items:end}
+    .section-head h2{font-size:clamp(2.4rem,5vw,5rem);line-height:.95;letter-spacing:-.055em;margin:0}
+    .section-head p{font-size:1.08rem;color:#4f5752;max-width:600px;margin:0 0 .5rem}
+
+    .services{background:var(--paper)}
+    .service-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .service{min-height:330px;border:1px solid var(--line-dark);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;justify-content:space-between;background:rgba(255,255,255,.35);transition:.25s ease;position:relative;overflow:hidden}
+    .service:hover{transform:translateY(-4px);background:var(--white);box-shadow:0 18px 44px rgba(12,18,16,.08)}
+    .service:nth-child(1){grid-column:span 7;background:var(--ink);color:#fff;border-color:var(--ink)}
+    .service:nth-child(2){grid-column:span 5}
+    .service:nth-child(3),.service:nth-child(4),.service:nth-child(5){grid-column:span 4}
+    .service .num{font-size:.75rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#7d8680}
+    .service:nth-child(1) .num{color:#9ba39e}
+    .service h3{font-size:clamp(1.7rem,3vw,2.8rem);line-height:1;letter-spacing:-.045em;margin:0 0 .8rem}
+    .service p{margin:0;color:#626a65;max-width:500px}
+    .service:nth-child(1) p{color:#b9c1bc}
+    .service .link{margin-top:28px;font-size:.87rem;font-weight:900}
+    .service:nth-child(1) .link{color:var(--accent)}
+
+    .dark{background:var(--ink);color:var(--white)}
+    .dark .section-head p{color:#aeb6b1}
+    .chain{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:55px}
+    .chain-step{border:1px solid var(--line);border-radius:18px;padding:24px;min-height:180px;background:rgba(255,255,255,.025)}
+    .chain-step b{display:block;color:var(--accent);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:32px}
+    .chain-step h3{font-size:1.45rem;margin:0 0 .5rem;letter-spacing:-.025em}
+    .chain-step p{font-size:.9rem;color:#9da69f;margin:0}
+
+    .tech-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .tech-panel{border-radius:28px;padding:36px;min-height:440px;border:1px solid var(--line-dark);background:var(--white)}
+    .tech-panel.darkpanel{background:var(--ink-2);color:#fff;border-color:var(--ink-2)}
+    .tech-panel h3{font-size:clamp(2rem,4vw,4rem);line-height:.95;letter-spacing:-.055em;margin:.5rem 0 1rem}
+    .tech-panel p{max-width:520px;color:#626a65}
+    .tech-panel.darkpanel p{color:#aab2ad}
+    .metric{display:flex;align-items:flex-end;justify-content:space-between;border-top:1px solid var(--line-dark);padding-top:18px;margin-top:65px}
+    .darkpanel .metric{border-color:var(--line)}
+    .metric strong{font-size:clamp(2.8rem,6vw,6rem);line-height:.8;letter-spacing:-.07em}
+    .metric span{font-size:.76rem;text-transform:uppercase;letter-spacing:.12em;font-weight:850;color:#737c76}
+
+    .history{background:var(--paper-2)}
+    .timeline{margin-top:48px;border-top:1px solid var(--line-dark);display:grid;grid-template-columns:repeat(4,1fr)}
+    .time{padding:30px 26px 0 0;border-right:1px solid var(--line-dark);min-height:260px}
+    .time:last-child{border-right:0;padding-left:26px}
+    .time:not(:first-child){padding-left:26px}
+    .year{font-size:clamp(2.6rem,5vw,5.4rem);font-weight:950;letter-spacing:-.065em;line-height:1;margin-bottom:15px}
+    .time p{color:#59615c;font-size:.93rem;max-width:240px}
+
+    .cta{background:var(--accent);color:var(--accent-ink);padding:100px 0}
+    .cta-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:70px;align-items:start}
+    .cta h2{font-size:clamp(3rem,6vw,6.5rem);line-height:.88;letter-spacing:-.07em;margin:0 0 1.3rem}
+    .cta p{font-size:1.1rem;max-width:650px}
+    .form{background:var(--ink);color:#fff;border-radius:26px;padding:28px;box-shadow:var(--shadow)}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .field{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
+    .field label{font-size:.72rem;font-weight:800;color:#aeb5b0;text-transform:uppercase;letter-spacing:.1em}
+    .field input,.field textarea,.field select{width:100%;background:#171d1b;border:1px solid rgba(255,255,255,.12);color:#fff;border-radius:12px;padding:13px 14px;outline:none}
+    .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent)}
+    .field textarea{min-height:100px;resize:vertical}
+    .form .btn{width:100%;margin-top:5px}
+    .form small{display:block;color:#7e8882;margin-top:10px;font-size:.72rem}
+
+    footer{background:#080b0a;color:#a9b0ac;padding:46px 0 32px}
+    .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:30px}
+    footer strong{color:#fff}
+    footer h4{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#717b75;margin:0 0 15px}
+    footer a{display:block;margin:.5rem 0;font-size:.88rem}
+    footer a:hover{color:#fff}
+    .foot-bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:35px;padding-top:22px;display:flex;justify-content:space-between;gap:20px;font-size:.78rem}
+
+    .mobile-panel{display:none}
+    @media (max-width:900px){
+      .navlinks{display:none}.menu{display:block}
+      .hero{padding-top:128px;min-height:auto}.hero-grid{grid-template-columns:1fr;gap:34px}.hero h1{font-size:clamp(3.2rem,15vw,6rem)}
+      .truck-stage{height:auto}.truck-card{max-width:600px;margin:auto}
+      .hero-proof{grid-template-columns:1fr 1fr}
+      .section-head{grid-template-columns:1fr;gap:18px}
+      .service:nth-child(n){grid-column:span 12;min-height:260px}
+      .chain{grid-template-columns:1fr 1fr}
+      .tech-layout,.cta-grid{grid-template-columns:1fr}
+      .timeline{grid-template-columns:1fr 1fr}.time{border-bottom:1px solid var(--line-dark)}
+      .footer-grid{grid-template-columns:1fr 1fr}
+      .mobile-panel.open{display:flex;position:fixed;top:76px;left:0;right:0;background:#0d1110;border-top:1px solid rgba(255,255,255,.1);padding:24px;z-index:49;flex-direction:column;gap:18px;color:#fff;font-weight:800}
+    }
+    @media (max-width:580px){
+      .container{width:min(calc(100% - 26px),var(--max))}
+      section{padding:80px 0}.hero-proof{grid-template-columns:1fr}.chain{grid-template-columns:1fr}.timeline{grid-template-columns:1fr}.time{border-right:0;padding-left:0!important}.form-row{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.foot-bottom{flex-direction:column}
+    }
+    @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav aria-label="Päänavigaatio">
+        <a class="brand" href="#top" aria-label="Juha Rantakaulio Oy etusivu">
+          <span class="brand-mark">R</span>
+          <span>RANTAKAULIO<small>Kuljetus & logistiikka</small></span>
+        </a>
+        <div class="navlinks">
+          <a href="#palvelut">Palvelut</a><a href="#terminaali">Terminaali</a><a href="#kalusto">Kalusto</a><a href="#yritys">Yritys</a><a href="#yhteys">Yhteystiedot</a>
+          <a class="btn btn-primary" href="#tarjous">Pyydä tarjous <span class="arrow">↗</span></a>
+        </div>
+        <button class="menu" id="menu" aria-label="Avaa valikko" aria-expanded="false">☰</button>
+      </nav>
+    </div>
+  </header>
+  <div class="mobile-panel" id="mobilePanel"><a href="#palvelut">Palvelut</a><a href="#terminaali">Terminaali</a><a href="#kalusto">Kalusto</a><a href="#yritys">Yritys</a><a href="#tarjous">Pyydä tarjous</a></div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow" style="color:var(--accent)">Kouvola · Suomi · vuodesta 1984</div>
+            <h1>Lämpötilahallittua logistiikkaa. Varmasti perille.</h1>
+            <p class="lead">Kuljetukset, terminaali, varastointi ja jakelu yhdeltä kokeneelta kumppanilta. Rakennettu yrityksille, joiden tavaran pitää liikkua oikein — ei melkein oikein.</p>
+            <div class="hero-actions"><a class="btn btn-primary" href="#tarjous">Pyydä tarjous <span class="arrow">↗</span></a><a class="btn btn-ghost" href="#palvelut">Tutustu palveluihin</a></div>
+          </div>
+          <div class="truck-stage" aria-hidden="true">
+            <div class="truck-card">
+              <div class="label">Rantakaulio / Fleet</div>
+              <div class="tag">ATP · lämpötilaseuranta</div>
+              <svg class="truck-svg" viewBox="0 0 800 480" role="img" aria-label="Tyylitelty kuorma-auto">
+                <defs><linearGradient id="cab" x1="0" x2="1"><stop stop-color="#e6e8e6"/><stop offset="1" stop-color="#8e9791"/></linearGradient><linearGradient id="box" x1="0" x2="1"><stop stop-color="#313936"/><stop offset="1" stop-color="#1d2421"/></linearGradient></defs>
+                <ellipse cx="420" cy="422" rx="335" ry="22" fill="#050706" opacity=".75"/>
+                <rect x="282" y="164" width="380" height="184" rx="14" fill="url(#box)" stroke="#56615b"/>
+                <path d="M125 196h122l66 72v80H109v-105c0-26 6-37 16-47Z" fill="url(#cab)"/>
+                <path d="M144 209h86l48 54H144Z" fill="#17231f"/><rect x="126" y="279" width="150" height="12" rx="6" fill="#d7ff45"/>
+                <rect x="310" y="184" width="322" height="10" rx="5" fill="#d7ff45" opacity=".85"/><rect x="310" y="209" width="225" height="7" rx="3" fill="#68716c"/>
+                <circle cx="183" cy="365" r="52" fill="#070908" stroke="#303733" stroke-width="10"/><circle cx="183" cy="365" r="19" fill="#9da59f"/><circle cx="585" cy="365" r="52" fill="#070908" stroke="#303733" stroke-width="10"/><circle cx="585" cy="365" r="19" fill="#9da59f"/><circle cx="688" cy="365" r="52" fill="#070908" stroke="#303733" stroke-width="10"/><circle cx="688" cy="365" r="19" fill="#9da59f"/>
+                <rect x="103" y="326" width="596" height="22" rx="8" fill="#111614"/><text x="333" y="293" fill="#f6f7f4" font-size="30" font-weight="800" font-family="Arial, sans-serif" letter-spacing="3">RANTAKAULIO</text><text x="333" y="323" fill="#8e9891" font-size="15" font-weight="700" font-family="Arial, sans-serif" letter-spacing="2">TEMPERATURE CONTROLLED LOGISTICS</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="hero-proof">
+          <div class="proof"><strong>1984 →</strong><span>Kuljetustoimintaa yli 40 vuotta</span></div>
+          <div class="proof"><strong>ATP</strong><span>Lämpötilahallittu kalusto</span></div>
+          <div class="proof"><strong>LIVE</strong><span>Reaaliaikainen lämpötilaseuranta</span></div>
+          <div class="proof"><strong>KOUVOLA</strong><span>Terminaali lähellä Tykkimäkeä</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="palvelut">
+      <div class="container">
+        <div class="section-head"><div class="eyebrow">Palvelut</div><div><h2>Logistiikka ei lopu kuljetukseen.</h2><p>Rantakaulio yhdistää kuljetuksen tarvittaessa terminaaliin, varastointiin, keräilyyn ja jakeluun — sama kokonaisuus, vähemmän rajapintoja.</p></div></div>
+        <div class="service-grid">
+          <article class="service"><div class="num">01 / Ydinpalvelu</div><div><h3>Lämpötilahallitut kuljetukset</h3><p>ATP-luokiteltu kalusto ja reaaliaikainen lämpötilaseuranta tukevat hallittua kylmäketjua koko kuljetuksen ajan.</p><div class="link">Tutustu palveluun →</div></div></article>
+          <article class="service"><div class="num">02</div><div><h3>Elintarvike-logistiikka</h3><p>Kuljetukset ja logistiset välivaiheet elintarvikealan vaatimuksiin.</p><div class="link">Tutustu →</div></div></article>
+          <article class="service"><div class="num">03</div><div><h3>Terminaali</h3><p>Viileäterminaali Kouvolassa, lajittelu ja tavaran käsittely osana toimitusketjua.</p><div class="link">Tutustu →</div></div></article>
+          <article class="service"><div class="num">04</div><div><h3>Varastointi & jakelu</h3><p>Välivarastointi, keräily ja jakelu asiakkaan tarpeen mukaan.</p><div class="link">Tutustu →</div></div></article>
+          <article class="service"><div class="num">05</div><div><h3>Raakapuu-kuljetukset</h3><p>Oma palvelulinja raakapuulogistiikalle vuodesta 2019.</p><div class="link">Tutustu →</div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark" id="terminaali">
+      <div class="container">
+        <div class="section-head"><div class="eyebrow" style="color:var(--accent)">Terminaali · Kouvola</div><div><h2>Yksi ketju. Neljä vaihetta.</h2><p>Kaikkea ei tarvitse kuljettaa suoraan lähtöpisteestä loppuasiakkaalle. Terminaali tuo toimitusketjuun puskuria ja mahdollistaa tehokkaamman keräilyn sekä jakelun.</p></div></div>
+        <div class="chain">
+          <div class="chain-step"><b>01</b><h3>Kuljetus</h3><p>Tavara noudetaan sovitulla kalustolla.</p></div>
+          <div class="chain-step"><b>02</b><h3>Varastointi</h3><p>Tavara voidaan sijoittaa terminaaliin odottamaan tilausta.</p></div>
+          <div class="chain-step"><b>03</b><h3>Keräily</h3><p>Toimitukset koostetaan tilauksen mukaisesti.</p></div>
+          <div class="chain-step"><b>04</b><h3>Jakelu</h3><p>Valmis kuorma jatkaa asiakkaan määrittämään kohteeseen.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kalusto">
+      <div class="container">
+        <div class="section-head"><div class="eyebrow">Kalusto & teknologia</div><div><h2>Luottamus tehdään mitattavaksi.</h2><p>Toimintavarmuus ei perustu pelkkään lupaukseen. Kalusto ja seuranta tukevat lämpötilahallittujen kuljetusten toteutusta käytännössä.</p></div></div>
+        <div class="tech-layout">
+          <article class="tech-panel darkpanel"><div class="eyebrow" style="color:var(--accent)">Lämpötilaseuranta</div><h3>Tieto kulkee kuorman mukana.</h3><p>Fleetlogisin etäluettava järjestelmä mahdollistaa kuljetuslämpötilojen reaaliaikaisen seurannan ja ajankohtaisen tiedon tuottamisen.</p><div class="metric"><strong>LIVE</strong><span>Fleetlogis</span></div></article>
+          <article class="tech-panel"><div class="eyebrow">Kalusto</div><h3>ATP-luokiteltu. Työhön valittu.</h3><p>Kalustoa käytetään elintarvike- ja lämpötilahallittujen kuljetusten vaatimusten mukaisesti. Oikea auto valitaan kuljetustarpeen mukaan.</p><div class="metric"><strong>ATP</strong><span>Luokitus</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="history" id="yritys">
+      <div class="container">
+        <div class="section-head"><div class="eyebrow">Perheyhtiö</div><div><h2>Yli 40 vuotta tien päällä.</h2><p>Kuljetustoiminta alkoi Tuohikotista 1984. Nykyinen Juha Rantakaulio Oy rekisteröitiin vuonna 1989. Yritystä johtaa tänään seuraava sukupolvi.</p></div></div>
+        <div class="timeline">
+          <div class="time"><div class="year">1984</div><strong>Toiminta alkaa</strong><p>Kuljetustoiminnan historia alkaa Tuohikotista.</p></div>
+          <div class="time"><div class="year">1989</div><strong>Juha Rantakaulio Oy</strong><p>Nykyinen osakeyhtiö rekisteröidään.</p></div>
+          <div class="time"><div class="year">2019</div><strong>Raakapuulogistiikka</strong><p>Raakapuukuljetukset käynnistyvät omana palvelulinjana.</p></div>
+          <div class="time"><div class="year">2026</div><strong>Seuraava sukupolvi</strong><p>Henri Rantakaulio toimii toimitusjohtajana. Perheyhtiön toiminta jatkuu.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="tarjous">
+      <div class="container cta-grid">
+        <div><div class="eyebrow">Tarjouspyyntö</div><h2>Kun tavaran pitää olla siellä missä sovittiin.</h2><p>Kerro mitä pitää kuljettaa, mistä ja minne. Rantakaulio arvioi sopivan kuljetus- tai logistiikkaratkaisun.</p><p><strong>Ajojärjestely 24 h:</strong> 050 366 2215<br><strong>Terminaali:</strong> Tiilitie 6, 45200 Kouvola</p></div>
+        <form class="form" onsubmit="event.preventDefault();document.getElementById('success').hidden=false;this.querySelector('button').textContent='Lähetetty';" aria-label="Tarjouspyyntölomake">
+          <div class="form-row"><div class="field"><label for="name">Nimi</label><input id="name" required placeholder="Etunimi Sukunimi" /></div><div class="field"><label for="company">Yritys</label><input id="company" required placeholder="Yritys Oy" /></div></div>
+          <div class="field"><label for="service">Palvelu</label><select id="service" required><option value="">Valitse palvelu</option><option>Lämpötilahallittu kuljetus</option><option>Elintarvikelogistiikka</option><option>Terminaalipalvelut</option><option>Varastointi ja jakelu</option><option>Raakapuukuljetus</option><option>Muu</option></select></div>
+          <div class="form-row"><div class="field"><label for="from">Lähtöpaikka</label><input id="from" placeholder="Paikkakunta" /></div><div class="field"><label for="to">Toimituspaikka</label><input id="to" placeholder="Paikkakunta" /></div></div>
+          <div class="field"><label for="msg">Tarve</label><textarea id="msg" required placeholder="Kerro lyhyesti kuljetuksesta tai logistiikkatarpeesta"></textarea></div>
+          <button class="btn btn-primary" type="submit">Pyydä tarjous ↗</button><small>Prototyyppi: lomake ei lähetä tietoja palvelimelle.</small><div id="success" hidden style="margin-top:12px;color:var(--accent);font-weight:800">Kiitos — prototyypin lomakepolku toimii.</div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer id="yhteys"><div class="container"><div class="footer-grid"><div><div class="brand"><span class="brand-mark">R</span><span>RANTAKAULIO<small>Kuljetus & logistiikka</small></span></div><p style="max-width:360px;font-size:.88rem">Lämpötilahallitut kuljetukset, terminaali, varastointi ja jakelu Kouvolasta.</p></div><div><h4>Palvelut</h4><a href="#palvelut">Lämpötilakuljetukset</a><a href="#palvelut">Elintarvikelogistiikka</a><a href="#terminaali">Terminaali</a></div><div><h4>Yritys</h4><a href="#yritys">Historia</a><a href="#kalusto">Kalusto</a><a href="#tarjous">Rekry / yhteys</a></div><div><h4>Yhteys</h4><strong>050 366 2215</strong><p style="font-size:.84rem">Tiilitie 6<br>45200 Kouvola</p></div></div><div class="foot-bottom"><span>© Juha Rantakaulio Oy · Y-tunnus 0767846-3</span><span>Prototype v1 · 20.08.2026</span></div></div></footer>
+  <script>
+    const menu=document.getElementById('menu'),panel=document.getElementById('mobilePanel');
+    menu.addEventListener('click',()=>{const open=panel.classList.toggle('open');menu.setAttribute('aria-expanded',open);menu.textContent=open?'×':'☰'});
+    panel.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{panel.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='☰'}));
+  </script>
+</body>
+</html>
