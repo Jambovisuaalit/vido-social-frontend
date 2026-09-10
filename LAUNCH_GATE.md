@@ -40,14 +40,17 @@ PR: #5
 - [ ] GitHub Actions repository secret `VERCEL_TOKEN` configured
 - [ ] Vercel Preview deployment available for this branch
 - [ ] Preview desktop/mobile/functional/SEO QA completed
+- [ ] Explicit production approval received from Jami
 
 ## Current technical blocker
 
-GitHub Actions run #46 validated the Next.js application successfully, then stopped at the Vercel Preview credential gate because repository secret `VERCEL_TOKEN` is not configured.
+GitHub Actions run #48 validated the current PR head successfully, then stopped at the Vercel Preview credential gate because repository secret `VERCEL_TOKEN` was not available to the workflow at that run.
 
-No merge or production deployment is permitted until the secret exists, the preview deployment succeeds and QA passes.
+The previous failed job is older than GitHub's rerun window, so this launch-gate commit intentionally creates a fresh pull-request workflow run. If `VERCEL_TOKEN` has since been configured, the new run can proceed through Vercel Preview deployment.
 
-Once `VERCEL_TOKEN` is configured, rerun the failed preview job. The workflow will:
+No merge or production deployment is permitted until the preview deployment succeeds, QA passes, the durable lead pipeline passes, and Jami gives explicit production approval.
+
+Once `VERCEL_TOKEN` is configured, the workflow will:
 
 1. pull the Vercel preview environment for project `prj_nLX0pIdNKqtYZAK45fyHezal2q3S`
 2. build the prebuilt preview artifact
@@ -112,6 +115,6 @@ The Supabase security advisor reports zero errors, zero warnings and zero anonym
 
 ## Merge policy
 
-`feature/next-landing-v1` → GitHub Actions build → Vercel Preview → functional/mobile/desktop/SEO QA → squash merge to `main` → production deploy.
+`feature/next-landing-v1` → GitHub Actions build → Vercel Preview → functional/mobile/desktop/SEO QA → explicit Jami approval → squash merge to `main` → production deploy → production smoke test.
 
-Do not merge if `VERCEL_TOKEN` is missing, Preview is unavailable, QA fails or the durable lead pipeline fails.
+Do not merge if `VERCEL_TOKEN` is missing, Preview is unavailable, QA fails, the durable lead pipeline fails or explicit production approval has not been given.
