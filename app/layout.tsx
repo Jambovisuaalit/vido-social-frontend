@@ -9,6 +9,7 @@ const inter = Inter({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://vidosocial.com";
+const isProduction = process.env.VERCEL_ENV === "production";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -46,10 +47,9 @@ export const metadata: Metadata = {
   verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
     ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
     : undefined,
-  robots: {
-    index: true,
-    follow: true
-  }
+  robots: isProduction
+    ? { index: true, follow: true }
+    : { index: false, follow: false, noarchive: true, nosnippet: true }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
